@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Like, postgresql://user:password@localhost:5432/database?schema=public
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model post {
+  author_id Int?
+  content   String?
+  post_id   Int     @default(autoincrement()) @id
+  title     String
+  user      user?   @relation(fields: [author_id], references: [user_id])
+}
+
+model profile {
+  bio        String?
+  profile_id Int     @default(autoincrement()) @id
+  user_id    Int
+  user       user    @relation(fields: [user_id], references: [user_id])
+}
+
+model user {
+  email   String    @unique
+  name    String?
+  user_id Int       @default(autoincrement()) @id
+  post    post[]
+  profile profile[]
+}
