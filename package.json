@@ -1,10 +1,43 @@
 {
-  "name": "prisma-zeit-now",
+  "name": "shopifyreviewer",
+  "version": "1.0.0",
+  "private": true,
   "dependencies": {
-    "@prisma/client": "2.0.0-beta.2"
+    "react": "^16.13.1",
+    "react-animate-on-scroll": "2.1.5",
+    "react-datetime": "2.16.3",
+    "react-dom": "^16.13.1",
+    "react-google-maps": "9.4.5",
+    "react-image-gallery": "0.8.18",
+    "react-slick": "0.25.2",
+    "react-swipeable-views": "0.13.3",
+    "react-tagsinput": "3.19.0",
+    "@material-ui/core": "4.3.2",
+    "@material-ui/icons": "4.2.1",
+    "@prisma/client": "2.0.0-beta.2",
+    "@zeit/next-css": "1.0.1",
+    "@zeit/next-sass": "1.0.1",
+    "animate.css": "3.7.2",
+    "classnames": "2.2.6",
+    "moment": "2.24.0",
+    "next": "9.0.5",
+    "next-compose-plugins": "2.2.0",
+    "next-images": "1.1.2",
+    "node-sass": "4.12.0",
+    "nouislider": "14.0.2",
+    "path": "0.12.7",
+    "prop-types": "15.7.2",
+    "webpack": "4.40.2"
   },
   "scripts": {
-    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && rm -rf .next/ && npm install && npm run dev",
+    "compile-sass": "node-sass assets/scss/nextjs-material-kit-pro.scss assets/css/nextjs-material-kit-pro.css",
+    "minify-sass": "node-sass assets/scss/nextjs-material-kit-pro.scss assets/css/nextjs-material-kit-pro.min.css --output-style compressed",
+    "map-sass": "node-sass assets/scss/nextjs-material-kit-pro.scss assets/css/nextjs-material-kit-pro.css --source-map true",
     "prisma:introspect": "prisma introspect",
     "prisma:generate": "prisma generate",
     "postinstall": "prisma generate"
@@ -12,5 +45,17 @@
   "devDependencies": {
     "@prisma/cli": "2.0.0-beta.2",
     "now": "16.7.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": []
+  },
+  "optionalDependencies": {
+    "@types/googlemaps": "3.37.6",
+    "@types/markerclustererplus": "2.1.33"
   }
 }
