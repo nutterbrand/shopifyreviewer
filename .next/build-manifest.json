@@ -1,107 +1,22 @@
 {
-  "devFiles": [],
+  "devFiles": [
+    "static/development/dll/dll_0041bd19dfb78d63af5c.js",
+    "static/development/dll/dll_0041bd19dfb78d63af5c.js.map"
+  ],
   "pages": {
-    "/": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
     "/_app": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/css/styles.b4549d64.chunk.css",
-      "static/chunks/styles.14028577da03099dd999.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
     ],
     "/_error": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ],
-    "/about-us": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/blog-post": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/blog-posts": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/components": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/contact-us": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/ecommerce": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/error-page": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/index": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/landing-page": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/login": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/presentation": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/pricing": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/product": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/profile": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/sections": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/shopping-cart": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
-    ],
-    "/signup": [
-      "static/runtime/webpack-4b444dab214c6491079c.js",
-      "static/chunks/commons.469534b9034ce681668c.js",
-      "static/runtime/main-e454aefe6e7695ba6af4.js"
+    "/blindsgalore": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ]
   }
 }

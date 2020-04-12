@@ -1,1 +1,0 @@
-{"ast":null,"code":"import _objectSpread from \"@babel/runtime-corejs2/helpers/esm/objectSpread\";\nimport { main } from \"assets/jss/nextjs-material-kit-pro.js\";\nconst sectionsPageStyle = {\n  main: _objectSpread({}, main)\n};\nexport default sectionsPageStyle;","map":null,"metadata":{},"sourceType":"module"}
