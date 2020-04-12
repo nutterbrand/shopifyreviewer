@@ -8,6 +8,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model company_shopping {
+  company         String?
+  date            DateTime? @default(now())
+  extensions      String?
+  extracted_price Float?
+  id              Int       @default(autoincrement()) @unique
+  keyword         String?
+  link            String?
+  position        String?
+  rating          String?
+  reviews         String?
+  source          String?
+  thumbnail       String?
+  title           String?
+
+  @@index([company], name: "company")
+}
+
 model post {
   author_id Int?
   content   String?

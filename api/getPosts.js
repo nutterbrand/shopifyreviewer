@@ -3,9 +3,7 @@ const prisma = new PrismaClient();
 
 export default async (req, res) => {
   try {
-    const users = await prisma.user.findMany({
-      include: { profile: true },
-    });
+    const users = await prisma.company_shopping.findMany({});
     res.status(200).json(users);
   } catch (error) {
     console.error(error);
