@@ -3,11 +3,13 @@ import {
   mlAuto,
   section,
   main,
-  mainRaised,
+  mainRaisedMargin,
   title,
   cardTitle,
   grayColor,
-  roseColor
+  roseColor,
+  hexToRgb,
+  blackColor,
 } from "assets/jss/nextjs-material-kit-pro.js";
 
 import tooltipsStyle from "assets/jss/nextjs-material-kit-pro/tooltipsStyle.js";
@@ -22,53 +24,73 @@ const productStyle = {
   ...tooltipsStyle,
   container: {
     ...container,
-    zIndex: 2
+    zIndex: 2,
   },
-  mainRaised: {
-    ...mainRaised
+  mainRaisedMargin: {
+    ...mainRaisedMargin,
   },
   section: {
     ...section,
-    padding: "70px 0px"
+    padding: "70px 0px",
   },
   title: {
     ...title,
-    marginBottom: 0
+    marginBottom: 0,
+  },
+  keywordTitle: {
+    fontWeight: "Bold",
+  },
+  productHeader: {
+    backgroundColor: "White",
+    boxShadow:
+      "0 4px 18px 0px rgba(" +
+      hexToRgb(blackColor) +
+      ", 0.12), 0 7px 10px -5px rgba(" +
+      hexToRgb(blackColor) +
+      ", 0.15)",
+    border: "0",
+    borderRadius: "3px",
+    padding: "0.625rem 0",
+    marginBottom: "-20px",
+    marginTop: "10px",
   },
   sectionGray: {
-    background: grayColor[14]
+    background: grayColor[14],
   },
   mainPrice: {
-    margin: "10px 0px 25px"
+    margin: "10px 0px 25px",
   },
   textCenter: {
-    textAlign: "center!important"
+    textAlign: "center!important",
   },
   features: {
-    paddingTop: "30px"
+    paddingTop: "30px",
+  },
+  productBox: {
+    paddinTop: "100px",
   },
   productPage: {
     backgroundColor: grayColor[2],
-    "& $mainRaised": {
+    "& $mainRaisedMargin": {
       margin: "-40vh 0 0",
-      padding: "40px"
+      padding: "40px",
     },
     "& .image-gallery-slide img": {
       borderRadius: "3px",
       maxWidth: "300px",
-      height: "auto"
+      height: "auto",
     },
     "& .image-gallery-swipe": {
       margin: "30px 0px",
       overflow: "hidden",
       width: "100%",
       height: "auto",
-      textAlign: "center"
+      textAlign: "center",
     },
     "& .image-gallery-thumbnails > .image-gallery-thumbnails-container a": {
       "&.active > div": {
         opacity: "1",
-        borderColor: grayColor[6]
+        borderColor: grayColor[6],
       },
       "& > div": {
         width: "80%",
@@ -79,57 +101,58 @@ const productStyle = {
         border: "1px solid transparent",
         background: "transparent",
         borderRadius: "3px",
-        opacity: ".8"
+        opacity: ".8",
       },
       "& > div img": {
         borderRadius: "3px",
         width: "100%",
         height: "auto",
-        textAlign: "center"
-      }
-    }
+        textAlign: "center",
+      },
+    },
   },
   titleRow: {
-    marginTop: "-8vh"
+    marginTop: "-8vh",
   },
   floatRight: {
-    float: "right!important"
+    float: "right!important",
   },
   pageHeader: {
     minHeight: "60vh",
     maxHeight: "600px",
     height: "auto",
-    backgroundPosition: "top center"
+    backgroundPosition: "top center",
   },
   relatedProducts: {
-    marginTop: "50px",
+    marginTop: "0px",
+    marginBottom: "50px",
     "& $title": {
-      marginBottom: "80px"
-    }
+      marginBottom: "80px",
+    },
   },
   pickSize: {
-    marginTop: "50px"
+    marginTop: "50px",
   },
   pullRight: {
-    float: "right"
+    float: "right",
   },
   cardCategory: {
     textAlign: "center",
-    marginTop: "10px"
+    marginTop: "10px",
   },
   cardTitle: {
     ...cardTitle,
-    textAlign: "center"
+    textAlign: "center",
   },
   cardDescription: {
     textAlign: "center",
-    color: grayColor[0]
+    color: "#3d3d3d",
   },
   textRose: {
-    color: roseColor[0]
+    color: roseColor[0],
   },
   justifyContentBetween: {
-    justifyContent: "space-between!important"
+    justifyContent: "space-between!important",
   },
   socialFeed: {
     "& p": {
@@ -137,19 +160,19 @@ const productStyle = {
       verticalAlign: "top",
       overflow: "hidden",
       paddingBottom: "10px",
-      maxWidth: 300
+      maxWidth: 300,
     },
     "& i": {
       fontSize: "20px",
       display: "table-cell",
-      paddingRight: "10px"
-    }
+      paddingRight: "10px",
+    },
   },
   img: {
     width: "20%",
     marginRight: "5%",
     marginBottom: "5%",
-    float: "left"
+    float: "left",
   },
   block: {
     color: "inherit",
@@ -160,33 +183,33 @@ const productStyle = {
     borderRadius: "3px",
     textDecoration: "none",
     position: "relative",
-    display: "block"
+    display: "block",
   },
   inlineBlock: {
     display: "inline-block",
     padding: "0px",
-    width: "auto"
+    width: "auto",
   },
   list: {
     marginBottom: "0",
     padding: "0",
-    marginTop: "0"
+    marginTop: "0",
   },
   left: {
     float: "left!important",
-    display: "block"
+    display: "block",
   },
   right: {
     padding: "15px 0",
     margin: "0",
-    float: "right"
+    float: "right",
   },
   icon: {
     top: "3px",
     width: "18px",
     height: "18px",
-    position: "relative"
-  }
+    position: "relative",
+  },
 };
 
 export default productStyle;

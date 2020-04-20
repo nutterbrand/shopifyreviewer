@@ -75,7 +75,7 @@ export default function HeaderLinks(props) {
       currentTime = 0,
       increment = 20;
 
-    var animateScroll = function() {
+    var animateScroll = function () {
       currentTime += increment;
       var val = easeInOutQuad(currentTime, start, change, duration);
       element.scrollTop = val;
@@ -91,7 +91,7 @@ export default function HeaderLinks(props) {
   const classes = useStyles();
   return (
     <List className={classes.list + " " + classes.mlAuto}>
-      <ListItem className={classes.listItem}>
+      {/* <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
           navDropdown
@@ -286,7 +286,9 @@ export default function HeaderLinks(props) {
           ]}
         />
       </ListItem>
+        */}
       <ListItem className={classes.listItem}>
+        {" "}
         <Hidden mdDown>
           <Button
             href="https://www.creative-tim.com/product/nextjs-material-kit-pro?ref=njsmkp-navbar"
@@ -300,7 +302,7 @@ export default function HeaderLinks(props) {
         </Hidden>
         <Hidden mdUp>
           <Button
-            href="https://www.creative-tim.com/product/nextjs-material-kit-pro?ref=njsmkp-navbar"
+            href="#"
             color={"info"}
             target="_blank"
             className={classes.navButton}
@@ -315,7 +317,7 @@ export default function HeaderLinks(props) {
 }
 
 HeaderLinks.defaultProps = {
-  hoverColor: "primary"
+  hoverColor: "primary",
 };
 
 HeaderLinks.propTypes = {
@@ -326,6 +328,6 @@ HeaderLinks.propTypes = {
     "success",
     "warning",
     "danger",
-    "rose"
-  ])
+    "rose",
+  ]),
 };

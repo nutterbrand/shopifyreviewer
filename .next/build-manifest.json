@@ -1,7 +1,7 @@
 {
   "devFiles": [
-    "static/development/dll/dll_0041bd19dfb78d63af5c.js",
-    "static/development/dll/dll_0041bd19dfb78d63af5c.js.map"
+    "static/development/dll/dll_98292ac6ade05e526963.js",
+    "static/development/dll/dll_98292ac6ade05e526963.js.map"
   ],
   "pages": {
     "/_app": [
@@ -15,6 +15,10 @@
       "static/runtime/main.js"
     ],
     "/blindsgalore": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/presentation": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

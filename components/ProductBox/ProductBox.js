@@ -40,201 +40,227 @@ import cardProduct3 from "assets/img/examples/card-product3.jpg";
 import cardProduct4 from "assets/img/examples/card-product4.jpg";
 import cardProduct2 from "assets/img/examples/card-product2.jpg";
 
-import product1 from "assets/img/examples/product1.jpg";
-import product2 from "assets/img/examples/product2.jpg";
-import product3 from "assets/img/examples/product3.jpg";
-import product4 from "assets/img/examples/product4.jpg";
+import ProductElement from "../ProductElement/ProductElement";
 
 const useStyles = makeStyles(productStyle);
+
+// export default function Pagination(props) {
+//   const { pages, color, className } = props;
+//   const classes = useStyles();
+//   const paginationClasses = classNames(classes.pagination, className);
+//   return (
+//     <ul className={paginationClasses}>
+//       {pages.map((prop, key) => {
+//         const paginationLink = classNames({
+//           [classes.paginationLink]: true,
+//           [classes[color]]: prop.active,
+//           [classes.disabled]: prop.disabled,
+//         });
+//         return (
+//           <li className={classes.paginationItem} key={key}>
+//             {prop.onClick !== undefined ? (
+//               <Button
+//                 onClick={prop.onClick}
+//                 className={paginationLink}
+//                 disabled={prop.disabled}
+//               >
+//                 {prop.text}
+//               </Button>
+//             ) : (
+//               <Button
+//                 onClick={() => alert("you've clicked " + prop.text)}
+//                 className={paginationLink}
+//                 disabled={prop.disabled}
+//               >
+//                 {prop.text}
+//               </Button>
+//             )}
+//           </li>
+//         );
+//       })}
+//     </ul>
+//   );
+// }
 
 export default function ProductBox(props) {
   const [colorSelect, setColorSelect] = React.useState("0");
   const [sizeSelect, setSizeSelect] = React.useState("0");
   const classes = useStyles();
 
-  const images = [
-    {
-      original: product3,
-      thumbnail: product3,
-    },
-    {
-      original: product4,
-      thumbnail: product4,
-    },
-    {
-      original: product1,
-      thumbnail: product1,
-    },
-    {
-      original: product2,
-      thumbnail: product2,
-    },
-  ];
+  const { data } = props;
+  // item.map((value, index) => {
+  //   console.log(value);
+  // });
+
+  if (!data) return <div>Loading...</div>;
+  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+  console.log(data[1].thumbnail);
+  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa");
 
   return (
-    <div className={classNames(classes.main, classes.mainRaised)}>
-      <GridContainer>
-        <GridItem md={6} sm={6}>
-          <ImageGallery
-            showFullscreenButton={false}
-            showPlayButton={false}
-            startIndex={3}
-            items={images}
-          />
-        </GridItem>
-        <GridItem md={6} sm={6}>
-          <h2 className={classes.title}>{props.domain}</h2>
-          <h3 className={classes.mainPrice}>$335</h3>
-          <Accordion
-            active={0}
-            activeColor="rose"
-            collapses={[
-              {
-                title: "Description",
-                content: (
-                  <p>
-                    Eres{"'"} daring {"'"}Grigri Fortune{"'"} swimsuit has the
-                    fit and coverage of a bikini in a one-piece silhouette. This
-                    fuchsia style is crafted from the label{"'"}s sculpting peau
-                    douce fabric and has flattering cutouts through the torso
-                    and back. Wear yours with mirrored sunglasses on vacation.
-                  </p>
-                ),
-              },
-              {
-                title: "Designer Information",
-                content: (
-                  <p>
-                    An infusion of West Coast cool and New York attitude,
-                    Rebecca Minkoff is synonymous with It girl style. Minkoff
-                    burst on the fashion scene with her best-selling {"'"}
-                    Morning After Bag{"'"} and later expanded her offering with
-                    the Rebecca Minkoff Collection - a range of luxe city
-                    staples with a {'"'}
-                    downtown romantic{'"'} theme.
-                  </p>
-                ),
-              },
-              {
-                title: "Details and Care",
-                content: (
-                  <ul>
-                    <li>Storm and midnight-blue stretch cotton-blend</li>
-                    <li>
-                      Notch lapels, functioning buttoned cuffs, two front flap
-                      pockets, single vent, internal pocket
-                    </li>
-                    <li>Two button fastening</li>
-                    <li>84% cotton, 14% nylon, 2% elastane</li>
-                    <li>Dry clean</li>
-                  </ul>
-                ),
-              },
-            ]}
-          />
-          <GridContainer className={classes.pickSize}>
-            <GridItem md={6} sm={6}>
-              <label>Select color</label>
-              <FormControl fullWidth className={classes.selectFormControl}>
-                <Select
-                  MenuProps={{
-                    className: classes.selectMenu,
-                  }}
-                  classes={{
-                    select: classes.select,
-                  }}
-                  value={colorSelect}
-                  onChange={(event) => setColorSelect(event.target.value)}
-                  inputProps={{
-                    name: "colorSelect",
-                    id: "color-select",
-                  }}
-                >
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected,
-                    }}
-                    value="0"
+    <GridContainer>
+      {/* {
+        data.length > 0 && (
+          data.map((value, index) => {
+            console.log(value.title);
+            if (index < 4) {
+              // return <ProductElement element={value} />;
+              return ( */}
+      {data && (
+        <div className={classes.relatedProducts}>
+          <GridContainer>
+            <GridItem sm={6} md={3}>
+              <Card product>
+                <CardHeader image>
+                  <a href="#pablo">
+                    <img src={data[0].thumbnail} alt="cardProduct" />
+                  </a>
+                </CardHeader>
+                <CardBody>
+                  <h6
+                    className={classNames(
+                      classes.cardCategory,
+                      classes.textRose
+                    )}
                   >
-                    Rose
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected,
-                    }}
-                    value="1"
-                  >
-                    Gray
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected,
-                    }}
-                    value="2"
-                  >
-                    White
-                  </MenuItem>
-                </Select>
-              </FormControl>
+                    {data[0].keyword}
+                  </h6>
+                  <h4 className={classes.cardTitle}>{data[0].source}</h4>
+                  <div className={classes.cardDescription}>{data[0].title}</div>
+                </CardBody>
+                <CardFooter className={classes.justifyContentBetween}>
+                  <div className={classes.price}>
+                    <h4>${data[0].extracted_price}</h4>
+                  </div>
+                  <div className={classes.stats}>
+                    <Tooltip
+                      id="tooltip-top"
+                      title="Save to Wishlist"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <Button justIcon color="rose" simple>
+                        <Favorite />
+                      </Button>
+                    </Tooltip>
+                  </div>
+                </CardFooter>
+              </Card>
             </GridItem>
-            <GridItem md={6} sm={6}>
-              <label>Select size</label>
-              <FormControl fullWidth className={classes.selectFormControl}>
-                <Select
-                  MenuProps={{
-                    className: classes.selectMenu,
-                  }}
-                  classes={{
-                    select: classes.select,
-                  }}
-                  value={sizeSelect}
-                  onChange={(event) => setSizeSelect(event.target.value)}
-                  inputProps={{
-                    name: "sizeSelect",
-                    id: "size-select",
-                  }}
-                >
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected,
-                    }}
-                    value="0"
+            <GridItem sm={6} md={3}>
+              <Card product>
+                <CardHeader image>
+                  <a href="#pablo">
+                    <img src={data[1].thumbnail} alt="cardProduct3" />
+                  </a>
+                </CardHeader>
+                <CardBody>
+                  <h6 className={classes.cardCategory}>Popular</h6>
+                  <h4 className={classes.cardTitle}>{data[1].source}</h4>
+                  <div className={classes.cardDescription}>{data[1].title}</div>
+                </CardBody>
+                <CardFooter className={classes.justifyContentBetween}>
+                  <div className={classes.price}>
+                    <h4>${data[1].extracted_price}</h4>
+                  </div>
+                  <div className={classes.stats}>
+                    <Tooltip
+                      id="tooltip-top"
+                      title="Save to Wishlist"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <Button justIcon link>
+                        <Favorite />
+                      </Button>
+                    </Tooltip>
+                  </div>
+                </CardFooter>
+              </Card>
+            </GridItem>
+            <GridItem sm={6} md={3}>
+              <Card product>
+                <CardHeader image>
+                  <a href="#pablo">
+                    <img src={data[2].thumbnail} alt="cardProduct4" />
+                  </a>
+                </CardHeader>
+                <CardBody>
+                  <h6 className={classes.cardCategory}>Popular</h6>
+                  <h4 className={classes.cardTitle}>{data[0].source}</h4>
+                  <div className={classes.cardDescription}>
+                    Balenciaga{"'"}s black textured-leather wallet is finished
+                    with the label{"'"}s iconic {"'"}Giant{"'"} studs. This is
+                    where you can...
+                  </div>
+                </CardBody>
+                <CardFooter className={classes.justifyContentBetween}>
+                  <div className={classes.price}>
+                    <h4>$590</h4>
+                  </div>
+                  <div className={classes.stats}>
+                    <Tooltip
+                      id="tooltip-top"
+                      title="Save to Wishlist"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <Button justIcon color="rose" simple>
+                        <Favorite />
+                      </Button>
+                    </Tooltip>
+                  </div>
+                </CardFooter>
+              </Card>
+            </GridItem>
+            <GridItem sm={6} md={3}>
+              <Card product>
+                <CardHeader image>
+                  <a href="#pablo">
+                    <img src={cardProduct2} alt="cardProduct2" />
+                  </a>
+                </CardHeader>
+                <CardBody>
+                  <h6
+                    className={classNames(
+                      classes.cardCategory,
+                      classes.textRose
+                    )}
                   >
-                    Small
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected,
-                    }}
-                    value="1"
-                  >
-                    Medium
-                  </MenuItem>
-                  <MenuItem
-                    classes={{
-                      root: classes.selectMenuItem,
-                      selected: classes.selectMenuItemSelected,
-                    }}
-                    value="2"
-                  >
-                    Large
-                  </MenuItem>
-                </Select>
-              </FormControl>
+                    Trending
+                  </h6>
+                  <h4 className={classes.cardTitle}>Dolce & Gabbana</h4>
+                  <div className={classes.cardDescription}>
+                    Dolce & Gabbana{"'"}s {"'"}Greta{"'"} tote has been crafted
+                    in Italy from hard-wearing red textured-leather.
+                  </div>
+                </CardBody>
+                <CardFooter className={classes.justifyContentBetween}>
+                  <div className={classes.price}>
+                    <h4>$1,459</h4>
+                  </div>
+                  <div className={classes.stats}>
+                    <Tooltip
+                      id="tooltip-top"
+                      title="Save to Wishlist"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <Button justIcon link>
+                        <Favorite />
+                      </Button>
+                    </Tooltip>
+                  </div>
+                </CardFooter>
+              </Card>
             </GridItem>
           </GridContainer>
-          <GridContainer className={classes.pullRight}>
-            <Button round color="rose">
-              Add to Cart &nbsp; <ShoppingCart />
-            </Button>
-          </GridContainer>
-        </GridItem>
-      </GridContainer>
-    </div>
+        </div>
+      )}
+      {/* )
+        //);
+      }
+      })} */}
+    </GridContainer>
   );
 }
