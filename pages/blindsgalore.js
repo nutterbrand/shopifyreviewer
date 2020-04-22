@@ -7,7 +7,6 @@ import Rating from "@material-ui/lab/Rating";
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Footer from "components/Footer/Footer.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
@@ -18,9 +17,7 @@ import productStyle from "assets/jss/nextjs-material-kit-pro/pages/productStyle.
 import imgHeader from "assets/img/blindsgalore.jpg";
 import fetch from "isomorphic-unfetch";
 import useSwr from "swr";
-
 import _ from "underscore";
-import ProductBox from "../components/ProductBox/ProductBox";
 
 const useStyles = makeStyles(productStyle);
 
@@ -174,10 +171,8 @@ export default function BlindsgalorePage(props) {
                 </div>
               );
             })}
-          <ProductBox />
         </div>
       </div>
-      <Footer/>
     </div>
   );
 }
