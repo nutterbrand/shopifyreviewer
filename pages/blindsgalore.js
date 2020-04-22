@@ -85,28 +85,35 @@ export default function BlindsgalorePage(props) {
       <div className={classNames(classes.section)}>
         <div className={classes.container}>
           <GridContainer className={classes.productHeader}>
-            <GridItem md={9} sm={3}>
-              <img src={imgHeader} />
-              <h4>Shopping Score Overview:</h4>
-              <ul>
-                <li>
-                  <b>23%</b> of the time your company
+            <GridItem md={7} sm={12}>
+              <img className={classes.headerImg} src={imgHeader} />
+              <h3>Shopping Score Overview:</h3>
+                <div className={classes.stat}>
+                  <b className={classes.statNum}>23%</b> of the time your company
                   shows up for the top keywords in your industry.
-                </li>
-                <li>
-                  <b>11%</b> of the time your company
+                </div>
+                <div className={classes.stat}>
+                  <b className={classes.statNum}>11%</b> of the time your company
                   had the lowest price compared to your competition.
-                </li>
-                <li>
-                  <b>4%</b> of the time your company
+                </div>
+                <div className={classes.stat}>
+                  <b className={classes.statNum}>4%</b> of the time your company
                   ratings on products for top keywords.
-                </li>
-              </ul>
+                </div>
             </GridItem>
-            <GridItem md={3} sm={1}>
+            <GridItem md={5} sm={12}>
               <h2>
-                Score: <b>12%</b>
+                Score: <b className={classes.statNum}>12%</b>
               </h2>
+              <p>
+                We did a full on analysis on over a 100 of the most
+                popular searches that bring customers to your site.
+              </p>
+              <p>
+                We found quite a few areas we you can improve your
+                Google advertising to get more customers buying on
+                your site.
+              </p>
             </GridItem>
           </GridContainer>
           {productData &&
@@ -117,27 +124,25 @@ export default function BlindsgalorePage(props) {
 
               const moreThanRow = data.length > 3;
               return (
-                <div className={classes.relatedProducts}>
+                <>
                   {moreThanRow && (
-                    <div className={classes.productHeader} product>
-                      <div className={classes.container}>
+                    <div className={classes.productHeader}>
                         <h2 className={classes.keywordTitle}>Keyword: "{keyword}"</h2>
                         <GridContainer>
                           <GridItem md={12} sm={12}>
                             <p> Suggestions: </p>
                             <ul>
-                              {suggestions.map(suggestion => <li>{suggestion}</li>)}
+                              {suggestions.map((suggestion,i) => <li key={i}>{suggestion}</li>)}
                             </ul>
                           </GridItem>
                         </GridContainer>
-                      </div>
                     </div>
                   )}
                   <GridContainer>
                     {moreThanRow &&
                       data.map( (value, index) => {
                         return (
-                          <GridItem sm={6} md={3}>
+                          <GridItem sm={6} md={3} key={index}>
                             <Card product>
                               <CardHeader image>
                                 <img src={value.thumbnail} alt="cardProduct"/>
@@ -168,7 +173,7 @@ export default function BlindsgalorePage(props) {
                         );
                       })}
                   </GridContainer>
-                </div>
+                </>
               );
             })}
         </div>

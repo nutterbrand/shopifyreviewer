@@ -20,7 +20,6 @@ const productStyle = {
   ...tooltipsStyle,
   container: {
     ...container,
-    zIndex: 2,
   },
   mainRaisedMargin: {
     ...mainRaisedMargin,
@@ -31,11 +30,25 @@ const productStyle = {
   title: {
     ...title,
   },
-  keywordTitle: {
-    fontWeight: "Bold",
+  productPage: {
+
+  },
+  headerImg: {
+    marginTop: "15px",
   },
   productHeader: {
     backgroundColor: "White",
+    marginTop: "100px",
+    padding: "25px",
+  },
+  stat: {
+    marginBottom: "5px",
+  },
+  statNum: {
+    color: "#e15940",
+  },
+  keywordTitle: {
+    fontWeight: "Bold",
   },
   sectionGray: {
     background: grayColor[14],
@@ -43,9 +56,6 @@ const productStyle = {
   mainPrice: {
 
   },
-  productPage: {
-
-  }
 };
 
 export default productStyle;
