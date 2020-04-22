@@ -47,14 +47,62 @@ const productStyle = {
   statNum: {
     color: "#e15940",
   },
+  dollar: {
+    color: "#5a8b5d",
+  },
+  keywordHeader:{
+    backgroundColor: "White",
+    margin: "50px -15px",
+    padding: "40px",
+  },
   keywordTitle: {
     fontWeight: "Bold",
   },
-  sectionGray: {
-    background: grayColor[14],
+  suggestionsContainer: {
+    marginBottom: "25px",
   },
   mainPrice: {
 
+  },
+  productRow: {
+    display: "flex",
+    flexWrap: "nowrap",
+    overflowY: "auto",
+  },
+  productContainer: {
+    flex: "0 0 auto",
+    width: "200px",
+    margin: "10px",
+    padding: "0 0 20px 0",
+    border: "2px solid #dfe1e5",
+    borderRadius: "8px",
+    textAlign: "center",
+  },
+  productImg: {
+    width: "100%",
+    height: "200px",
+    borderTopLeftRadius: "6px",
+    borderTopRightRadius: "6px",
+  },
+  productKeyword: {
+    margin: "20px 5px 10px 5px",
+    fontSize: "16px",
+    lineHeight: "18px",
+  },
+  productLink: {
+    color: "#190eab",
+    fontWeight: "bold",
+    marginBottom: "10px",
+  },
+  description: {
+    maxHeight: "200px",
+    overflowY: "auto",
+    padding: "10px",
+    fontSize: "12px",
+    lineHeight: "16px"
+  },
+  sectionGray: {
+    background: grayColor[14],
   },
 };
 

@@ -7,10 +7,6 @@ import Rating from "@material-ui/lab/Rating";
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
 
 import productStyle from "assets/jss/nextjs-material-kit-pro/pages/productStyle.js";
 
@@ -126,53 +122,40 @@ export default function BlindsgalorePage(props) {
               return (
                 <>
                   {moreThanRow && (
-                    <div className={classes.productHeader}>
-                        <h2 className={classes.keywordTitle}>Keyword: "{keyword}"</h2>
+                    <div className={classes.keywordHeader}>
                         <GridContainer>
+                          <GridItem md={12} sm={12} className={classes.suggestionsContainer}>
+                            <h3 className={classes.keywordTitle}>Keyword: "{keyword}"</h3>
+                            <h4> Suggestions: </h4>
+                              {suggestions.map((suggestion,i) => <div key={i}>{suggestion}</div>)}
+                          </GridItem>
                           <GridItem md={12} sm={12}>
-                            <p> Suggestions: </p>
-                            <ul>
-                              {suggestions.map((suggestion,i) => <li key={i}>{suggestion}</li>)}
-                            </ul>
+                          <GridContainer className={classes.productRow}>
+                          {moreThanRow &&
+                          data.map( (value, index) => {
+                            return (
+                                <div key={index} className={classes.productContainer}>
+                                  <img src={value.thumbnail} className={classes.productImg}/>
+                                  <div>
+                                    <div className={classes.productKeyword}>
+                                      <b>#{index + 1}: {value.keyword}</b>
+                                    </div>
+                                    <a className={classes.productLink} href={value.source}>{value.source}</a>
+                                    <div className={classes.dollar}>${value.extracted_price}</div>
+                                    <div className={classes.description}>
+                                      <Rating name="read-only" value={value.rating} precision={0.5} size="small" readOnly/>
+                                      <div>{value.title}</div>
+                                    </div>
+                                  </div>
+                                </div>
+                            );
+                          })
+                          }
+                          </GridContainer>
                           </GridItem>
                         </GridContainer>
                     </div>
                   )}
-                  <GridContainer>
-                    {moreThanRow &&
-                      data.map( (value, index) => {
-                        return (
-                          <GridItem sm={6} md={3} key={index}>
-                            <Card product>
-                              <CardHeader image>
-                                <img src={value.thumbnail} alt="cardProduct"/>
-                              </CardHeader>
-                              <CardBody>
-                                <h6 className={classNames(classes.cardCategory, classes.textRose)}>
-                                  #{index + 1}: {value.keyword}
-                                </h6>
-                                <h4 className={classes.cardTitle}>{value.source}</h4>
-                                <h4 className={classes.cardTitle}>${value.extracted_price}</h4>
-
-                                <div className={classes.cardDescription}>
-                                  <Rating
-                                    name="read-only"
-                                    value={value.rating}
-                                    precision={0.5}
-                                    size="small"
-                                    readOnly
-                                  />
-                                  <span>{value.title}</span>
-                                </div>
-                              </CardBody>
-                              <CardFooter className={classes.justifyContentBetween}>
-                                <div></div>
-                              </CardFooter>
-                            </Card>
-                          </GridItem>
-                        );
-                      })}
-                  </GridContainer>
                 </>
               );
             })}
