@@ -53,10 +53,11 @@ const productStyle = {
   dollar: {
     color: '#5a8b5d',
   },
-  keywordHeader: {
+  keywordCard: {
     backgroundColor: 'White',
     margin: '50px -15px',
     padding: '40px 40px 60px 40px',
+    overflowX: 'hidden',
   },
   keywordTitle: {
     fontWeight: 'Bold',
@@ -73,6 +74,14 @@ const productStyle = {
     borderRadius: '5px',
     border: '2px solid #eeeeee',
     backgroundColor: '#fffef4',
+  },
+  rec:{
+    display: 'flex',
+    alignItems: 'center',
+  },
+  recIcon: {
+    marginRight: '10px',
+    color: '#e15940',
   },
   searchContainer: {
     position: 'relative',

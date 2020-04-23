@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import {makeStyles} from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 import Header from 'components/Header/Header.js';
 import GridContainer from 'components/Grid/GridContainer.js';
 import GridItem from 'components/Grid/GridItem.js';
@@ -85,15 +86,15 @@ export default function BlindsgalorePage(props) {
                 <h3>Shopping Score Overview:</h3>
                 <div className={classes.stat}>
                   <b className={classes.statNum}>23%</b> of the time your company
-                  shows up for the top keywords in your industry.
+                  shows up for the <b className={classes.dollar}>top keywords</b> in your industry.
                 </div>
                 <div className={classes.stat}>
                   <b className={classes.statNum}>11%</b> of the time your company
-                  had the lowest price compared to your competition.
+                  had the <b className={classes.dollar}>lowest price</b> compared to your competition.
                 </div>
                 <div className={classes.stat}>
                   <b className={classes.statNum}>4%</b> of the time your company
-                  ratings on products for top keywords.
+                  ratings on products for <b className={classes.dollar}>top keywords</b>.
                 </div>
               </GridItem>
               <GridItem md={5} sm={12}>
@@ -110,14 +111,15 @@ export default function BlindsgalorePage(props) {
               const keyword = products[ 0 ].keyword;
               const recommendations = getRecommendations(products, keyword);
               const shouldBlurClass = {[ classes.blur ]: keyIndex > 9 && !isSignedUp};
-              return <div className={classes.keywordHeader}>
+              return <div className={classes.keywordCard}>
                 <GridContainer>
                   <GridItem md={12} sm={12} className={classes.recsContainer}>
                     <h3 className={classes.keywordTitle}>Keyword: "{keyword}"</h3>
                     <div className={classNames(classes.recs, shouldBlurClass)}>
                       <h4 className={classes.recTitle}>Recommendations:</h4>
                       {recommendations.map((rec, i) => {
-                        return <div key={i}>{rec}</div>;
+                        return <div className={classes.rec} key={i}>
+                          <Icon className={classes.recIcon} fontSize="small">info</Icon>{rec}</div>;
                       })}
                     </div>
                     <div className={classNames(classes.searchContainer, shouldBlurClass)}>
