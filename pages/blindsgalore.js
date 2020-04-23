@@ -73,7 +73,7 @@ export default function BlindsgalorePage(props) {
   };
 
   return (
-      <div className={classes.productPage}>
+      <div className={classes.companyPage}>
         <Header fixed color="white" brand="Shopify Reviewer"
                 links={
                   <Button color={isSignedUp ? 'primary' : 'secondary'} variant="contained"
@@ -81,7 +81,7 @@ export default function BlindsgalorePage(props) {
                     {!isSignedUp ? 'Sign Up' : 'Account'}</Button>}/>
         <div className={classNames(classes.section)}>
           <div className={classes.container}>
-            <GridContainer className={classes.productHeader}>
+            <GridContainer className={classes.companyHeader}>
               <GridItem md={8} sm={12}>
                 <img className={classes.headerImg} src={CompanyLogo}/>
                 <h3>Shopping Score Overview:</h3>
@@ -111,49 +111,57 @@ export default function BlindsgalorePage(props) {
               const products = groupedData[ key ];
               const keyword = products[ 0 ].keyword;
               const recommendations = getRecommendations(products, keyword);
-              const shouldBlurClass = {[ classes.blur ]: keyIndex > 9 && !isSignedUp};
-              return <div className={classes.keywordCard}>
-                <GridContainer>
-                  <GridItem md={12} sm={12} className={classes.recsContainer}>
-                    <h3 className={classes.keywordTitle}>Keyword: "{keyword}"</h3>
-                    <div className={classNames(classes.recs, shouldBlurClass)}>
-                      <h4 className={classes.recTitle}>Recommendations:</h4>
-                      {recommendations.map((rec, i) => {
-                        return <div className={classes.rec} key={i}>
-                          <Icon className={classes.recIcon} fontSize="small">info</Icon>{rec}</div>;
-                      })}
+              let notTopTenAndNotSignedUp = keyIndex > 9 && !isSignedUp;
+              const blurClass = {[ classes.blur ]: notTopTenAndNotSignedUp};
+              return (
+                  <>
+                    <div className={classes.keywordCard}>
+                      <GridContainer>
+                        <GridItem md={12} sm={12} className={classes.recsContainer}>
+                          <h3 className={classes.keywordTitle}>Keyword: "{keyword}"</h3>
+                          {notTopTenAndNotSignedUp &&
+                          <Button size="large" color='secondary' className={classes.showButton} variant="contained"
+                                  onClick={() => updateStatus(true)}>SIGN UP TO SEE RESULTS</Button>}
+                          <div className={classNames(classes.recs, blurClass)}>
+                            <h4 className={classes.recTitle}>Recommendations:</h4>
+                            {recommendations.map((rec, i) => {
+                              return <div className={classes.rec} key={i}>
+                                <Icon className={classes.recIcon} fontSize="small">info</Icon>{rec}</div>;
+                            })}
+                          </div>
+                          <div className={classNames(classes.searchContainer, blurClass)}>
+                            <h4 className={classes.searchingResult}>{keyword}</h4>
+                            <img className={classes.googleSearch} src={GoogleSearch}/>
+                          </div>
+                        </GridItem>
+                        <GridItem md={12} sm={12} className={classNames(blurClass)}>
+                          <GridContainer className={classes.productRow}>
+                            {products.map((product, index) => {
+                              return (
+                                  <div key={index} className={classes.productContainer}>
+                                    <img src={product.thumbnail} className={classNames(classes.productImg, blurClass)}/>
+                                    <div>
+                                      <div className={classes.productKeyword}>
+                                        <b>#{index + 1}: {product.keyword}</b>
+                                      </div>
+                                      <a className={classes.productLink} href={classes.productLink}>{product.source}</a>
+                                      <div className={classes.dollar}>${product.extracted_price}</div>
+                                      <div className={classes.description}>
+                                        <Rating value={parseInt(product.rating)} precision={0.5} size="small" readOnly/>
+                                        <div>{product.title}</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                              );
+                            })}
+                            {products.length > 5 &&
+                            <i className={classes.more}>There's {products.length - 5} more products, scroll
+                              right...</i>}
+                          </GridContainer>
+                        </GridItem>
+                      </GridContainer>
                     </div>
-                    <div className={classNames(classes.searchContainer, shouldBlurClass)}>
-                      <h4 className={classes.searchingResult}>{keyword}</h4>
-                      <img className={classes.googleSearch} src={GoogleSearch}/>
-                    </div>
-                  </GridItem>
-                  <GridItem md={12} sm={12} className={classNames(shouldBlurClass)}>
-                    <GridContainer className={classes.productRow}>
-                      {products.map((product, index) => {
-                        return (
-                            <div key={index} className={classes.productContainer}>
-                              <img src={product.thumbnail} className={classNames(classes.productImg, shouldBlurClass)}/>
-                              <div>
-                                <div className={classes.productKeyword}>
-                                  <b>#{index + 1}: {product.keyword}</b>
-                                </div>
-                                <a className={classes.productLink} href={classes.productLink}>{product.source}</a>
-                                <div className={classes.dollar}>${product.extracted_price}</div>
-                                <div className={classes.description}>
-                                  <Rating value={parseInt(product.rating)} precision={0.5} size="small" readOnly/>
-                                  <div>{product.title}</div>
-                                </div>
-                              </div>
-                            </div>
-                        );
-                      })}
-                      {products.length > 5 &&
-                      <i className={classes.more}>There's {products.length - 5} more products, scroll right...</i>}
-                    </GridContainer>
-                  </GridItem>
-                </GridContainer>
-              </div>;
+                  </> );
             })}
           </div>
         </div>

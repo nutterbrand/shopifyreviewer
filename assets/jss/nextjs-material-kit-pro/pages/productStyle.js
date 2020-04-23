@@ -30,7 +30,7 @@ const productStyle = {
   title: {
     ...title,
   },
-  productPage: {},
+  companyPage: {},
   center: {
     width: '100%',
     textAlign: 'center',
@@ -44,22 +44,22 @@ const productStyle = {
   headerImg: {
     marginTop: '15px',
   },
-  productHeader: {
+  companyHeader: {
     backgroundColor: 'White',
     marginTop: '100px',
     padding: '25px',
   },
   stat: {
-    marginBottom: '5px',
+    marginBottom: '10px',
+  },
+  badge: {
+    fontSize: '14px',
   },
   statNum: {
     color: '#f44436',
   },
   dollar: {
     color: '#5a8b5d',
-  },
-  badge: {
-    fontSize: '16px',
   },
   keywordCard: {
     backgroundColor: 'White',
@@ -69,6 +69,12 @@ const productStyle = {
   },
   keywordTitle: {
     fontWeight: 'Bold',
+  },
+  showButton: {
+    position: "absolute",
+    right: "0",
+    top: "0",
+    margin: "15px",
   },
   recsContainer: {
     marginBottom: '25px',
