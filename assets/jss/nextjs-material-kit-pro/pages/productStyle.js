@@ -6,11 +6,11 @@ import {
   mainRaisedMargin,
   title,
   grayColor,
-} from "assets/jss/nextjs-material-kit-pro.js";
+} from 'assets/jss/nextjs-material-kit-pro.js';
 
-import tooltipsStyle from "assets/jss/nextjs-material-kit-pro/tooltipsStyle.js";
-import imagesStyles from "assets/jss/nextjs-material-kit-pro/imagesStyles.js";
-import customSelectStyle from "assets/jss/nextjs-material-kit-pro/customSelectStyle.js";
+import tooltipsStyle from 'assets/jss/nextjs-material-kit-pro/tooltipsStyle.js';
+import imagesStyles from 'assets/jss/nextjs-material-kit-pro/imagesStyles.js';
+import customSelectStyle from 'assets/jss/nextjs-material-kit-pro/customSelectStyle.js';
 
 const productStyle = {
   mlAuto,
@@ -30,92 +30,103 @@ const productStyle = {
   title: {
     ...title,
   },
-  productPage: {
-
-  },
-  signUp:{
-    position: "absolute",
-    right: "0",
-    top: "6px",
+  productPage: {},
+  signUp: {
+    position: 'absolute',
+    right: '0',
+    top: '6px',
   },
   headerImg: {
-    marginTop: "15px",
+    marginTop: '15px',
   },
   productHeader: {
-    backgroundColor: "White",
-    marginTop: "100px",
-    padding: "25px",
+    backgroundColor: 'White',
+    marginTop: '100px',
+    padding: '25px',
   },
   stat: {
-    marginBottom: "5px",
+    marginBottom: '5px',
   },
   statNum: {
-    color: "#e15940",
+    color: '#e15940',
   },
   dollar: {
-    color: "#5a8b5d",
+    color: '#5a8b5d',
   },
-  keywordHeader:{
-    backgroundColor: "White",
-    margin: "50px -15px",
-    padding: "40px 40px 60px 40px",
+  keywordHeader: {
+    backgroundColor: 'White',
+    margin: '50px -15px',
+    padding: '40px 40px 60px 40px',
   },
   keywordTitle: {
-    fontWeight: "Bold",
+    fontWeight: 'Bold',
   },
-  suggestionsContainer: {
-    marginBottom: "25px",
+  recsContainer: {
+    marginBottom: '25px',
   },
-  mainPrice: {
-
+  searchContainer: {
+    position: 'relative',
+    height: '50px',
+    marginTop: '20px',
   },
+  searchingResult: {
+    position: 'absolute',
+    left: "50px",
+    fontWeight: "bold",
+    height: '100%',
+  },
+  googleSearch: {
+    height: '100%',
+  },
+  mainPrice: {},
   productRow: {
-    display: "flex",
-    flexWrap: "nowrap",
-    overflowY: "scroll",
+    display: 'flex',
+    flexWrap: 'nowrap',
+    overflowY: 'scroll',
   },
   productContainer: {
-    flex: "0 0 auto",
-    width: "200px",
-    margin: "10px",
-    padding: "0 0 20px 0",
-    border: "2px solid #dfe1e5",
-    borderRadius: "8px",
-    textAlign: "center",
+    flex: '0 0 auto',
+    width: '200px',
+    margin: '10px',
+    padding: '0 0 20px 0',
+    border: '2px solid #dfe1e5',
+    borderRadius: '8px',
+    textAlign: 'center',
   },
   productImg: {
-    width: "100%",
-    height: "200px",
-    borderTopLeftRadius: "6px",
-    borderTopRightRadius: "6px",
+    width: '100%',
+    height: '200px',
+    borderTopLeftRadius: '6px',
+    borderTopRightRadius: '6px',
   },
   productKeyword: {
-    margin: "20px 5px 10px 5px",
-    fontSize: "16px",
-    lineHeight: "18px",
+    margin: '20px 5px 10px 5px',
+    fontSize: '16px',
+    lineHeight: '18px',
   },
   productLink: {
-    color: "#190eab",
-    fontWeight: "bold",
-    marginBottom: "10px",
+    display: 'block',
+    color: '#190eab',
+    fontWeight: 'bold',
+    margin: '5px 0',
   },
   description: {
-    maxHeight: "200px",
-    overflowY: "auto",
-    padding: "10px",
-    fontSize: "12px",
-    lineHeight: "16px"
+    maxHeight: '200px',
+    overflowY: 'auto',
+    padding: '10px',
+    fontSize: '12px',
+    lineHeight: '16px',
   },
   sectionGray: {
-    background: grayColor[14],
+    background: grayColor[ 14 ],
   },
   blur: {
     filter: 'blur(5px)',
   },
-  more:{
-    position: "absolute",
-    bottom: "-35px",
-    left: "10px"
+  more: {
+    position: 'absolute',
+    bottom: '-35px',
+    left: '10px',
   },
 };
 

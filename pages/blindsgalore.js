@@ -7,6 +7,7 @@ import Header from 'components/Header/Header.js';
 import GridContainer from 'components/Grid/GridContainer.js';
 import GridItem from 'components/Grid/GridItem.js';
 import CompanyLogo from 'assets/img/blindsgalore.jpg';
+import GoogleSearch from 'assets/img/googleSearch.png';
 import fetch from 'isomorphic-unfetch';
 import useSwr from 'swr';
 import _ from 'underscore';
@@ -24,7 +25,7 @@ export default function BlindsgalorePage(props) {
   if (!data) return <div>Loading...</div>;
   const groupedData = _.filter(_.groupBy(data, 'keyword'), product => product.length > 3);
   const productsData = _.keys(groupedData);
-  const getSuggestions = (data, keyword) => {
+  const getRecommendations = (data, keyword) => {
     const prices = _(data).pluck('extracted_price');
     const ratings = _.compact(_(data).pluck('rating'));
     const num_ratings = ratings ? ratings.length + 1 : 0;
@@ -34,40 +35,39 @@ export default function BlindsgalorePage(props) {
         prices.length || 1,
     );
     const company_listing = _.where(data, {source: 'Blindsgalore.com'});
-    let suggestions = [];
+    let recommendations = [];
     if (company_listing.length) {
       const your_company = company_listing[ 0 ];
-      suggestions = [`Your ad was in position #${your_company?.position} among your competition.`];
-
+      recommendations = [`Your ad was in position #${your_company?.position} among your competition.`];
       if (min_price.source === your_company.source) {
-        suggestions = [
-          ...suggestions,
+        recommendations = [
+          ...recommendations,
           `You have the lowest price item advertised for this keyword $${min_price.extracted_price}.`];
       } else {
-        suggestions = [
-          ...suggestions,
+        recommendations = [
+          ...recommendations,
           `${min_price.source} has the lowest price item: $${min_price.extracted_price},
                   while you have a price of $${your_company.extracted_price}. The average price is $${avg_price}.`];
       }
       if (!your_company.rating) {
-        suggestions = [
-          ...suggestions,
+        recommendations = [
+          ...recommendations,
           `Add ratings to your product in your Google Shopping feed.`];
         if (num_ratings > 1) {
-          suggestions = [
-            ...suggestions,
+          recommendations = [
+            ...recommendations,
             `There are ${num_ratings} companies that have ratings for products that match this keyword.`];
         }
       }
     } else {
-      suggestions = [
-        ...suggestions,
+      recommendations = [
+        ...recommendations,
         'Your products did not show up for this keyword.',
         `Add the following keyword to your product description: "${keyword}"`,
         `Advertise a product near the avg price: $${avg_price} dollars.`,
       ];
     }
-    return suggestions;
+    return recommendations;
   };
 
   return (
@@ -108,16 +108,20 @@ export default function BlindsgalorePage(props) {
             {productsData.map((key, keyIndex) => {
               const products = groupedData[ key ];
               const keyword = products[ 0 ].keyword;
-              const suggestions = getSuggestions(products, keyword);
+              const recommendations = getRecommendations(products, keyword);
               const shouldBlurClass = {[ classes.blur ]: keyIndex > 9 && !isSignedUp};
               return <div className={classes.keywordHeader}>
                 <GridContainer>
-                  <GridItem md={12} sm={12} className={classes.suggestionsContainer}>
+                  <GridItem md={12} sm={12} className={classes.recsContainer}>
                     <h3 className={classes.keywordTitle}>Keyword: "{keyword}"</h3>
-                    <h4 className={classNames(shouldBlurClass)}> Suggestions: </h4>
-                    {suggestions.map((suggestion, i) => {
-                      return <div key={i} className={classNames(shouldBlurClass)}>{suggestion}</div>;
+                    <h4 className={classNames(shouldBlurClass)}><b>Recommendations:</b></h4>
+                    {recommendations.map((rec, i) => {
+                      return <div key={i} className={classNames(shouldBlurClass)}>{rec}</div>;
                     })}
+                    <div className={classNames(classes.searchContainer, shouldBlurClass)}>
+                      <h4 className={classes.searchingResult}>{keyword}</h4>
+                      <img className={classes.googleSearch} src={GoogleSearch}/>
+                    </div>
                   </GridItem>
                   <GridItem md={12} sm={12} className={classNames(shouldBlurClass)}>
                     <GridContainer className={classes.productRow}>
@@ -129,11 +133,10 @@ export default function BlindsgalorePage(props) {
                                 <div className={classes.productKeyword}>
                                   <b>#{index + 1}: {product.keyword}</b>
                                 </div>
-                                <div className={classes.productLink}>{product.source}</div>
+                                <a className={classes.productLink} href={classes.productLink}>{product.source}</a>
                                 <div className={classes.dollar}>${product.extracted_price}</div>
                                 <div className={classes.description}>
-                                  <Rating name="read-only" value={parseInt(product.rating)} precision={0.5} size="small"
-                                          readOnly/>
+                                  <Rating value={parseInt(product.rating)} precision={0.5} size="small" readOnly/>
                                   <div>{product.title}</div>
                                 </div>
                               </div>
