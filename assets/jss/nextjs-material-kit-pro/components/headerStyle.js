@@ -26,12 +26,7 @@ const headerStyle = theme => ({
     color: grayColor[15],
     width: "100%",
     backgroundColor: whiteColor,
-    boxShadow:
-      "0 4px 18px 0px rgba(" +
-      hexToRgb(blackColor) +
-      ", 0.12), 0 7px 10px -5px rgba(" +
-      hexToRgb(blackColor) +
-      ", 0.15)",
+    boxShadow: "0px 5px 5px 10px rgba(217,217,217,0.01)",
     transition: "all 150ms ease 0s",
     alignItems: "center",
     flexFlow: "row nowrap",

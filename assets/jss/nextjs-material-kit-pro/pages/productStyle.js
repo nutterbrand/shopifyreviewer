@@ -5,16 +5,12 @@ import {
   main,
   mainRaisedMargin,
   title,
-  cardTitle,
   grayColor,
-  roseColor,
-  hexToRgb,
-  blackColor,
-} from "assets/jss/nextjs-material-kit-pro.js";
+} from 'assets/jss/nextjs-material-kit-pro.js';
 
-import tooltipsStyle from "assets/jss/nextjs-material-kit-pro/tooltipsStyle.js";
-import imagesStyles from "assets/jss/nextjs-material-kit-pro/imagesStyles.js";
-import customSelectStyle from "assets/jss/nextjs-material-kit-pro/customSelectStyle.js";
+import tooltipsStyle from 'assets/jss/nextjs-material-kit-pro/tooltipsStyle.js';
+import imagesStyles from 'assets/jss/nextjs-material-kit-pro/imagesStyles.js';
+import customSelectStyle from 'assets/jss/nextjs-material-kit-pro/customSelectStyle.js';
 
 const productStyle = {
   mlAuto,
@@ -24,191 +20,146 @@ const productStyle = {
   ...tooltipsStyle,
   container: {
     ...container,
-    zIndex: 2,
   },
   mainRaisedMargin: {
     ...mainRaisedMargin,
   },
   section: {
     ...section,
-    padding: "70px 0px",
   },
   title: {
     ...title,
-    marginBottom: 0,
+  },
+  companyPage: {},
+  center: {
+    width: '100%',
+    textAlign: 'center',
+    marginTop: '450px',
+  },
+  signUp: {
+    position: 'absolute',
+    right: '0',
+    top: '6px',
+  },
+  headerImg: {
+    marginTop: '15px',
+  },
+  companyHeader: {
+    backgroundColor: 'White',
+    marginTop: '100px',
+    padding: '25px',
+  },
+  stat: {
+    marginBottom: '10px',
+  },
+  badge: {
+    fontSize: '14px',
+  },
+  statNum: {
+    color: '#f44436',
+  },
+  dollar: {
+    color: '#5a8b5d',
+  },
+  keywordCard: {
+    backgroundColor: 'White',
+    margin: '50px -15px',
+    padding: '40px 40px 60px 40px',
+    overflowX: 'hidden',
   },
   keywordTitle: {
-    fontWeight: "Bold",
+    fontWeight: 'Bold',
   },
-  productHeader: {
-    backgroundColor: "White",
-    boxShadow:
-      "0 4px 18px 0px rgba(" +
-      hexToRgb(blackColor) +
-      ", 0.12), 0 7px 10px -5px rgba(" +
-      hexToRgb(blackColor) +
-      ", 0.15)",
-    border: "0",
-    borderRadius: "3px",
-    padding: "0.625rem 0",
-    marginBottom: "-20px",
-    marginTop: "10px",
+  showButton: {
+    position: "absolute",
+    right: "0",
+    top: "0",
+    margin: "15px",
+  },
+  recsContainer: {
+    marginBottom: '25px',
+  },
+  recTitle: {
+    marginTop: '0px',
+  },
+  recs: {
+    width: '100%',
+    padding: '10px',
+    borderRadius: '5px',
+    border: '2px solid #eeeeee',
+    backgroundColor: '#fffef4',
+  },
+  rec: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  recIcon: {
+    marginRight: '10px',
+    color: '#e15940',
+  },
+  searchContainer: {
+    position: 'relative',
+    height: '50px',
+    marginTop: '20px',
+  },
+  searchingResult: {
+    position: 'absolute',
+    left: '50px',
+    fontWeight: 'bold',
+    height: '100%',
+  },
+  googleSearch: {
+    height: '100%',
+  },
+  mainPrice: {},
+  productRow: {
+    display: 'flex',
+    flexWrap: 'nowrap',
+    overflowY: 'scroll',
+  },
+  productContainer: {
+    flex: '0 0 auto',
+    width: '200px',
+    margin: '10px',
+    padding: '0 0 20px 0',
+    border: '2px solid #dfe1e5',
+    borderRadius: '8px',
+    textAlign: 'center',
+  },
+  productImg: {
+    width: '100%',
+    height: '200px',
+    borderTopLeftRadius: '6px',
+    borderTopRightRadius: '6px',
+  },
+  productKeyword: {
+    margin: '20px 5px 10px 5px',
+    fontSize: '16px',
+    lineHeight: '18px',
+  },
+  productLink: {
+    display: 'block',
+    color: '#190eab',
+    fontWeight: 'bold',
+    margin: '5px 0',
+  },
+  description: {
+    maxHeight: '200px',
+    overflowY: 'auto',
+    padding: '10px',
+    fontSize: '12px',
+    lineHeight: '16px',
   },
   sectionGray: {
-    background: grayColor[14],
+    background: grayColor[ 14 ],
   },
-  mainPrice: {
-    margin: "10px 0px 25px",
+  blur: {
+    filter: 'blur(5px)',
   },
-  textCenter: {
-    textAlign: "center!important",
-  },
-  features: {
-    paddingTop: "30px",
-  },
-  productBox: {
-    paddinTop: "100px",
-  },
-  productPage: {
-    backgroundColor: grayColor[2],
-    "& $mainRaisedMargin": {
-      margin: "-40vh 0 0",
-      padding: "40px",
-    },
-    "& .image-gallery-slide img": {
-      borderRadius: "3px",
-      maxWidth: "300px",
-      height: "auto",
-    },
-    "& .image-gallery-swipe": {
-      margin: "30px 0px",
-      overflow: "hidden",
-      width: "100%",
-      height: "auto",
-      textAlign: "center",
-    },
-    "& .image-gallery-thumbnails > .image-gallery-thumbnails-container a": {
-      "&.active > div": {
-        opacity: "1",
-        borderColor: grayColor[6],
-      },
-      "& > div": {
-        width: "80%",
-        maxWidth: "85px",
-        margin: "0 auto",
-        padding: "8px",
-        display: "block",
-        border: "1px solid transparent",
-        background: "transparent",
-        borderRadius: "3px",
-        opacity: ".8",
-      },
-      "& > div img": {
-        borderRadius: "3px",
-        width: "100%",
-        height: "auto",
-        textAlign: "center",
-      },
-    },
-  },
-  titleRow: {
-    marginTop: "-8vh",
-  },
-  floatRight: {
-    float: "right!important",
-  },
-  pageHeader: {
-    minHeight: "60vh",
-    maxHeight: "600px",
-    height: "auto",
-    backgroundPosition: "top center",
-  },
-  relatedProducts: {
-    marginTop: "0px",
-    marginBottom: "50px",
-    "& $title": {
-      marginBottom: "80px",
-    },
-  },
-  pickSize: {
-    marginTop: "50px",
-  },
-  pullRight: {
-    float: "right",
-  },
-  cardCategory: {
-    textAlign: "center",
-    marginTop: "10px",
-  },
-  cardTitle: {
-    ...cardTitle,
-    textAlign: "center",
-  },
-  cardDescription: {
-    textAlign: "center",
-    color: "#3d3d3d",
-  },
-  textRose: {
-    color: roseColor[0],
-  },
-  justifyContentBetween: {
-    justifyContent: "space-between!important",
-  },
-  socialFeed: {
-    "& p": {
-      display: "table-cell",
-      verticalAlign: "top",
-      overflow: "hidden",
-      paddingBottom: "10px",
-      maxWidth: 300,
-    },
-    "& i": {
-      fontSize: "20px",
-      display: "table-cell",
-      paddingRight: "10px",
-    },
-  },
-  img: {
-    width: "20%",
-    marginRight: "5%",
-    marginBottom: "5%",
-    float: "left",
-  },
-  block: {
-    color: "inherit",
-    padding: "0.9375rem",
-    fontWeight: "500",
-    fontSize: "12px",
-    textTransform: "uppercase",
-    borderRadius: "3px",
-    textDecoration: "none",
-    position: "relative",
-    display: "block",
-  },
-  inlineBlock: {
-    display: "inline-block",
-    padding: "0px",
-    width: "auto",
-  },
-  list: {
-    marginBottom: "0",
-    padding: "0",
-    marginTop: "0",
-  },
-  left: {
-    float: "left!important",
-    display: "block",
-  },
-  right: {
-    padding: "15px 0",
-    margin: "0",
-    float: "right",
-  },
-  icon: {
-    top: "3px",
-    width: "18px",
-    height: "18px",
-    position: "relative",
+  more: {
+    position: 'absolute',
+    bottom: '-35px',
+    left: '10px',
   },
 };
 
