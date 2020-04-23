@@ -110,7 +110,9 @@ const productStyle = {
   },
   blurryText: {
   color: "transparent",
-  textShadow: "0 0 5px rgba(0,0,0,0.5)",
+  textShadow: "0 0 5px rgba(0,0,0,0.75)",
+    fillOpacity: "0.5",
+    opacity: "0.5",
 },
 };
 

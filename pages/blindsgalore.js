@@ -116,7 +116,7 @@ export default function BlindsgalorePage(props) {
               const keyword = data[0].keyword;
               const suggestions = getSuggestions(data, keyword);
               const moreThanThreeProduct = data.length > 3;
-              const shouldBlurClass = classNames({[ classes.blurryText ]: keyIndex > 9 && !isSignedUp});
+              const shouldBlurClass = {[ classes.blurryText ]: keyIndex > 9 && !isSignedUp};
               return (
                 <>
                   {moreThanThreeProduct && (
@@ -126,10 +126,10 @@ export default function BlindsgalorePage(props) {
                             <h3 className={classes.keywordTitle}>Keyword: "{keyword}"</h3>
                             <h4> Suggestions: </h4>
                               {suggestions.map((suggestion,i) => {
-                                return <div key={i} className={shouldBlurClass}>{suggestion}</div>;
+                                return <div key={i} className={classNames(shouldBlurClass)}>{suggestion}</div>;
                               })}
                           </GridItem>
-                          <GridItem md={12} sm={12} className={shouldBlurClass}>
+                          <GridItem md={12} sm={12} className={classNames(shouldBlurClass)}>
                           <GridContainer className={classes.productRow}>
                           {moreThanThreeProduct &&
                           data.map( (value, index) => {
@@ -140,10 +140,11 @@ export default function BlindsgalorePage(props) {
                                     <div className={classes.productKeyword}>
                                       <b>#{index + 1}: {value.keyword}</b>
                                     </div>
-                                    <a className={classes.productLink} href={value.source}>{value.source}</a>
-                                    <div className={classes.dollar}>${value.extracted_price}</div>
+                                    <div className={classNames(classes.productLink, shouldBlurClass)}>{value.source}</div>
+                                    <div className={classNames(classes.dollar, shouldBlurClass)}>${value.extracted_price}</div>
                                     <div className={classes.description}>
-                                      <Rating name="read-only" value={parseInt(value.rating)} precision={0.5} size="small" readOnly/>
+                                      <Rating className={classNames(shouldBlurClass)} name="read-only"
+                                              value={parseInt(value.rating)} precision={0.5} size="small" readOnly/>
                                       <div>{value.title}</div>
                                     </div>
                                   </div>
