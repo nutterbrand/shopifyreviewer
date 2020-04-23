@@ -114,10 +114,12 @@ export default function BlindsgalorePage(props) {
                 <GridContainer>
                   <GridItem md={12} sm={12} className={classes.recsContainer}>
                     <h3 className={classes.keywordTitle}>Keyword: "{keyword}"</h3>
-                    <h4 className={classNames(shouldBlurClass)}><b>Recommendations:</b></h4>
-                    {recommendations.map((rec, i) => {
-                      return <div key={i} className={classNames(shouldBlurClass)}>{rec}</div>;
-                    })}
+                    <div className={classNames(classes.recs, shouldBlurClass)}>
+                      <h4 className={classes.recTitle}>Recommendations:</h4>
+                      {recommendations.map((rec, i) => {
+                        return <div key={i}>{rec}</div>;
+                      })}
+                    </div>
                     <div className={classNames(classes.searchContainer, shouldBlurClass)}>
                       <h4 className={classes.searchingResult}>{keyword}</h4>
                       <img className={classes.googleSearch} src={GoogleSearch}/>

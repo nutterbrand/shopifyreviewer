@@ -64,6 +64,16 @@ const productStyle = {
   recsContainer: {
     marginBottom: '25px',
   },
+  recTitle:{
+    marginTop: '0px',
+  },
+  recs: {
+    width: '100%',
+    padding: '10px',
+    borderRadius: '5px',
+    border: '2px solid #eeeeee',
+    backgroundColor: '#fffef4',
+  },
   searchContainer: {
     position: 'relative',
     height: '50px',
