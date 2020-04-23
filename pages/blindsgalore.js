@@ -2,29 +2,25 @@ import React from "react";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import Rating from "@material-ui/lab/Rating";
-
-// core components
+import Button from "@material-ui/core/Button";
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-
-import productStyle from "assets/jss/nextjs-material-kit-pro/pages/productStyle.js";
-
-import imgHeader from "assets/img/blindsgalore.jpg";
+import CompanyLogo from "assets/img/blindsgalore.jpg";
 import fetch from "isomorphic-unfetch";
 import useSwr from "swr";
 import _ from "underscore";
-
+import productStyle from "assets/jss/nextjs-material-kit-pro/pages/productStyle.js";
 const useStyles = makeStyles(productStyle);
 
 const fetcher = url => fetch(url).then((res) => res.json());
 
 export default function BlindsgalorePage(props) {
+  const [isSignedUp, updateStatus] = React.useState(false);
   const classes = useStyles();
   const { data, error } = useSwr("/api/shopping", fetcher);
-  if (error) return <div>Failed to load users</div>;
+  if (error) return <div>Failed to load data</div>;
   if (!data) return <div>Loading...</div>;
-
   const groupedData = _.groupBy(data, "keyword");
   const productData = Object.keys(groupedData);
 
@@ -77,12 +73,14 @@ export default function BlindsgalorePage(props) {
 
   return (
     <div className={classes.productPage}>
-      <Header fixed color="white" brand="Shopify Reviewer"/>
+      <Header fixed color="white" brand="Shopify Reviewer"
+              links={<Button color={isSignedUp ? "primary" : "secondary"} variant="contained" className={classes.signUp}
+                             onClick={()=>updateStatus(!isSignedUp)}>{!isSignedUp ? "Sign Up" : "Account"}</Button>}/>
       <div className={classNames(classes.section)}>
         <div className={classes.container}>
           <GridContainer className={classes.productHeader}>
             <GridItem md={7} sm={12}>
-              <img className={classes.headerImg} src={imgHeader} />
+              <img className={classes.headerImg} src={CompanyLogo} />
               <h3>Shopping Score Overview:</h3>
                 <div className={classes.stat}>
                   <b className={classes.statNum}>23%</b> of the time your company
@@ -113,25 +111,27 @@ export default function BlindsgalorePage(props) {
             </GridItem>
           </GridContainer>
           {productData &&
-            productData.map((key, i) => {
+            productData.map( (key, keyIndex) => {
               const data = groupedData[key];
               const keyword = data[0].keyword;
               const suggestions = getSuggestions(data, keyword);
-
-              const moreThanRow = data.length > 3;
+              const moreThanThreeProduct = data.length > 3;
+              const shouldBlurClass = classNames({[ classes.blurryText ]: keyIndex > 9 && !isSignedUp});
               return (
                 <>
-                  {moreThanRow && (
+                  {moreThanThreeProduct && (
                     <div className={classes.keywordHeader}>
                         <GridContainer>
                           <GridItem md={12} sm={12} className={classes.suggestionsContainer}>
                             <h3 className={classes.keywordTitle}>Keyword: "{keyword}"</h3>
                             <h4> Suggestions: </h4>
-                              {suggestions.map((suggestion,i) => <div key={i}>{suggestion}</div>)}
+                              {suggestions.map((suggestion,i) => {
+                                return <div key={i} className={shouldBlurClass}>{suggestion}</div>;
+                              })}
                           </GridItem>
-                          <GridItem md={12} sm={12}>
+                          <GridItem md={12} sm={12} className={shouldBlurClass}>
                           <GridContainer className={classes.productRow}>
-                          {moreThanRow &&
+                          {moreThanThreeProduct &&
                           data.map( (value, index) => {
                             return (
                                 <div key={index} className={classes.productContainer}>
@@ -143,7 +143,7 @@ export default function BlindsgalorePage(props) {
                                     <a className={classes.productLink} href={value.source}>{value.source}</a>
                                     <div className={classes.dollar}>${value.extracted_price}</div>
                                     <div className={classes.description}>
-                                      <Rating name="read-only" value={value.rating} precision={0.5} size="small" readOnly/>
+                                      <Rating name="read-only" value={parseInt(value.rating)} precision={0.5} size="small" readOnly/>
                                       <div>{value.title}</div>
                                     </div>
                                   </div>

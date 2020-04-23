@@ -33,6 +33,10 @@ const productStyle = {
   productPage: {
 
   },
+  signUp:{
+    position: "absolute",
+    right: "0",
+  },
   headerImg: {
     marginTop: "15px",
   },
@@ -104,6 +108,10 @@ const productStyle = {
   sectionGray: {
     background: grayColor[14],
   },
+  blurryText: {
+  color: "transparent",
+  textShadow: "0 0 5px rgba(0,0,0,0.5)",
+},
 };
 
 export default productStyle;
