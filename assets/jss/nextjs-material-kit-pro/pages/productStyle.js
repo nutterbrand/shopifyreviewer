@@ -31,6 +31,11 @@ const productStyle = {
     ...title,
   },
   productPage: {},
+  center: {
+    width: '100%',
+    textAlign: 'center',
+    marginTop: '450px',
+  },
   signUp: {
     position: 'absolute',
     right: '0',
@@ -48,10 +53,13 @@ const productStyle = {
     marginBottom: '5px',
   },
   statNum: {
-    color: '#e15940',
+    color: '#f44436',
   },
   dollar: {
     color: '#5a8b5d',
+  },
+  badge: {
+    fontSize: '16px',
   },
   keywordCard: {
     backgroundColor: 'White',
@@ -65,7 +73,7 @@ const productStyle = {
   recsContainer: {
     marginBottom: '25px',
   },
-  recTitle:{
+  recTitle: {
     marginTop: '0px',
   },
   recs: {
@@ -75,7 +83,7 @@ const productStyle = {
     border: '2px solid #eeeeee',
     backgroundColor: '#fffef4',
   },
-  rec:{
+  rec: {
     display: 'flex',
     alignItems: 'center',
   },
@@ -90,8 +98,8 @@ const productStyle = {
   },
   searchingResult: {
     position: 'absolute',
-    left: "50px",
-    fontWeight: "bold",
+    left: '50px',
+    fontWeight: 'bold',
     height: '100%',
   },
   googleSearch: {

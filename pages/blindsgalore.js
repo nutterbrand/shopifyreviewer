@@ -13,6 +13,7 @@ import fetch from 'isomorphic-unfetch';
 import useSwr from 'swr';
 import _ from 'underscore';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
+import Badge from '../components/Badge/Badge';
 
 const useStyles = makeStyles(productStyle);
 
@@ -22,8 +23,8 @@ export default function BlindsgalorePage(props) {
   const [isSignedUp, updateStatus] = useState(false);
   const classes = useStyles();
   const {data, error} = useSwr('/api/shopping', fetcher);
-  if (error) return <div>Failed to load data</div>;
-  if (!data) return <div>Loading...</div>;
+  if (error) return <h6 className={classes.center}>Failed to load data</h6>;
+  if (!data) return <h6 className={classes.center}>Loading Your Marketing Analysis...</h6>;
   const groupedData = _.filter(_.groupBy(data, 'keyword'), product => product.length > 3);
   const productsData = _.keys(groupedData);
   const getRecommendations = (data, keyword) => {
@@ -81,24 +82,24 @@ export default function BlindsgalorePage(props) {
         <div className={classNames(classes.section)}>
           <div className={classes.container}>
             <GridContainer className={classes.productHeader}>
-              <GridItem md={7} sm={12}>
+              <GridItem md={8} sm={12}>
                 <img className={classes.headerImg} src={CompanyLogo}/>
                 <h3>Shopping Score Overview:</h3>
                 <div className={classes.stat}>
-                  <b className={classes.statNum}>23%</b> of the time your company
+                  <Badge className={classes.badge} color="success">32%</Badge> of the time your company
                   shows up for the <b className={classes.dollar}>top keywords</b> in your industry.
                 </div>
                 <div className={classes.stat}>
-                  <b className={classes.statNum}>11%</b> of the time your company
+                  <Badge className={classes.badge} color="warning">16%</Badge> of the time your company
                   had the <b className={classes.dollar}>lowest price</b> compared to your competition.
                 </div>
                 <div className={classes.stat}>
-                  <b className={classes.statNum}>4%</b> of the time your company
+                  <Badge className={classes.badge} color="danger">4%</Badge> of the time your company
                   ratings on products for <b className={classes.dollar}>top keywords</b>.
                 </div>
               </GridItem>
-              <GridItem md={5} sm={12}>
-                <h2>Score: <b className={classes.statNum}>12%</b></h2>
+              <GridItem md={4} sm={12}>
+                <h2>Score: <b className={classes.statNum}>22%</b></h2>
                 <p>We did a full on analysis on over a 100 of the most
                   popular searches that bring customers to your site.</p>
                 <p>We found quite a few areas we you can improve your
