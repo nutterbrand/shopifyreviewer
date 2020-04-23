@@ -108,12 +108,9 @@ const productStyle = {
   sectionGray: {
     background: grayColor[14],
   },
-  blurryText: {
-  color: "transparent",
-  textShadow: "0 0 5px rgba(0,0,0,0.75)",
-    fillOpacity: "0.5",
-    opacity: "0.5",
-},
+  blur: {
+    filter: 'blur(5px)',
+  },
 };
 
 export default productStyle;
