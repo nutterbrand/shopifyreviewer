@@ -36,6 +36,7 @@ const productStyle = {
   signUp:{
     position: "absolute",
     right: "0",
+    top: "6px",
   },
   headerImg: {
     marginTop: "15px",
@@ -57,7 +58,7 @@ const productStyle = {
   keywordHeader:{
     backgroundColor: "White",
     margin: "50px -15px",
-    padding: "40px",
+    padding: "40px 40px 60px 40px",
   },
   keywordTitle: {
     fontWeight: "Bold",
@@ -71,7 +72,7 @@ const productStyle = {
   productRow: {
     display: "flex",
     flexWrap: "nowrap",
-    overflowY: "auto",
+    overflowY: "scroll",
   },
   productContainer: {
     flex: "0 0 auto",
@@ -110,6 +111,11 @@ const productStyle = {
   },
   blur: {
     filter: 'blur(5px)',
+  },
+  more:{
+    position: "absolute",
+    bottom: "-35px",
+    left: "10px"
   },
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import Rating from "@material-ui/lab/Rating";
@@ -16,7 +16,7 @@ const useStyles = makeStyles(productStyle);
 const fetcher = url => fetch(url).then((res) => res.json());
 
 export default function BlindsgalorePage(props) {
-  const [isSignedUp, updateStatus] = React.useState(false);
+  const [isSignedUp, updateStatus] = useState(false);
   const classes = useStyles();
   const { data, error } = useSwr("/api/shopping", fetcher);
   if (error) return <div>Failed to load data</div>;
@@ -103,9 +103,9 @@ export default function BlindsgalorePage(props) {
             </GridItem>
           </GridContainer>
           {productsData.map( (key, keyIndex) => {
-              const data = groupedData[key];
-              const keyword = data[0].keyword;
-              const suggestions = getSuggestions(data, keyword);
+              const products = groupedData[key];
+              const keyword = products[0].keyword;
+              const suggestions = getSuggestions(products, keyword);
               const shouldBlurClass = {[ classes.blur ]: keyIndex > 9 && !isSignedUp};
               return <div className={classes.keywordHeader}>
                         <GridContainer>
@@ -118,24 +118,26 @@ export default function BlindsgalorePage(props) {
                           </GridItem>
                           <GridItem md={12} sm={12} className={classNames(shouldBlurClass)}>
                           <GridContainer className={classes.productRow}>
-                          {data.map( (value, index) => {
+                          {products.map( (product, index) => {
                             return (
                                 <div key={index} className={classes.productContainer}>
-                                  <img src={value.thumbnail} className={classNames(classes.productImg, shouldBlurClass)}/>
+                                  <img src={product.thumbnail} className={classNames(classes.productImg, shouldBlurClass)}/>
                                   <div>
                                     <div className={classes.productKeyword}>
-                                      <b>#{index + 1}: {value.keyword}</b>
+                                      <b>#{index + 1}: {product.keyword}</b>
                                     </div>
-                                    <div className={classes.productLink}>{value.source}</div>
-                                    <div className={classes.dollar}>${value.extracted_price}</div>
+                                    <div className={classes.productLink}>{product.source}</div>
+                                    <div className={classes.dollar}>${product.extracted_price}</div>
                                     <div className={classes.description}>
-                                      <Rating name="read-only" value={parseInt(value.rating)} precision={0.5} size="small" readOnly/>
-                                      <div>{value.title}</div>
+                                      <Rating name="read-only" value={parseInt(product.rating)} precision={0.5} size="small" readOnly/>
+                                      <div>{product.title}</div>
                                     </div>
                                   </div>
                                 </div>
                               );
                           })}
+                            {products.length > 5 &&
+                            <i className={classes.more}>There's {products.length - 5} more products, scroll right...</i>}
                           </GridContainer>
                           </GridItem>
                         </GridContainer>
