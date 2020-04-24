@@ -7,7 +7,7 @@ import Icon from "@material-ui/core/Icon";
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import CompanyLogo from "assets/img/blindsgalore.jpg";
+import CompanyLogo from "assets/img/signature.png";
 import GoogleSearch from "assets/img/googleSearch.png";
 import fetch from "isomorphic-unfetch";
 import useSwr from "swr";
@@ -41,7 +41,7 @@ export default function BlindsgalorePage(props) {
     const avg_price = Math.floor(
       _.reduce(prices, (memo, num) => memo + num, 0) / prices.length || 1
     );
-    const company_listing = _.where(data, { source: "Blindsgalore.com" });
+    const company_listing = _.where(data, { source: "Signature Hard..." });
     let recommendations = [];
     if (company_listing.length) {
       const your_company = company_listing[0];
@@ -108,14 +108,14 @@ export default function BlindsgalorePage(props) {
               <h3>Shopping Score Overview:</h3>
               <div className={classes.stat}>
                 <Badge className={classes.badge} color="success">
-                  32%
+                  --
                 </Badge>{" "}
                 of the time your company shows up for the{" "}
                 <b className={classes.dollar}>top keywords</b> in your industry.
               </div>
               <div className={classes.stat}>
                 <Badge className={classes.badge} color="warning">
-                  16%
+                  --
                 </Badge>{" "}
                 of the time your company had the{" "}
                 <b className={classes.dollar}>lowest price</b> compared to your
@@ -123,7 +123,7 @@ export default function BlindsgalorePage(props) {
               </div>
               <div className={classes.stat}>
                 <Badge className={classes.badge} color="danger">
-                  4%
+                  --
                 </Badge>{" "}
                 of the time your company ratings on products for{" "}
                 <b className={classes.dollar}>top keywords</b>.
@@ -131,7 +131,7 @@ export default function BlindsgalorePage(props) {
             </GridItem>
             <GridItem md={4} sm={12}>
               <h2>
-                Score: <b className={classes.statNum}>22%</b>
+                Score: <b className={classes.statNum}>--</b>
               </h2>
               <p>
                 We did a full on analysis on over a 100 of the most popular
