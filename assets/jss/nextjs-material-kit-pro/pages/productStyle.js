@@ -91,6 +91,7 @@ const productStyle = {
   },
   rec: {
     display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
   },
   recIcon: {

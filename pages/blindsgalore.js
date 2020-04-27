@@ -37,39 +37,57 @@ export default function BlindsgalorePage(props) {
         prices.length || 1,
     );
     const company_listing = _.where(data, {source: 'Blindsgalore.com'});
-    let recommendations = [];
     if (company_listing.length) {
       const your_company = company_listing[ 0 ];
-      recommendations = [`Your ad was in position #${your_company?.position} among your competition.`];
-      if (min_price.source === your_company.source) {
-        recommendations = [
-          ...recommendations,
-          `You have the lowest price item advertised for this keyword $${min_price.extracted_price}.`];
-      } else {
-        recommendations = [
-          ...recommendations,
-          `${min_price.source} has the lowest price item: $${min_price.extracted_price},
-                  while you have a price of $${your_company.extracted_price}. The average price is $${avg_price}.`];
-      }
-      if (!your_company.rating) {
-        recommendations = [
-          ...recommendations,
-          `Add ratings to your product in your Google Shopping feed.`];
-        if (num_ratings > 1) {
-          recommendations = [
-            ...recommendations,
-            `There are ${num_ratings} companies that have ratings for products that match this keyword.`];
-        }
-      }
+      return (
+          <>
+            <div className={classes.rec}>
+              <Icon className={classes.recIcon} fontSize="small">info</Icon>
+              <span>Your ad was in position #${your_company.position} among your competition.</span>
+            </div>
+            {min_price.source === your_company.source ?
+                <div className={classes.rec}>
+                  <Icon className={classes.recIcon} fontSize="small">info</Icon>
+                  <span>You have the lowest price item advertised for this keyword
+                    ${min_price.extracted_price}.
+                  </span>
+                </div> :
+                <div className={classes.rec}><Icon className={classes.recIcon} fontSize="small">info</Icon>
+                  <span>{min_price.source} has the lowest price item: $${min_price.extracted_price}, while you have a
+                    price of ${your_company.extracted_price}. The average price is ${avg_price}.
+                  </span>
+                </div>
+            }
+            {
+              !your_company.rating &&
+              <div className={classes.rec}><Icon className={classes.recIcon} fontSize="small">info</Icon>
+                <span>Add ratings to your product in your Google Shopping feed.</span>
+              </div>
+            }
+            {
+              !your_company.rating && num_ratings > 1 &&
+              <div className={classes.rec}><Icon className={classes.recIcon} fontSize="small">info</Icon>
+                <span>There are {num_ratings} companies that have ratings for products that match this keyword.</span>
+              </div>
+            }
+          </>
+      );
+
     } else {
-      recommendations = [
-        ...recommendations,
-        'Your products did not show up for this keyword.',
-        `Add the following keyword to your product description: "${keyword}"`,
-        `Advertise a product near the avg price: $${avg_price} dollars.`,
-      ];
+      return (
+          <>
+            <div className={classes.rec}><Icon className={classes.recIcon} fontSize="small">info</Icon>
+              <span>Your products did not show up for this keyword.</span>
+            </div>
+            <div className={classes.rec}><Icon className={classes.recIcon} fontSize="small">check</Icon>
+              <span>Add the following keyword to your product description: "{keyword}"</span>
+            </div>
+            <div className={classes.rec}><Icon className={classes.recIcon} fontSize="small">check</Icon>
+              <span>Advertise a product near the avg price: ${avg_price} dollars.</span>
+            </div>
+          </>
+      );
     }
-    return recommendations;
   };
 
   return (
@@ -111,23 +129,21 @@ export default function BlindsgalorePage(props) {
               const products = groupedData[ key ];
               const keyword = products[ 0 ].keyword;
               const recommendations = getRecommendations(products, keyword);
-              let notTopTenAndNotSignedUp = keyIndex > 9 && !isSignedUp;
+              const notTopTenAndNotSignedUp = keyIndex > 9 && !isSignedUp;
               const blurClass = {[ classes.blur ]: notTopTenAndNotSignedUp};
               return (
                   <>
                     <div className={classes.keywordCard}>
                       <GridContainer>
                         <GridItem md={12} sm={12} className={classes.recsContainer}>
-                          <h3 className={classes.keywordTitle}>Keyword: "{keyword}"</h3>
+                          <h3 className={classes.keywordTitle}><span className={classes.dollar}>#{keyIndex +
+                          1}</span> Keyword: "{keyword}"</h3>
                           {notTopTenAndNotSignedUp &&
                           <Button size="large" color='secondary' className={classes.showButton} variant="contained"
                                   onClick={() => updateStatus(true)}>SIGN UP TO SEE RESULTS</Button>}
                           <div className={classNames(classes.recs, blurClass)}>
                             <h4 className={classes.recTitle}>Recommendations:</h4>
-                            {recommendations.map((rec, i) => {
-                              return <div className={classes.rec} key={i}>
-                                <Icon className={classes.recIcon} fontSize="small">info</Icon>{rec}</div>;
-                            })}
+                            {recommendations}
                           </div>
                           <div className={classNames(classes.searchContainer, blurClass)}>
                             <h4 className={classes.searchingResult}>{keyword}</h4>
