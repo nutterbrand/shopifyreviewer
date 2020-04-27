@@ -59,7 +59,7 @@ const productStyle = {
     color: '#f44436',
   },
   dollar: {
-    color: '#5a8b5d',
+    color: '#4bb051',
   },
   keywordCard: {
     backgroundColor: 'White',
@@ -71,10 +71,10 @@ const productStyle = {
     fontWeight: 'Bold',
   },
   showButton: {
-    position: "absolute",
-    right: "0",
-    top: "0",
-    margin: "15px",
+    position: 'absolute',
+    right: '0',
+    top: '0',
+    margin: '15px',
   },
   recsContainer: {
     marginBottom: '25px',
@@ -94,9 +94,17 @@ const productStyle = {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  recIcon: {
+  recIconPos: {
     marginRight: '10px',
-    color: '#e15940',
+    color: '#4bb051',
+  },
+  recIconNeu: {
+    marginRight: '10px',
+    color: '#ff9900',
+  },
+  recIconNeg: {
+    marginRight: '10px',
+    color: '#f44436',
   },
   searchContainer: {
     position: 'relative',

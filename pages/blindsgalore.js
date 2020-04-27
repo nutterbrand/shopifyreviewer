@@ -42,32 +42,34 @@ export default function BlindsgalorePage(props) {
       return (
           <>
             <div className={classes.rec}>
-              <Icon className={classes.recIcon} fontSize="small">info</Icon>
-              <span>Your ad was in position #${your_company.position} among your competition.</span>
+              <Icon className={classes.recIconPos} fontSize="small">info</Icon>
+              Your ad was in position <b className={classes.recIconPos}> #${your_company.position}</b> among your
+              competition.
             </div>
             {min_price.source === your_company.source ?
                 <div className={classes.rec}>
-                  <Icon className={classes.recIcon} fontSize="small">info</Icon>
-                  <span>You have the lowest price item advertised for this keyword
-                    ${min_price.extracted_price}.
-                  </span>
+                  <Icon className={classes.recIconPos} fontSize="small">info</Icon>
+                  You have the lowest price item advertised for this keyword
+                  <b className={classes.recIconPos}> ${min_price.extracted_price}.</b>
                 </div> :
-                <div className={classes.rec}><Icon className={classes.recIcon} fontSize="small">info</Icon>
-                  <span>{min_price.source} has the lowest price item: $${min_price.extracted_price}, while you have a
-                    price of ${your_company.extracted_price}. The average price is ${avg_price}.
-                  </span>
+                <div className={classes.rec}><Icon className={classes.recIconNeg} fontSize="small">info</Icon>
+                  <b className={classes.recIconNeg}>{min_price.source}</b> has the lowest price item:
+                  <b className={classes.recIconPos}> ${min_price.extracted_price}</b>, while you have a
+                  price of <b className={classes.recIconNeg}> ${your_company.extracted_price}.</b>
+                  The average price is <b className={classes.recIconNeu}> ${avg_price}</b>.
                 </div>
             }
             {
               !your_company.rating &&
-              <div className={classes.rec}><Icon className={classes.recIcon} fontSize="small">info</Icon>
-                <span>Add ratings to your product in your Google Shopping feed.</span>
+              <div className={classes.rec}><Icon className={classes.recIconPos} fontSize="small">info</Icon>
+                Add ratings to your product in your Google Shopping feed.
               </div>
             }
             {
               !your_company.rating && num_ratings > 1 &&
-              <div className={classes.rec}><Icon className={classes.recIcon} fontSize="small">info</Icon>
-                <span>There are {num_ratings} companies that have ratings for products that match this keyword.</span>
+              <div className={classes.rec}><Icon className={classes.recIconPos} fontSize="small">info</Icon>
+                There are <b className={classes.recIconPos}>{num_ratings}</b> companies that have ratings for
+                products that match this keyword.
               </div>
             }
           </>
@@ -76,14 +78,15 @@ export default function BlindsgalorePage(props) {
     } else {
       return (
           <>
-            <div className={classes.rec}><Icon className={classes.recIcon} fontSize="small">info</Icon>
-              <span>Your products did not show up for this keyword.</span>
+            <div className={classes.rec}><Icon className={classes.recIconNeg} fontSize="small">info</Icon>
+              Your products did not show up for this keyword.
             </div>
-            <div className={classes.rec}><Icon className={classes.recIcon} fontSize="small">check</Icon>
-              <span>Add the following keyword to your product description: "{keyword}"</span>
+            <div className={classes.rec}><Icon className={classes.recIconPos} fontSize="small">add_circle</Icon>
+              Add the following keyword to your product description: <b
+                  className={classes.recIconPos}> "{keyword}"</b>
             </div>
-            <div className={classes.rec}><Icon className={classes.recIcon} fontSize="small">check</Icon>
-              <span>Advertise a product near the avg price: ${avg_price} dollars.</span>
+            <div className={classes.rec}><Icon className={classes.recIconPos} fontSize="small">monetization_on</Icon>
+              Advertise a product near the avg price: <b className={classes.recIconPos}> ${avg_price} dollars</b>.
             </div>
           </>
       );
@@ -97,7 +100,7 @@ export default function BlindsgalorePage(props) {
                   <Button color={isSignedUp ? 'primary' : 'secondary'} variant="contained"
                           className={classes.signUp} onClick={() => updateStatus(!isSignedUp)}>
                     {!isSignedUp ? 'Sign Up' : 'Account'}</Button>}/>
-        <div className={classNames(classes.section)}>
+        <div className={classes.section}>
           <div className={classes.container}>
             <GridContainer className={classes.companyHeader}>
               <GridItem md={8} sm={12}>
@@ -136,8 +139,7 @@ export default function BlindsgalorePage(props) {
                     <div className={classes.keywordCard}>
                       <GridContainer>
                         <GridItem md={12} sm={12} className={classes.recsContainer}>
-                          <h3 className={classes.keywordTitle}><span className={classes.dollar}>#{keyIndex +
-                          1}</span> Keyword: "{keyword}"</h3>
+                          <h3 className={classes.keywordTitle}>#{keyIndex + 1} Keyword: "{keyword}"</h3>
                           {notTopTenAndNotSignedUp &&
                           <Button size="large" color='secondary' className={classes.showButton} variant="contained"
                                   onClick={() => updateStatus(true)}>SIGN UP TO SEE RESULTS</Button>}
