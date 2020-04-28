@@ -34,7 +34,8 @@ const productStyle = {
   center: {
     width: '100%',
     textAlign: 'center',
-    marginTop: '450px',
+    position: 'absolute',
+    top: '50%',
   },
   signUp: {
     position: 'absolute',
