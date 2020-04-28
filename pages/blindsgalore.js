@@ -1,22 +1,18 @@
 import React, {useState} from 'react';
-import classNames from 'classnames';
 import {makeStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Header from 'components/Header/Header.js';
 import GridContainer from 'components/Grid/GridContainer.js';
 import GridItem from 'components/Grid/GridItem.js';
 import CompanyLogo from 'assets/img/blindsgalore.jpg';
-import GoogleSearch from 'assets/img/googleSearch.png';
 import fetch from 'isomorphic-unfetch';
 import useSwr from 'swr';
 import _ from 'underscore';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
 import Badge from '../components/Badge/Badge';
-import {Recommendations} from './Recommendations';
-import {Product} from './Product';
+import {KeywordProducts} from './KeywordProducts';
 
 const useStyles = makeStyles(productStyle);
-
 const fetcher = url => fetch(url).then((res) => res.json());
 
 export default function BlindsgalorePage(props) {
@@ -63,44 +59,10 @@ export default function BlindsgalorePage(props) {
                   your site.</p>
               </GridItem>
             </GridContainer>
-            {productsData.map((key, keyIndex) => {
-              const products = groupedData[ key ];
-              const keyword = products[ 0 ].keyword;
-              const notTopTenAndNotSignedUp = keyIndex > 9 && !isSignedUp;
-              const blurClass = {[ classes.blur ]: notTopTenAndNotSignedUp};
-              return (
-                  <>
-                    <div className={classes.keywordCard}>
-                      <GridContainer>
-                        <GridItem md={12} sm={12} className={classes.recsContainer}>
-                          <h3 className={classes.keywordTitle}>#{keyIndex + 1} Keyword: "{keyword}"</h3>
-                          {notTopTenAndNotSignedUp &&
-                          <Button size="large" color='secondary' className={classes.showButton} variant="contained"
-                                  onClick={() => updateStatus(true)}>SIGN UP TO SEE RESULTS</Button>}
-                          <div className={classNames(classes.recs, blurClass)}>
-                            <h4 className={classes.recTitle}>Recommendations:</h4>
-                            <Recommendations products={products} keyword={keyword}/>
-                          </div>
-                          <div className={classNames(classes.searchContainer, blurClass)}>
-                            <h4 className={classes.searchingResult}>{keyword}</h4>
-                            <img className={classes.googleSearch} src={GoogleSearch}/>
-                          </div>
-                        </GridItem>
-                        <GridItem md={12} sm={12} className={classNames(blurClass)}>
-                          <GridContainer className={classes.productRow}>
-                            {products.map((product, index) =>
-                                <Product index={index} product={product} blurClass={blurClass}/>
-                              )}
-                            {products.length > 5 &&
-                            <i className={classes.more}>There's {products.length - 5} more products, scroll
-                              right...</i>}
-                          </GridContainer>
-                        </GridItem>
-                      </GridContainer>
-                    </div>
-                  </>
-              );
-            })}
+            {productsData.map(
+                (key, keyIndex) => <KeywordProducts key={key} keyIndex={keyIndex} products={groupedData[ key ]}
+                                                    isSignedUp={isSignedUp} updateStatus={updateStatus}/>,
+            )}
           </div>
         </div>
       </div>
