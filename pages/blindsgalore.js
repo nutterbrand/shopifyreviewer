@@ -9,8 +9,9 @@ import fetch from 'isomorphic-unfetch';
 import useSwr from 'swr';
 import _ from 'underscore';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
-import Badge from '../components/Badge/Badge';
 import {KeywordProducts} from './KeywordProducts';
+import {CircularProgressbar, buildStyles} from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const useStyles = makeStyles(productStyle);
 const fetcher = url => fetch(url).then((res) => res.json());
@@ -19,8 +20,8 @@ export default function BlindsgalorePage(props) {
   const [isSignedUp, updateStatus] = useState(false);
   const classes = useStyles();
   const {data, error} = useSwr('/api/shopping', fetcher);
-  if (error) return <h6 className={classes.center}>Failed to load data</h6>;
-  if (!data) return <h6 className={classes.center}>Loading Your Marketing Analysis...</h6>;
+  if (error) return <span className={classes.center}>Failed to load data</span>;
+  if (!data) return <span className={classes.center}>Loading Your Marketing Analysis...</span>;
   const groupedData = _.filter(_.groupBy(data, 'keyword'), product => product.length > 3);
   const productsData = _.keys(groupedData);
 
@@ -34,29 +35,69 @@ export default function BlindsgalorePage(props) {
         <div className={classes.section}>
           <div className={classes.container}>
             <GridContainer className={classes.companyHeader}>
-              <GridItem md={8} sm={12}>
-                <img className={classes.headerImg} src={CompanyLogo}/>
-                <h3>Shopping Score Overview:</h3>
-                <div className={classes.stat}>
-                  <Badge className={classes.badge} color="success">32%</Badge> of the time your company
-                  shows up for the <b className={classes.dollar}>top keywords</b> in your industry.
+              <GridItem md={12} sm={12}>
+                <div className={classes.scoreHeader}>
+                  <img className={classes.headerImg} src={CompanyLogo}/>
+                  <div className={classes.statNumContainer}>Score: 22%</div>
                 </div>
-                <div className={classes.stat}>
-                  <Badge className={classes.badge} color="warning">16%</Badge> of the time your company
-                  had the <b className={classes.dollar}>lowest price</b> compared to your competition.
+                <div className={classes.statContainer}>
+                  <div className={classes.stat}>
+                    <CircularProgressbar value={33} text={`33%`} strokeWidth={5} className={classes.statCircle}
+                                         styles={buildStyles({
+                                           rotation: 0.5,
+                                           strokeLinecap: 'butt',
+                                           textSize: '24px',
+                                           pathTransitionDuration: 0.5,
+                                           pathColor: '#4bb051',
+                                           textColor: '#4bb051',
+                                           trailColor: '#eeeeee',
+                                         })}/>
+                    <h4>of the time your company shows up for the <span className={classes.green}>top keywords</span> in
+                      your industry.
+                    </h4>
+                  </div>
+                  <div className={classes.stat}>
+                    <CircularProgressbar value={16} text={`16%`} className={classes.statCircle}
+                                         styles={buildStyles({
+                                           rotation: 0.5,
+                                           strokeLinecap: 'butt',
+                                           textSize: '24px',
+                                           pathTransitionDuration: 0.5,
+                                           pathColor: '#ffa21a',
+                                           textColor: '#ffa21a',
+                                           trailColor: '#eeeeee',
+                                         })}/>
+                    <h4>of the time your company had the <span className={classes.yellow}>lowest price</span> compared
+                      to your competition.
+                    </h4>
+                  </div>
+                  <div className={classes.stat}>
+                    <CircularProgressbar value={8} text={`8%`} className={classes.statCircle}
+                                         styles={buildStyles({
+                                           rotation: 0.5,
+                                           strokeLinecap: 'butt',
+                                           textSize: '24px',
+                                           pathTransitionDuration: 0.5,
+                                           pathColor: '#f65a4e',
+                                           textColor: '#f65a4e',
+                                           trailColor: '#eeeeee',
+                                         })}/>
+                    <h4>of the time your company had <span className={classes.red}>ratings</span> on products for top
+                      keywords.
+                    </h4>
+                  </div>
                 </div>
-                <div className={classes.stat}>
-                  <Badge className={classes.badge} color="danger">4%</Badge> of the time your company
-                  ratings on products for <b className={classes.dollar}>top keywords</b>.
+                <div className={classes.statDes}>
+                  <ul>
+                    <li>We did a full on analysis on over a 100 of the most
+                      popular searches that bring customers to your site.
+                    </li>
+                    <li>We found quite a few areas we you can improve your
+                      Google advertising to get more customers buying on
+                      your site.
+                    </li>
+                  </ul>
                 </div>
-              </GridItem>
-              <GridItem md={4} sm={12}>
-                <h2>Score: <b className={classes.statNum}>22%</b></h2>
-                <p>We did a full on analysis on over a 100 of the most
-                  popular searches that bring customers to your site.</p>
-                <p>We found quite a few areas we you can improve your
-                  Google advertising to get more customers buying on
-                  your site.</p>
               </GridItem>
             </GridContainer>
             {productsData.map(

@@ -42,25 +42,80 @@ const productStyle = {
     right: '0',
     top: '6px',
   },
-  headerImg: {
-    marginTop: '15px',
-  },
   companyHeader: {
     backgroundColor: 'White',
     marginTop: '100px',
     padding: '25px',
   },
+  scoreHeader: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    margin: '30px',
+  },
+  statNumContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '40px',
+    width: '30%',
+    height: '60px',
+    fontFamily: 'Roboto',
+    backgroundColor: '#f65a4e',
+    color: '#f9f9f9',
+    boxShadow: '0px 4px 2px -3px rgba(0,0,0,0.2)',
+  },
+  headerImg: {
+    width: '30%',
+    height: 'auto',
+  },
+  statContainer: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    margin: '50px 15px 15px 15px',
+  },
   stat: {
-    marginBottom: '10px',
+    width: '30%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: '5px',
+    border: '1px solid #eeeeee',
+    padding: '40px 25px',
+    textAlign: 'center',
   },
-  badge: {
-    fontSize: '14px',
+  statCircle: {
+    width: '80%',
+    marginBottom: '30px',
   },
-  statNum: {
-    color: '#f44436',
+  statScore: {
+    padding: '0',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: '30px',
   },
-  dollar: {
+  green: {
     color: '#4bb051',
+    fontWeight: 'bold',
+    fontSize: '24px',
+  },
+  yellow: {
+    color: '#ffa21a',
+    fontWeight: 'bold',
+    fontSize: '24px',
+  },
+  red: {
+    color: '#f65a4e',
+    fontWeight: 'bold',
+    fontSize: '24px',
+  },
+  statDes: {
+    margin: "25px 30px",
+    borderRadius: '5px',
+    border: '1px solid #eeeeee',
+    padding: '40px 25px',
   },
   keywordCard: {
     backgroundColor: 'White',
