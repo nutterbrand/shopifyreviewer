@@ -1,22 +1,22 @@
-import _ from 'underscore';
 import React from 'react';
+import _ from 'underscore';
 import Icon from '@material-ui/core/Icon';
 import {makeStyles} from '@material-ui/core/styles';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
 const useStyles = makeStyles(productStyle);
 
 export const Recommendations = (props) => {
-  const {data, keyword} = props;
+  const {products, keyword} = props;
   const classes = useStyles();
-  const prices = _(data).pluck('extracted_price');
-  const ratings = _.compact(_(data).pluck('rating'));
+  const prices = _(products).pluck('extracted_price');
+  const ratings = _.compact(_(products).pluck('rating'));
   const num_ratings = ratings ? ratings.length + 1 : 0;
-  const min_price = _.min(data, elem => elem.extracted_price);
+  const min_price = _.min(products, elem => elem.extracted_price);
   const avg_price = Math.floor(
       _.reduce(prices, (memo, num) => memo + num, 0) /
       prices.length || 1,
   );
-  const company_listing = _.where(data, {source: 'Blindsgalore.com'});
+  const company_listing = _.where(products, {source: 'Blindsgalore.com'});
   if (company_listing.length) {
     const your_company = company_listing[ 0 ];
     return (
