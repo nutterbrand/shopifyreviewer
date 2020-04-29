@@ -116,6 +116,7 @@ const productStyle = {
     borderRadius: '5px',
     border: '1px solid #eeeeee',
     padding: '40px 25px',
+    backgroundColor: '#fffef9',
   },
   keywordCard: {
     backgroundColor: 'White',
@@ -140,15 +141,16 @@ const productStyle = {
   },
   recs: {
     width: '100%',
-    padding: '10px',
+    padding: '20px 25px',
     borderRadius: '5px',
-    border: '2px solid #eeeeee',
-    backgroundColor: '#fffef4',
+    border: '1px solid #eeeeee',
+    backgroundColor: '#fffef9',
   },
   rec: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    margin: "5px 0",
   },
   recIconPos: {
     marginRight: '10px',
@@ -187,7 +189,7 @@ const productStyle = {
     width: '200px',
     margin: '10px',
     padding: '0 0 20px 0',
-    border: '2px solid #dfe1e5',
+    border: '1px solid #dfe1e5',
     borderRadius: '8px',
     textAlign: 'center',
   },
