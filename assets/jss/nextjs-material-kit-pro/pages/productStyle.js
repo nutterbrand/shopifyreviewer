@@ -34,32 +34,89 @@ const productStyle = {
   center: {
     width: '100%',
     textAlign: 'center',
-    marginTop: '450px',
+    position: 'absolute',
+    top: '50%',
   },
   signUp: {
     position: 'absolute',
     right: '0',
     top: '6px',
   },
-  headerImg: {
-    marginTop: '15px',
-  },
   companyHeader: {
     backgroundColor: 'White',
     marginTop: '100px',
     padding: '25px',
   },
+  scoreHeader: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    margin: '30px',
+  },
+  statNumContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '40px',
+    width: '30%',
+    height: '60px',
+    fontFamily: 'Roboto',
+    backgroundColor: '#f65a4e',
+    color: '#f9f9f9',
+    boxShadow: '0px 4px 2px -3px rgba(0,0,0,0.2)',
+  },
+  headerImg: {
+    width: '30%',
+    height: 'auto',
+  },
+  statContainer: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    margin: '50px 15px 15px 15px',
+  },
   stat: {
-    marginBottom: '10px',
+    width: '30%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: '5px',
+    border: '1px solid #eeeeee',
+    padding: '40px 25px',
+    textAlign: 'center',
   },
-  badge: {
-    fontSize: '14px',
+  statCircle: {
+    width: '80%',
+    marginBottom: '30px',
   },
-  statNum: {
-    color: '#f44436',
+  statScore: {
+    padding: '0',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: '30px',
   },
-  dollar: {
-    color: '#5a8b5d',
+  green: {
+    color: '#4bb051',
+    fontWeight: 'bold',
+    fontSize: '24px',
+  },
+  yellow: {
+    color: '#ffa21a',
+    fontWeight: 'bold',
+    fontSize: '24px',
+  },
+  red: {
+    color: '#f65a4e',
+    fontWeight: 'bold',
+    fontSize: '24px',
+  },
+  statDes: {
+    margin: "25px 30px",
+    borderRadius: '5px',
+    border: '1px solid #eeeeee',
+    padding: '40px 25px',
+    backgroundColor: '#fffef9',
   },
   keywordCard: {
     backgroundColor: 'White',
@@ -71,10 +128,10 @@ const productStyle = {
     fontWeight: 'Bold',
   },
   showButton: {
-    position: "absolute",
-    right: "0",
-    top: "0",
-    margin: "15px",
+    position: 'absolute',
+    right: '0',
+    top: '0',
+    margin: '15px',
   },
   recsContainer: {
     marginBottom: '25px',
@@ -84,18 +141,28 @@ const productStyle = {
   },
   recs: {
     width: '100%',
-    padding: '10px',
+    padding: '20px 25px',
     borderRadius: '5px',
-    border: '2px solid #eeeeee',
-    backgroundColor: '#fffef4',
+    border: '1px solid #eeeeee',
+    backgroundColor: '#fffef9',
   },
   rec: {
     display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
+    margin: "5px 0",
   },
-  recIcon: {
+  recIconPos: {
     marginRight: '10px',
-    color: '#e15940',
+    color: '#4bb051',
+  },
+  recIconNeu: {
+    marginRight: '10px',
+    color: '#ff9900',
+  },
+  recIconNeg: {
+    marginRight: '10px',
+    color: '#f44436',
   },
   searchContainer: {
     position: 'relative',
@@ -122,7 +189,7 @@ const productStyle = {
     width: '200px',
     margin: '10px',
     padding: '0 0 20px 0',
-    border: '2px solid #dfe1e5',
+    border: '1px solid #dfe1e5',
     borderRadius: '8px',
     textAlign: 'center',
   },

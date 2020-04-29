@@ -13,10 +13,6 @@
     "/_error": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
-    ],
-    "/signaturehardware": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
     ]
   }
 }
