@@ -108,8 +108,8 @@ const productStyle = {
     fontWeight: 'bold',
     fontSize: '24px',
   },
-  yellow: {
-    color: '#ffa21a',
+  blue: {
+    color: '#3694F5',
     fontWeight: 'bold',
     fontSize: '24px',
   },
@@ -163,9 +163,9 @@ const productStyle = {
     margin: '0 5px',
     color: '#4bb051',
   },
-  recIconYellow: {
+  recIconBlue: {
     margin: '0 5px',
-    color: '#ffa21a',
+    color: '#3694F5',
   },
   recIconRed: {
     margin: '0 5px',
