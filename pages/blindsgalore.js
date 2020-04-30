@@ -21,7 +21,10 @@ export default function BlindsgalorePage(props) {
   const classes = useStyles();
   const {data, error} = useSwr('/api/shopping', fetcher);
   if (error) return <span className={classes.center}>Failed to load data</span>;
-  if (!data) return <span className={classes.center}>Loading Your Marketing Analysis...</span>;
+  if (!data) return <div className={classes.center}>
+    <img className={classes.loadImg} src={CompanyLogo}/>
+    <h3 className={classes.loadText}>Please Wait For a Moment While We Are Loading Your Marketing Analysis...</h3>
+  </div>;
   const groupedData = _.filter(_.groupBy(data, 'keyword'), product => product.length > 3);
   const productsData = _.keys(groupedData);
 

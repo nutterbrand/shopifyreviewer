@@ -32,11 +32,18 @@ const productStyle = {
   },
   companyPage: {},
   center: {
+    display: 'flex',
+    flexDirection: 'column',
     width: '100%',
-    textAlign: 'center',
-    position: 'absolute',
-    top: '50%',
+    height: '100vh',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
+  loadImg: {
+    width: '300px',
+  },
+  loadText: {},
   signUp: {
     position: 'absolute',
     right: '0',
@@ -58,9 +65,9 @@ const productStyle = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: '40px',
+    fontSize: '30px',
     width: '30%',
-    height: '60px',
+    height: '50px',
     fontFamily: 'Roboto',
     backgroundColor: '#f65a4e',
     color: '#f9f9f9',
@@ -193,9 +200,9 @@ const productStyle = {
     borderRadius: '8px',
     textAlign: 'center',
   },
-  highlighted:{
+  highlighted: {
     border: '1px solid #4bb051',
-    boxShadow: '0 0 5px 5px #4bb051'
+    boxShadow: '0 0 5px 5px #4bb051',
   },
   productImg: {
     width: '100%',
