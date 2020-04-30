@@ -109,7 +109,7 @@ const productStyle = {
     fontSize: '24px',
   },
   blue: {
-    color: '#3694F5',
+    color: '#4842F5',
     fontWeight: 'bold',
     fontSize: '24px',
   },
@@ -159,15 +159,15 @@ const productStyle = {
     alignItems: 'center',
     margin: '5px 0',
   },
-  recIconGreen: {
+  recGreen: {
     margin: '0 5px',
     color: '#4bb051',
   },
-  recIconBlue: {
+  recBlue: {
     margin: '0 5px',
-    color: '#3694F5',
+    color: '#4842F5',
   },
-  recIconRed: {
+  recRed: {
     margin: '0 5px',
     color: '#f65a4e',
   },

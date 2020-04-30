@@ -66,8 +66,8 @@ export default function BlindsgalorePage(props) {
                                            strokeLinecap: 'butt',
                                            textSize: '24px',
                                            pathTransitionDuration: 0.5,
-                                           pathColor: '#3694F5',
-                                           textColor: '#3694F5',
+                                           pathColor: '#4842F5',
+                                           textColor: '#4842F5',
                                            trailColor: '#eeeeee',
                                          })}/>
                     <h4>of the time your company had the <span className={classes.blue}>lowest price</span> compared
