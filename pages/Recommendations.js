@@ -1,8 +1,10 @@
 import React from 'react';
 import _ from 'underscore';
+import classNames from 'classnames';
 import Icon from '@material-ui/core/Icon';
 import {makeStyles} from '@material-ui/core/styles';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
+
 const useStyles = makeStyles(productStyle);
 
 export const Recommendations = (props) => {
@@ -19,36 +21,39 @@ export const Recommendations = (props) => {
   const company_listing = _.where(products, {source: 'Blindsgalore.com'});
   if (company_listing.length) {
     const your_company = company_listing[ 0 ];
+    const isTop5 = your_company.position <= 5;
+    const isTop5Class = classNames({[ classes.recIconGreen ]: isTop5}, {[ classes.recIconRed ]: !isTop5});
     return (
         <>
           <div className={classes.rec}>
-            <Icon className={classes.recIconPos} fontSize="small">info</Icon>
-            Your ad was in position <b className={classes.recIconPos}> #${your_company.position}</b> among your
+            <Icon className={isTop5Class} fontSize="small">{isTop5 ? 'thumb_up' : 'thumb_down'}</Icon>
+            Your ad was in position<b className={isTop5Class}> #{your_company.position}</b> among your
             competition.
           </div>
           {min_price.source === your_company.source ?
               <div className={classes.rec}>
-                <Icon className={classes.recIconPos} fontSize="small">info</Icon>
+                <Icon className={classes.recIconGreen} fontSize="small">monetization_on</Icon>
                 You have the lowest price item advertised for this keyword
-                <b className={classes.recIconPos}> ${min_price.extracted_price}.</b>
+                <b className={classes.recIconGreen}> ${min_price.extracted_price}.</b>
               </div> :
-              <div className={classes.rec}><Icon className={classes.recIconNeg} fontSize="small">info</Icon>
-                <b className={classes.recIconNeg}>{min_price.source}</b> has the lowest price item:
-                <b className={classes.recIconPos}> ${min_price.extracted_price}</b>, while you have a
-                price of <b className={classes.recIconNeg}> ${your_company.extracted_price}.</b>
-                The average price is <b className={classes.recIconNeu}> ${avg_price}</b>.
+              <div className={classes.rec}>
+                <Icon className={classes.recIconYellow} fontSize="small">monetization_on</Icon>
+                <b className={classes.recIconYellow}> {min_price.source} </b>has the lowest price item:
+                <b className={classes.recIconYellow}> ${min_price.extracted_price}</b>, while you have a
+                price of <b className={classes.recIconYellow}> ${your_company.extracted_price}.</b>
+                The average price is <b className={classes.recIconYellow}> ${avg_price}.</b>
               </div>
           }
           {
             !your_company.rating &&
-            <div className={classes.rec}><Icon className={classes.recIconPos} fontSize="small">info</Icon>
+            <div className={classes.rec}><Icon className={classes.recIconGreen} fontSize="small">stars</Icon>
               Add ratings to your product in your Google Shopping feed.
             </div>
           }
           {
             !your_company.rating && num_ratings > 1 &&
-            <div className={classes.rec}><Icon className={classes.recIconPos} fontSize="small">info</Icon>
-              There are <b className={classes.recIconPos}>{num_ratings}</b> companies that have ratings for
+            <div className={classes.rec}><Icon className={classes.recIconYellow} fontSize="small">vpn_key</Icon>
+              There are <b className={classes.recIconYellow}>{num_ratings}</b> companies that have ratings for
               products that match this keyword.
             </div>
           }
@@ -58,15 +63,14 @@ export const Recommendations = (props) => {
   } else {
     return (
         <>
-          <div className={classes.rec}><Icon className={classes.recIconNeg} fontSize="small">info</Icon>
-            Your products did not show up for this keyword.
+          <div className={classes.rec}><Icon className={classes.recIconRed} fontSize="small">info</Icon>
+            Your products did not show up for this <b className={classes.recIconRed}> keyword. </b>
           </div>
-          <div className={classes.rec}><Icon className={classes.recIconPos} fontSize="small">add_circle</Icon>
-            Add the following keyword to your product description: <b
-                className={classes.recIconPos}> "{keyword}"</b>
+          <div className={classes.rec}><Icon className={classes.recIconGreen} fontSize="small">add_circle</Icon>
+            Add the following keyword to your product description:<b className={classes.recIconGreen}>"{keyword}".</b>
           </div>
-          <div className={classes.rec}><Icon className={classes.recIconPos} fontSize="small">monetization_on</Icon>
-            Advertise a product near the avg price: <b className={classes.recIconPos}> ${avg_price} dollars</b>.
+          <div className={classes.rec}><Icon className={classes.recIconGreen} fontSize="small">monetization_on</Icon>
+            Advertise a product near the avg price: <b className={classes.recIconGreen}> ${avg_price} dollars.</b>
           </div>
         </>
     );

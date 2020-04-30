@@ -112,7 +112,7 @@ const productStyle = {
     fontSize: '24px',
   },
   statDes: {
-    margin: "25px 30px",
+    margin: '25px 30px',
     borderRadius: '5px',
     border: '1px solid #eeeeee',
     padding: '40px 25px',
@@ -150,19 +150,19 @@ const productStyle = {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    margin: "5px 0",
+    margin: '5px 0',
   },
-  recIconPos: {
-    marginRight: '10px',
+  recIconGreen: {
+    margin: '0 5px',
     color: '#4bb051',
   },
-  recIconNeu: {
-    marginRight: '10px',
-    color: '#ff9900',
+  recIconYellow: {
+    margin: '0 5px',
+    color: '#ffa21a',
   },
-  recIconNeg: {
-    marginRight: '10px',
-    color: '#f44436',
+  recIconRed: {
+    margin: '0 5px',
+    color: '#f65a4e',
   },
   searchContainer: {
     position: 'relative',
