@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import {Recommendations} from './Recommendations';
 import GoogleSearch from '../assets/img/googleSearch.png';
 import {Product} from './Product';
+import _ from 'underscore';
 
 const useStyles = makeStyles(productStyle);
 
@@ -16,6 +17,8 @@ export const KeywordProducts = (props) => {
   const classes = useStyles();
   const keyword = products[ 0 ].keyword;
   const notTopTenAndNotSignedUp = keyIndex > 9 && !isSignedUp;
+  const companyListings = _.where(products, {source: 'Blindsgalore.com'});
+  const yourCompany = companyListings && companyListings[ 0 ];
   const blurClass = {[ classes.blur ]: notTopTenAndNotSignedUp};
   return (
       <div className={classes.keywordCard}>
@@ -27,7 +30,8 @@ export const KeywordProducts = (props) => {
                     onClick={() => updateStatus(true)}>SIGN UP TO SEE RESULTS</Button>}
             <div className={classNames(classes.recs, blurClass)}>
               <h4 className={classes.recTitle}>Recommendations:</h4>
-              <Recommendations products={products} keyword={keyword}/>
+              <Recommendations products={products} companyListings={companyListings} yourCompany={yourCompany}
+                               keyword={keyword}/>
             </div>
             <div className={classNames(classes.searchContainer, blurClass)}>
               <h4 className={classes.searchingResult}>{keyword}</h4>
@@ -37,7 +41,8 @@ export const KeywordProducts = (props) => {
           <GridItem md={12} sm={12} className={classNames(blurClass)}>
             <GridContainer className={classes.productRow}>
               {products.map((product, index) =>
-                  <Product key={index} index={index} product={product} blurClass={blurClass}/>,
+                  <Product key={index} index={index} product={product} yourCompany={yourCompany}
+                           blurClass={blurClass}/>,
               )}
               {products.length > 5 &&
               <i className={classes.more}>There's {products.length - 5} more products, scroll

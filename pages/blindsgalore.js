@@ -23,7 +23,13 @@ export default function BlindsgalorePage(props) {
   if (error) return <span className={classes.center}>Failed to load data</span>;
   if (!data)
     return (
-      <span className={classes.center}>Loading Your Marketing Analysis...</span>
+      <div className={classes.center}>
+        <img className={classes.loadImg} src={CompanyLogo} />
+        <h3 className={classes.loadText}>
+          Please Wait For a Moment While We Are Loading Your Marketing
+          Analysis...
+        </h3>
+      </div>
     );
   const groupedData = _.filter(
     _.groupBy(data, "keyword"),
@@ -90,14 +96,14 @@ export default function BlindsgalorePage(props) {
                         strokeLinecap: "butt",
                         textSize: "24px",
                         pathTransitionDuration: 0.5,
-                        pathColor: "#ffa21a",
-                        textColor: "#ffa21a",
+                        pathColor: "#4842F5",
+                        textColor: "#4842F5",
                         trailColor: "#eeeeee",
                       })}
                     />
                     <h4>
                       of the time your company had the{" "}
-                      <span className={classes.yellow}>lowest price</span>{" "}
+                      <span className={classes.blue}>lowest price</span>{" "}
                       compared to your competition.
                     </h4>
                   </div>

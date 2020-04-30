@@ -32,11 +32,18 @@ const productStyle = {
   },
   companyPage: {},
   center: {
+    display: 'flex',
+    flexDirection: 'column',
     width: '100%',
-    textAlign: 'center',
-    position: 'absolute',
-    top: '50%',
+    height: '100vh',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
+  loadImg: {
+    width: '300px',
+  },
+  loadText: {},
   signUp: {
     position: 'absolute',
     right: '0',
@@ -58,9 +65,9 @@ const productStyle = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: '40px',
+    fontSize: '30px',
     width: '30%',
-    height: '60px',
+    height: '50px',
     fontFamily: 'Roboto',
     backgroundColor: '#f65a4e',
     color: '#f9f9f9',
@@ -101,8 +108,8 @@ const productStyle = {
     fontWeight: 'bold',
     fontSize: '24px',
   },
-  yellow: {
-    color: '#ffa21a',
+  blue: {
+    color: '#4842F5',
     fontWeight: 'bold',
     fontSize: '24px',
   },
@@ -112,7 +119,7 @@ const productStyle = {
     fontSize: '24px',
   },
   statDes: {
-    margin: "25px 30px",
+    margin: '25px 30px',
     borderRadius: '5px',
     border: '1px solid #eeeeee',
     padding: '40px 25px',
@@ -150,19 +157,19 @@ const productStyle = {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    margin: "5px 0",
+    margin: '5px 0',
   },
-  recIconPos: {
-    marginRight: '10px',
+  recGreen: {
+    margin: '0 5px',
     color: '#4bb051',
   },
-  recIconNeu: {
-    marginRight: '10px',
-    color: '#ff9900',
+  recBlue: {
+    margin: '0 5px',
+    color: '#4842F5',
   },
-  recIconNeg: {
-    marginRight: '10px',
-    color: '#f44436',
+  recRed: {
+    margin: '0 5px',
+    color: '#f65a4e',
   },
   searchContainer: {
     position: 'relative',
@@ -192,6 +199,10 @@ const productStyle = {
     border: '1px solid #dfe1e5',
     borderRadius: '8px',
     textAlign: 'center',
+  },
+  highlighted: {
+    border: '1px solid #4bb051',
+    boxShadow: '0 0 5px 5px #4bb051',
   },
   productImg: {
     width: '100%',
