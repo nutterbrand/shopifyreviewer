@@ -193,6 +193,10 @@ const productStyle = {
     borderRadius: '8px',
     textAlign: 'center',
   },
+  highlighted:{
+    border: '1px solid #4bb051',
+    boxShadow: '0 0 5px 5px #4bb051'
+  },
   productImg: {
     width: '100%',
     height: '200px',

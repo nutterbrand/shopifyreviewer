@@ -3,13 +3,15 @@ import {makeStyles} from '@material-ui/core/styles';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
 import Rating from '@material-ui/lab/Rating';
 import classNames from 'classnames';
+
 const useStyles = makeStyles(productStyle);
 
 export const Product = (props) => {
-  const {index, product, blurClass} = props;
+  const {index, product, yourCompany, blurClass} = props;
   const classes = useStyles();
   return (
-      <div key={index} className={classes.productContainer}>
+      <div key={index} className={classNames(classes.productContainer,
+          {[ classes.highlighted ]: yourCompany && yourCompany.source === product.source})}>
         <img src={product.thumbnail} className={classNames(classes.productImg, blurClass)}/>
         <div>
           <div className={classes.productKeyword}>
