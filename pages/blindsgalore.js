@@ -19,7 +19,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function BlindsgalorePage(props) {
   const [isSignedUp, updateStatus] = useState(false);
   const classes = useStyles();
-  const { data, error } = useSwr("/api/shopping", fetcher);
+  const { data, error } = useSwr("/api/get/shopping/blindsgalore.com", fetcher);
   if (error) return <span className={classes.center}>Failed to load data</span>;
   if (!data)
     return (
