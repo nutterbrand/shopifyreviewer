@@ -163,7 +163,6 @@ const productStyle = {
   recGreen: {
     margin: '-5px 5px',
     color: '#4bb051',
-
   },
   recBlue: {
     margin: '-3px 5px',
@@ -202,6 +201,26 @@ const productStyle = {
     borderRadius: '8px',
     textAlign: 'center',
   },
+  searchTermContainer: {
+    width: '100%',
+    margin: '10px',
+    padding: '0 20px',
+    border: '1px solid #dfe1e5',
+    borderRadius: '8px',
+    textAlign: 'left',
+  },
+  ad: {
+    color: '#016720',
+    border: '1px solid #016720',
+    borderRadius: '5px',
+    padding: '0 5px',
+    margin: '0 10px 5px 0',
+  },
+  companyLink: {
+    color: '#202124',
+    fontSize: '22px',
+    fontWeight: '500',
+  },
   highlighted: {
     border: '1px solid #4bb051',
     boxShadow: '0 0 5px 5px #4bb051',
@@ -222,6 +241,7 @@ const productStyle = {
     color: '#190eab',
     fontWeight: 'bold',
     margin: '5px 0',
+    cursor: 'pointer',
   },
   description: {
     maxHeight: '200px',
@@ -229,6 +249,35 @@ const productStyle = {
     padding: '10px',
     fontSize: '12px',
     lineHeight: '16px',
+  },
+  rank: {
+    position: 'absolute',
+    top: '-10px',
+    right: '50px',
+    color: '#fff',
+    backgroundColor: '#f65a4e',
+    width: '140px',
+    height: '40px',
+    fontSize: '25px',
+    lineHeight: '40px',
+    textAlign: 'center',
+    borderBottomRightRadius: '10px',
+    borderBottomLeftRadius: '10px',
+  },
+  rankGreen: {
+    backgroundColor: '#4bb051',
+  },
+  snippet: {
+    padding: '10px 0',
+    fontSize: '16px',
+    lineHeight: '20px',
+  },
+  cpc: {
+    backgroundColor: '#4bb051',
+    padding: '8px',
+    marginBottom: '20px',
+    fontSize: '16px',
+    lineHeight: '20px',
   },
   sectionGray: {
     background: grayColor[ 14 ],
