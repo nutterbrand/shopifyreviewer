@@ -93,15 +93,13 @@ const productStyle = {
     padding: '40px 25px',
     textAlign: 'center',
   },
+  statImg: {
+    margin: "auto",
+    width: '65%',
+  },
   statCircle: {
     width: '80%',
     marginBottom: '30px',
-  },
-  statScore: {
-    padding: '0',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: '30px',
   },
   green: {
     color: '#4bb051',
@@ -117,6 +115,12 @@ const productStyle = {
     color: '#f65a4e',
     fontWeight: 'bold',
     fontSize: '24px',
+  },
+  statScore: {
+    padding: '0',
+    marginBottom: '10px',
+    textAlign: 'center',
+    fontSize: '50px',
   },
   statDes: {
     margin: '25px 30px',
