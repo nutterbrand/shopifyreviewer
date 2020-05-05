@@ -7,7 +7,7 @@ import GridItem from '../components/Grid/GridItem';
 import Button from '@material-ui/core/Button';
 import {RecommendationsSearchTerm} from './RecommendationsSearchTerm';
 import GoogleSearch from '../assets/img/googleSearch.png';
-import {Product} from './Product';
+import {SearchResult} from './SearchResult';
 import _ from 'underscore';
 
 const useStyles = makeStyles(productStyle);
@@ -38,17 +38,14 @@ export const KeywordSearchTerm = (props) => {
               <img className={classes.googleSearch} src={GoogleSearch}/>
             </div>
           </GridItem>
-          {/*<GridItem md={12} sm={12} className={classNames(blurClass)}>*/}
-          {/*  <GridContainer className={classes.productRow}>*/}
-          {/*    {products.map((product, index) =>*/}
-          {/*        <Product key={index} index={index} product={product} yourCompany={yourCompany}*/}
-          {/*                 blurClass={blurClass}/>,*/}
-          {/*    )}*/}
-          {/*    {products.length > 5 &&*/}
-          {/*    <i className={classes.more}>There's {products.length - 5} more products, scroll*/}
-          {/*      right...</i>}*/}
-          {/*  </GridContainer>*/}
-          {/*</GridItem>*/}
+          <GridItem md={12} sm={12} className={classNames(blurClass)}>
+            <GridContainer className={classes.productRow}>
+              {products.map((product, index) =>
+                  <SearchResult key={index} index={index} product={product} yourCompany={yourCompany}
+                           blurClass={blurClass}/>
+              )}
+            </GridContainer>
+          </GridItem>
         </GridContainer>
       </div>
   );
