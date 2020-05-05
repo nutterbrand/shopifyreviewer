@@ -37,6 +37,10 @@ export default function BlindsgalorePage(props) {
   );
   const productsData = _.keys(groupedData);
 
+  if (data) {
+    console.log(data);
+  }
+
   return (
     <div>
       <div className={classes.companyPage}>
