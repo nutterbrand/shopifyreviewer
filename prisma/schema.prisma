@@ -8,12 +8,141 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model company {
+  alexa                 String?
+  city                  String?
+  company_affiliate_id  Int?
+  competitor_domains    String?
+  country               String?
+  created_date          DateTime?               @default(dbgenerated())
+  display_name          String?
+  domain                String?
+  emails                String?
+  facebook_link         String?
+  id                    Int                     @default(autoincrement()) @id
+  instagram_link        String?
+  last_report_generated DateTime?
+  linkedin_link         String?
+  majestic              String?
+  name                  String?
+  people                String?
+  quantcast             String?
+  referring_company     String?
+  sales_agent           String?
+  shopping_name         String?
+  state                 String?
+  telephone             String?
+  umbrella              String?
+  vertical              String?
+  company_affiliate     company_affiliate?      @relation(fields: [company_affiliate_id], references: [id])
+  company_billing       company_billing[]
+  company_keyword_rank  company_keyword_rank[]
+  company_lead_form     company_lead_form[]
+  company_paid_shopping company_paid_shopping[]
+  company_report        company_report[]
+}
+
+model company_affiliate {
+  created_date      DateTime?           @default(dbgenerated())
+  id                Int                 @id
+  name              String?
+  company           company[]
+  company_lead_form company_lead_form[]
+}
+
+model company_billing {
+  amount         String?
+  company_id     Int?
+  created_date   DateTime?       @default(dbgenerated())
+  email          String?
+  id             Int             @default(autoincrement()) @id
+  name           String?
+  report_id      Int?
+  company        company?        @relation(fields: [company_id], references: [id])
+  company_report company_report? @relation(fields: [report_id], references: [id])
+}
+
+model company_keyword_rank {
+  avg_pos                          Float?
+  company_id                       Int?
+  competition                      Float?
+  cpc                              Float?
+  created_date                     DateTime?       @default(dbgenerated())
+  domain                           String?
+  estimated_organic_traffic_volume Float?
+  estimated_paid_traffic_cost      Float?
+  estimated_paid_traffic_volume    Float?
+  id                               Int             @default(autoincrement()) @id
+  keyword                          String?
+  language                         String?
+  link                             String?
+  location_code                    String?
+  rank_absolute                    String?
+  rank_group                       String?
+  relative_url                     String?
+  report_id                        Int?
+  search_volume                    Int?
+  snippet                          String?
+  title                            String?
+  type                             String?
+  url                              String?
+  company                          company?        @relation(fields: [company_id], references: [id])
+  company_report                   company_report? @relation(fields: [report_id], references: [id])
+
+  @@index([company_id], name: "company_id_keywords")
+  @@unique([company_id, report_id, keyword], name: "company_keyword_rank_company_id_report_id_keyword_key")
+}
+
+model company_lead_form {
+  company_affiliate_id Int?
+  company_id           Int?
+  created_date         DateTime?          @default(dbgenerated())
+  email                Int?
+  id                   Int                @default(autoincrement()) @id
+  report_id            Int?
+  company_affiliate    company_affiliate? @relation(fields: [company_affiliate_id], references: [id])
+  company              company?           @relation(fields: [company_id], references: [id])
+  company_report       company_report?    @relation(fields: [report_id], references: [id])
+}
+
+model company_paid_shopping {
+  company_id      Int?
+  created_date    DateTime?       @default(dbgenerated())
+  domain          String?
+  extensions      String?
+  extracted_price Float?
+  id              Int             @default(autoincrement()) @id
+  keyword         String?
+  link            String?
+  position        String?
+  rating          String?
+  report_id       Int?
+  reviews         String?
+  thumbnail       String?
+  title           String?
+  company         company?        @relation(fields: [company_id], references: [id])
+  company_report  company_report? @relation(fields: [report_id], references: [id])
+
+  @@index([company_id], name: "company_id_shopping")
+}
+
+model company_report {
+  company_id            Int?
+  created_date          DateTime?               @default(dbgenerated())
+  id                    Int                     @default(autoincrement()) @id
+  company               company?                @relation(fields: [company_id], references: [id])
+  company_billing       company_billing[]
+  company_keyword_rank  company_keyword_rank[]
+  company_lead_form     company_lead_form[]
+  company_paid_shopping company_paid_shopping[]
+}
+
 model company_shopping {
   company         String?
   date            DateTime? @default(now())
   extensions      String?
   extracted_price Float?
-  id              Int       @default(autoincrement()) @unique
+  id              Int       @default(autoincrement()) @id
   keyword         String?
   link            String?
   position        String?
@@ -22,29 +151,4 @@ model company_shopping {
   source          String?
   thumbnail       String?
   title           String?
-
-  @@index([company], name: "company")
-}
-
-model post {
-  author_id Int?
-  content   String?
-  post_id   Int     @default(autoincrement()) @id
-  title     String
-  user      user?   @relation(fields: [author_id], references: [user_id])
-}
-
-model profile {
-  bio        String?
-  profile_id Int     @default(autoincrement()) @id
-  user_id    Int
-  user       user    @relation(fields: [user_id], references: [user_id])
-}
-
-model user {
-  email   String    @unique
-  name    String?
-  user_id Int       @default(autoincrement()) @id
-  post    post[]
-  profile profile[]
 }

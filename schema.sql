@@ -1,5 +1,4 @@
 -- Sequence and defined type
-CREATE SEQUENCE IF NOT EXISTS company_affiliate_id_seq;
 CREATE SEQUENCE IF NOT EXISTS company_id_seq;
 CREATE SEQUENCE IF NOT EXISTS company_paid_shopping_id_seq;
 CREATE SEQUENCE IF NOT EXISTS company_report_id_seq;
@@ -9,8 +8,8 @@ CREATE SEQUENCE IF NOT EXISTS company_keyword_rank_id_seq;
 
 -- Table Definition public.company_affiliate
 CREATE TABLE IF NOT EXISTS "public"."company_affiliate" (
-    "id" INT PRIMARY KEY NOT NULL DEFAULT nextval('company_affiliate_id_seq'::regclass),
-    "name" INT,
+    "id" INT PRIMARY KEY NOT NULL,
+    "name" TEXT,
     "created_date" DATE DEFAULT CURRENT_DATE
 );
 
@@ -19,6 +18,9 @@ CREATE TABLE IF NOT EXISTS "public"."company" (
     "id" INT PRIMARY KEY NOT NULL DEFAULT nextval('company_id_seq'::regclass),
     "company_affiliate_id" INT,
     "name" TEXT,
+    "city" TEXT,
+    "state" TEXT,
+    "country" TEXT,
     "created_date" DATE DEFAULT CURRENT_DATE,
     "domain" TEXT,
     "shopping_name" TEXT,
@@ -26,10 +28,18 @@ CREATE TABLE IF NOT EXISTS "public"."company" (
     "competitor_domains" TEXT,
     "sales_agent" TEXT,
     "referring_company" TEXT,
+    "last_report_generated" DATE,
     "emails" TEXT,
-    "source" TEXT,
+    "people" TEXT,
     "facebook_link" TEXT,
     "instagram_link" TEXT,
+    "linkedin_link" TEXT,
+    "telephone" TEXT,
+    "vertical" TEXT,
+    "quantcast" TEXT,
+    "alexa" TEXT,
+    "majestic" TEXT,
+    "umbrella" TEXT,
     FOREIGN KEY (company_affiliate_id) REFERENCES "public"."company_affiliate"(id)
 );
 
@@ -50,7 +60,7 @@ CREATE TABLE IF NOT EXISTS "public"."company_paid_shopping" (
     "position" TEXT,
     "title" TEXT,
     "link" TEXT,
-    "source" TEXT,
+    "domain" TEXT,
     "thumbnail" TEXT,
     "extensions" TEXT,
     "rating" TEXT,
@@ -76,7 +86,7 @@ CREATE TABLE IF NOT EXISTS "public"."company_billing" (
 
 -- Table Definition public.company_lead_form
 CREATE TABLE IF NOT EXISTS "public"."company_lead_form" (
-    "id" INT NOT NULL DEFAULT nextval('company_lead_form_id_seq'::regclass),
+    "id" INT PRIMARY KEY NOT NULL DEFAULT nextval('company_lead_form_id_seq'::regclass),
     "company_id" INT,
     "company_affiliate_id" INT,
     "report_id" INT,
@@ -89,12 +99,14 @@ CREATE TABLE IF NOT EXISTS "public"."company_lead_form" (
 
 -- Table Definition public.company_keyword_rank
 CREATE TABLE IF NOT EXISTS "public"."company_keyword_rank" (
-    "id" INT NOT NULL DEFAULT nextval('company_keyword_rank_id_seq'::regclass),
+    "id" INT PRIMARY KEY NOT NULL DEFAULT nextval('company_keyword_rank_id_seq'::regclass),
     "company_id" INT,
     "report_id" INT,
     "created_date" DATE DEFAULT CURRENT_DATE,
     "keyword" TEXT,
-    "source" TEXT,
+    "domain" TEXT,
+    "url" TEXT,
+    "relative_url" TEXT,
     "type" TEXT,
     "rank_group" TEXT,
     "rank_absolute" TEXT,
@@ -109,30 +121,7 @@ CREATE TABLE IF NOT EXISTS "public"."company_keyword_rank" (
     "cpc" FLOAT,
     "search_volume" INT,
     "competition" FLOAT,
-    "paid_pos_1" INT,
-    "paid_2_3" INT,
-    "paid_4_10" INT,
-    "paid_11_20" INT,
-    "paid_21_30" INT,
-    "paid_31_40" INT,
-    "paid_41_50" INT,
-    "paid_51_60" INT,
-    "paid_61_70" INT,
-    "paid_71_80" INT,
-    "paid_81_90" INT,
-    "paid_91_100" INT,
-    "organic_pos_1" INT,
-    "organic_pos_2_3" INT,
-    "organic_pos_4_10" INT,
-    "organic_pos_11_20" INT,
-    "organic_pos_21_30" INT,
-    "organic_pos_31_40" INT,
-    "organic_pos_41_50" INT,
-    "organic_pos_51_60" INT,
-    "organic_pos_61_70" INT,
-    "organic_pos_71_80" INT,
-    "organic_pos_81_90" INT,
-    "organic_pos_91_100" INT,
+    "avg_pos" FLOAT,
     FOREIGN KEY (company_id) REFERENCES "public"."company"(id),
     FOREIGN KEY (report_id) REFERENCES "public"."company_report"(id),
     UNIQUE (company_id, report_id, keyword)
