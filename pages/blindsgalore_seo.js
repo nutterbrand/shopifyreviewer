@@ -5,11 +5,11 @@ import Header from 'components/Header/Header.js';
 import CompanyLogo from 'assets/img/blindsgalore.jpg';
 import fetch from 'isomorphic-unfetch';
 import useSwr from 'swr';
-import _ from 'underscore';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
-import {KeywordProducts} from './KeywordProducts';
-import {CompanyScoreCard} from './CompanyScoreCard';
+import {KeywordSearchTerm} from './KeywordSearchTerm';
+import {CompanyScoreCard} from './CompanyScoreCard.js';
 import 'react-circular-progressbar/dist/styles.css';
+import _ from 'underscore';
 
 const useStyles = makeStyles(productStyle);
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -29,16 +29,8 @@ export default function BlindsgalorePage(props) {
           </h3>
         </div>
     );
-  const groupedData = _.filter(
-      _.groupBy(data, 'keyword'),
-      (product) => product.length > 3,
-  );
+  const groupedData = _.filter(_.groupBy(data, 'keyword'))
   const productsData = _.keys(groupedData);
-
-  if (data) {
-    console.log(data);
-  }
-
   return (
       <div>
         <div className={classes.companyPage}>
@@ -61,7 +53,7 @@ export default function BlindsgalorePage(props) {
             <div className={classes.container}>
               <CompanyScoreCard/>
               {productsData.map((key, keyIndex) => (
-                  <KeywordProducts
+                  <KeywordSearchTerm
                       key={key}
                       keyIndex={keyIndex}
                       products={groupedData[ key ]}

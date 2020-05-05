@@ -94,7 +94,7 @@ const productStyle = {
     textAlign: 'center',
   },
   statImg: {
-    margin: "auto",
+    margin: 'auto',
     width: '65%',
   },
   statCircle: {
@@ -158,21 +158,19 @@ const productStyle = {
     backgroundColor: '#fffef9',
   },
   rec: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
     margin: '5px 0',
   },
   recGreen: {
-    margin: '0 5px',
+    margin: '-5px 5px',
     color: '#4bb051',
+
   },
   recBlue: {
-    margin: '0 5px',
+    margin: '-3px 5px',
     color: '#4842F5',
   },
   recRed: {
-    margin: '0 5px',
+    margin: '-3px 5px',
     color: '#f65a4e',
   },
   searchContainer: {
