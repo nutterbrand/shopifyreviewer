@@ -97,10 +97,6 @@ const productStyle = {
     margin: 'auto',
     width: '65%',
   },
-  statCircle: {
-    width: '80%',
-    marginBottom: '30px',
-  },
   green: {
     color: '#4bb051',
     fontWeight: 'bold',
@@ -118,9 +114,10 @@ const productStyle = {
   },
   statScore: {
     padding: '0',
-    marginBottom: '10px',
+    marginTop: '40px',
+    marginBottom: '20px',
     textAlign: 'center',
-    fontSize: '50px',
+    fontSize: '55px',
   },
   statDes: {
     margin: '25px 30px',
