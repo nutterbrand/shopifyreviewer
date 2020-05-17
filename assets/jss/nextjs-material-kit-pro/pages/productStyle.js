@@ -70,8 +70,12 @@ const productStyle = {
   submit: {
     borderRadius: '0 4px 4px 0',
     backgroundColor: '#4bb051',
+    height: '36px',
     color: '#ffffff',
     width: '125px',
+      '&:hover': {
+        backgroundColor: 'none',
+      },
   },
   signUp: {
     backgroundColor: '#f65a4e',
