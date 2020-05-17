@@ -8,14 +8,22 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles(productStyle);
 
 export const Header = (props) => {
-  const [domainName, updateSearch] = useState('');
+  const [values, setValues] = useState({domain: '', email: ''});
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleChange = event => updateSearch(event.target.value);
-  const handleSubmit = (event) => {
-    //TODO: Make Call to BE API
-    updateSearch('');
+  const handleInputChange = e => {
+    const {name, value} = e.target;
+    setValues({...values, [ name ]: value});
+  };
+  const handleDomainSubmit = (event) => {
+    //TODO: Make Call to BE API To get data
+    setValues({...values, domain: ''});
+    event.preventDefault();
+  };
+  const handleEmailSubmit = (event) => {
+    //TODO: Make Call to BE API to submit email
+    setValues({...values, email: ''});
     event.preventDefault();
   };
   const classes = useStyles();
@@ -24,16 +32,21 @@ export const Header = (props) => {
       <>
         <div className={classes.header}>
           <h4>Shopify Reviewer</h4>
-          <form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <TextField className={classes.domain} id="domain" placeholder='Enter Your Company Website'
-                       variant="outlined" size="small" value={domainName} onChange={handleChange}/>
+          <form className={classes.form} noValidate autoComplete="off" onSubmit={handleDomainSubmit}>
+            <TextField className={classes.domain} id="domainName" name='domain' placeholder='Enter Your Company Website'
+                       variant="outlined" size="small" value={values.domain} onChange={handleInputChange}/>
             <Button className={classes.submit} type="submit">SUBMIT</Button>
           </form>
           <Button variant="contained" className={classes.signUp} onClick={handleOpen}>Sign Up</Button>
         </div>
         <Modal open={open} onClose={handleClose} className={classes.modalContainer}>
           <div className={classes.modal}>
-
+            <h5>Please enter your email for our team to contact you</h5>
+            <form className={classes.form} noValidate autoComplete="off" onSubmit={handleEmailSubmit}>
+              <TextField className={classes.domain} id="email" name='email' placeholder='Enter Your Email'
+                         variant="outlined" size="small" value={values.email} onChange={handleInputChange}/>
+              <Button className={classes.submit} type="submit">SUBMIT</Button>
+            </form>
           </div>
         </Modal>
       </>
