@@ -35,20 +35,15 @@ export default function BlindsgalorePage(props) {
   return (
       <div>
         <div className={classes.companyPage}>
-          <Header
-              fixed
-              color="white"
-              brand="Shopify Reviewer"
-              links={
-                <Button
-                    color={isSignedUp ? 'primary' : 'secondary'}
-                    variant="contained"
-                    className={classes.signUp}
-                    onClick={() => updateStatus(!isSignedUp)}>
-                  {!isSignedUp ? 'Sign Up' : 'Account'}
-                </Button>
-              }
-          />
+          <div className={classes.header}>
+            <h4>Shopify Reviewer</h4>
+            <Button
+                variant="contained"
+                className={classes.signUp}
+                onClick={() => updateStatus(!isSignedUp)}>
+              Sign Up
+            </Button>
+          </div>
           <div className={classes.section}>
             <div className={classes.container}>
               <CompanyScoreCard/>
