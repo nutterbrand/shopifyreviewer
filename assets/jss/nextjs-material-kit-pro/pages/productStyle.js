@@ -81,6 +81,18 @@ const productStyle = {
     backgroundColor: '#f65a4e',
     color: '#ffffff',
   },
+  modalContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modal: {
+    width: "400px",
+    height: "300px",
+    backgroundColor: '#ffffff',
+    boxShadow: '2px 2px 2px -1px rgba(0,0,0,0.2)',
+    padding: '20px',
+  },
   form: {
     margin: '0',
   },
