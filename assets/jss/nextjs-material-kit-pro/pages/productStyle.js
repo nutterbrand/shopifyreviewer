@@ -58,9 +58,27 @@ const productStyle = {
     zIndex: '2',
     boxShadow: '0 2px 5px -1px rgba(0,0,0,0.3)',
   },
+  domain: {
+    width: "300px",
+    '& div': {
+      borderRadius: '4px 0 0 4px',
+      '& input': {
+        padding: '8.5px 10px',
+      },
+    },
+  },
+  submit: {
+    borderRadius: '0 4px 4px 0',
+    backgroundColor: '#4bb051',
+    color: '#ffffff',
+    width: '125px',
+  },
   signUp: {
     backgroundColor: '#f65a4e',
     color: '#ffffff',
+  },
+  form: {
+    margin: '0',
   },
   companyHeader: {
     backgroundColor: 'White',
