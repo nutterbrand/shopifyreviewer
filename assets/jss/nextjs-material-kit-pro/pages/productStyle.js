@@ -78,7 +78,7 @@ const productStyle = {
       },
   },
   signUp: {
-    backgroundColor: '#f65a4e',
+    backgroundColor: '#4842F5',
     color: '#ffffff',
   },
   modalContainer: {

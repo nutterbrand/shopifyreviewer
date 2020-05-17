@@ -24,6 +24,7 @@ export const Header = (props) => {
   const handleEmailSubmit = (event) => {
     //TODO: Make Call to BE API to submit email
     setValues({...values, email: ''});
+    setOpen(false);
     event.preventDefault();
   };
   const classes = useStyles();
