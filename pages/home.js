@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import _ from 'underscore';
-import CompanyLogo from 'assets/img/blindsgalore.jpg';
 import fetch from 'isomorphic-unfetch';
 import useSwr from 'swr';
 import AppBar from '@material-ui/core/AppBar';
@@ -11,23 +9,19 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
 import {CompanyScoreCard} from './CompanyScoreCard.js';
+import {SimpleLoading} from './SimpleLoading';
 import {Header} from './Header';
-import {KeywordProducts} from './KeywordProducts';
 import 'react-circular-progressbar/dist/styles.css';
 import GridContainer from '../components/Grid/GridContainer';
 import GridItem from '../components/Grid/GridItem';
-import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
-import {Recommendations} from './Recommendations';
 import GoogleSearch from '../assets/img/googleSearch.png';
-import {Product} from './Product';
 
 const useStyles = makeStyles(productStyle);
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-
 const TabPanel = props => {
-  const { children, value, index, ...other } = props;
+  const {children, value, index, ...other} = props;
   return (
       <div
           role="tabpanel"
@@ -43,7 +37,7 @@ const TabPanel = props => {
         )}
       </div>
   );
-}
+};
 
 function a11yProps(index) {
   return {
@@ -51,7 +45,6 @@ function a11yProps(index) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-
 
 export default function HomePage(props) {
   const [isSignedUp, updateStatus] = useState(false);
@@ -63,16 +56,7 @@ export default function HomePage(props) {
   const {data, error} = useSwr('https://evening-retreat-22032.herokuapp.com/report/blindsgalore.com/', fetcher);
   if (error) return <span className={classes.center}>Failed to load data</span>;
   console.log(data);
-  if (!data)
-    return (
-        <div className={classes.center}>
-          <img className={classes.loadImg} src={CompanyLogo}/>
-          <h3 className={classes.loadText}>
-            Please Wait For a Moment While We Are Loading Your Marketing
-            Analysis...
-          </h3>
-        </div>
-    );
+  if (!data) return <SimpleLoading/>;
   return (
       <div>
         <Header/>

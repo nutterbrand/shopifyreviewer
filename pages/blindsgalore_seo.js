@@ -10,7 +10,7 @@ import {KeywordSearchTerm} from './KeywordSearchTerm';
 import {CompanyScoreCard} from './CompanyScoreCard.js';
 import 'react-circular-progressbar/dist/styles.css';
 import _ from 'underscore';
-
+import {SimpleLoading} from './SimpleLoading';
 const useStyles = makeStyles(productStyle);
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -19,16 +19,7 @@ export default function BlindsgalorePage(props) {
   const classes = useStyles();
   const {data, error} = useSwr('/api/get/search/1', fetcher);
   if (error) return <span className={classes.center}>Failed to load data</span>;
-  if (!data)
-    return (
-        <div className={classes.center}>
-          <img className={classes.loadImg} src={CompanyLogo}/>
-          <h3 className={classes.loadText}>
-            Please Wait For a Moment While We Are Loading Your Marketing
-            Analysis...
-          </h3>
-        </div>
-    );
+  if (!data) return <SimpleLoading/>;
   const groupedData = _.filter(_.groupBy(data, 'keyword'))
   const productsData = _.keys(groupedData);
   return (
