@@ -9,18 +9,13 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {TabPanel} from './TabPanel';
+import {ShoppingResult} from './ShoppingResult';
 
 const useStyles = makeStyles(productStyle);
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
+const a11yProps = (index) => {id: `simple-tab-${index}`;};
 
 export const KeywordGroup = ({result}) => {
-  console.log(result)
+  console.log(result);
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -35,27 +30,31 @@ export const KeywordGroup = ({result}) => {
               <h4 className={classes.searchingResult}>{result.keyword}</h4>
               <img className={classes.googleSearch} src={GoogleSearch}/>
             </div>
+            <AppBar position="static" className={classes.resultsTabs}>
+              <Tabs value={value} onChange={handleChange}>
+                <Tab label="Shopping Results" {...a11yProps(0)} />
+                <Tab label="Organic Results" {...a11yProps(1)} />
+                <Tab label="Related Searches" {...a11yProps(2)} />
+                <Tab label="Paid Ads" {...a11yProps(3)} />
+              </Tabs>
+            </AppBar>
+            <TabPanel value={value} index={0}>
+              <div className={classes.productRow}>
+                {
+                  result.shopping_results.map(product => <ShoppingResult product={product}/>)
+                }
+              </div>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              Organic Results
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+              Related Searches
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+              Paid Ads
+            </TabPanel>
           </GridItem>
-          <AppBar position="static" className={classes.resultsTabs}>
-            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-              <Tab label="Shopping Results" {...a11yProps(0)} />
-              <Tab label="Organic Results" {...a11yProps(1)} />
-              <Tab label="Related Searches" {...a11yProps(2)} />
-              <Tab label="Paid Ads" {...a11yProps(3)} />
-            </Tabs>
-          </AppBar>
-          <TabPanel value={value} index={0}>
-            Shopping Results
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            Organic Results
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            Related Searches
-          </TabPanel>
-          <TabPanel value={value} index={3}>
-            Paid Ads
-          </TabPanel>
         </GridContainer>
       </div>
   );
