@@ -25,7 +25,7 @@ export default function HomePage() {
             <div className={classes.container}>
               <CompanyScoreCard/>
               {
-                data.result.map(result => <KeywordGroup result={result}/>)
+                data.result.map(result => <KeywordGroup result={result} key={result.keyword}/>)
               }
             </div>
           </div>

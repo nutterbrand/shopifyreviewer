@@ -59,7 +59,7 @@ const productStyle = {
     boxShadow: '0 2px 5px -1px rgba(0,0,0,0.3)',
   },
   domain: {
-    width: "300px",
+    width: '300px',
     '& div': {
       borderRadius: '4px 0 0 4px',
       '& input': {
@@ -73,9 +73,9 @@ const productStyle = {
     height: '36px',
     color: '#ffffff',
     width: '125px',
-      '&:hover': {
-        backgroundColor: 'none',
-      },
+    '&:hover': {
+      backgroundColor: 'none',
+    },
   },
   signUp: {
     backgroundColor: '#4842F5',
@@ -92,8 +92,8 @@ const productStyle = {
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    width: "500px",
-    height: "175px",
+    width: '500px',
+    height: '175px',
     backgroundColor: '#ffffff',
     boxShadow: '2px 2px 2px -1px rgba(0,0,0,0.2)',
     padding: '0 30px',
@@ -338,6 +338,11 @@ const productStyle = {
     position: 'absolute',
     bottom: '-35px',
     left: '10px',
+  },
+  resultsTabs: {
+    backgroundColor: '#fff',
+    color: '#4842F5',
+    boxShadow: 'none',
   },
 };
 
