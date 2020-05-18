@@ -343,6 +343,7 @@ const productStyle = {
     backgroundColor: '#fff',
     color: '#4842F5',
     boxShadow: 'none',
+    zIndex: '0',
   },
 };
 
