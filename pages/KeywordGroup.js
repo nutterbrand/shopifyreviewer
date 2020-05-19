@@ -34,10 +34,10 @@ export const KeywordGroup = ({result}) => {
             </div>
             <AppBar position="static" className={classes.resultsTabs}>
               <Tabs value={value} onChange={handleChange}>
-                <Tab className={classes.tabLabel}  label="Shopping Results" {...a11yProps(0)} />
-                <Tab className={classes.tabLabel}  label="Organic Results" {...a11yProps(1)} />
-                <Tab className={classes.tabLabel}  label="Related Searches" {...a11yProps(2)} />
-                <Tab className={classes.tabLabel}  label="Paid Ads" {...a11yProps(3)} />
+                <Tab className={classes.tabLabel} label="Shopping Results" {...a11yProps(0)} />
+                <Tab className={classes.tabLabel} label="Organic Results" {...a11yProps(1)} />
+                <Tab className={classes.tabLabel} label="Related Searches" {...a11yProps(2)} />
+                <Tab className={classes.tabLabel} label="Paid Ads" {...a11yProps(3)} />
               </Tabs>
             </AppBar>
             <TabPanel value={value} index={0} className={classes.tabPanel}>
@@ -55,13 +55,14 @@ export const KeywordGroup = ({result}) => {
               </div>
             </TabPanel>
             <TabPanel value={value} index={2}>
-              <h3>Searches Related to {result.keyword}</h3>
               <div className={classes.relatedSearchRow}>
-              {
-                result.related_searches.map(
-                    searchTerm => <a className={classes.relatedSearchTerm} href={searchTerm.link}>{searchTerm.query}</a>)
+                <h3>Searches Related to {result.keyword}</h3>
+                {
+                  result.related_searches.map(
+                      searchTerm => <a className={classes.relatedSearchTerm}
+                                       href={searchTerm.link}>{searchTerm.query}</a>)
 
-              }
+                }
               </div>
             </TabPanel>
             <TabPanel value={value} index={3}>
