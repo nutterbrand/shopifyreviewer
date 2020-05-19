@@ -11,6 +11,7 @@ import Tab from '@material-ui/core/Tab';
 import {TabPanel} from './TabPanel';
 import {ShoppingResult} from './ShoppingResult';
 import {OrganicResult} from './OrganicResult';
+import {PaidAd} from './PaidAd';
 
 const useStyles = makeStyles(productStyle);
 const a11yProps = (index) => {id: `simple-tab-${index}`;};
@@ -64,7 +65,11 @@ export const KeywordGroup = ({result}) => {
               </div>
             </TabPanel>
             <TabPanel value={value} index={3}>
-              Paid Ads
+              <div className={classes.organicRow}>
+                {
+                  result.ads.map(product => <PaidAd product={product}/>)
+                }
+              </div>
             </TabPanel>
           </GridItem>
         </GridContainer>

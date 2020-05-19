@@ -18,7 +18,7 @@ export default function HomePage() {
   if (error) return <span className={classes.center}>Failed to load data</span>;
   if (!data) return <SimpleLoading/>;
   return (
-      <div>
+      <>
         <Header/>
         <div className={classes.companyPage}>
           <div className={classes.section}>
@@ -30,6 +30,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </div>
+      </>
   );
 }

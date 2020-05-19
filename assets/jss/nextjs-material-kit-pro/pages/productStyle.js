@@ -251,7 +251,7 @@ const productStyle = {
   relatedSearchRow: {
     display: 'flex',
     flexWrap: 'wrap',
-    width: '400px',
+    width: '65%',
     borderRadius: '8px',
     border: '1px solid #dfe1e5',
     padding: '10px 20px',
@@ -275,7 +275,7 @@ const productStyle = {
   },
   searchTermContainer: {
     margin: '10px',
-    padding: '0 20px',
+    padding: '0 20px 15px 20px',
     border: '1px solid #dfe1e5',
     borderRadius: '8px',
     textAlign: 'left',
