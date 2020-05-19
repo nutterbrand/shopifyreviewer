@@ -10,6 +10,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {TabPanel} from './TabPanel';
 import {ShoppingResult} from './ShoppingResult';
+import {OrganicResult} from './OrganicResult';
 
 const useStyles = makeStyles(productStyle);
 const a11yProps = (index) => {id: `simple-tab-${index}`;};
@@ -38,7 +39,7 @@ export const KeywordGroup = ({result}) => {
                 <Tab label="Paid Ads" {...a11yProps(3)} />
               </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0}>
+            <TabPanel value={value} index={0} className={classes.tabPanel}>
               <div className={classes.productRow}>
                 {
                   result.shopping_results.map(product => <ShoppingResult product={product}/>)
@@ -46,7 +47,11 @@ export const KeywordGroup = ({result}) => {
               </div>
             </TabPanel>
             <TabPanel value={value} index={1}>
-              Organic Results
+              <div className={classes.organicRow}>
+              {
+                result.organic_results.map(product => <OrganicResult product={product}/>)
+              }
+              </div>
             </TabPanel>
             <TabPanel value={value} index={2}>
               Related Searches

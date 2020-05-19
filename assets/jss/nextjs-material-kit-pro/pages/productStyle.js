@@ -236,10 +236,17 @@ const productStyle = {
     height: '100%',
   },
   mainPrice: {},
+  tabPanel: {
+    padding: '0',
+  },
   productRow: {
     display: 'flex',
     flexWrap: 'nowrap',
     overflowY: 'scroll',
+  },
+  organicRow: {
+    height: '500px',
+    overflowX: 'scroll',
   },
   productContainer: {
     flex: '0 0 auto',
@@ -251,7 +258,6 @@ const productStyle = {
     textAlign: 'center',
   },
   searchTermContainer: {
-    width: '100%',
     margin: '10px',
     padding: '0 20px',
     border: '1px solid #dfe1e5',
