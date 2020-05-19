@@ -34,10 +34,10 @@ export const KeywordGroup = ({result}) => {
             </div>
             <AppBar position="static" className={classes.resultsTabs}>
               <Tabs value={value} onChange={handleChange}>
-                <Tab label="Shopping Results" {...a11yProps(0)} />
-                <Tab label="Organic Results" {...a11yProps(1)} />
-                <Tab label="Related Searches" {...a11yProps(2)} />
-                <Tab label="Paid Ads" {...a11yProps(3)} />
+                <Tab className={classes.tabLabel}  label="Shopping Results" {...a11yProps(0)} />
+                <Tab className={classes.tabLabel}  label="Organic Results" {...a11yProps(1)} />
+                <Tab className={classes.tabLabel}  label="Related Searches" {...a11yProps(2)} />
+                <Tab className={classes.tabLabel}  label="Paid Ads" {...a11yProps(3)} />
               </Tabs>
             </AppBar>
             <TabPanel value={value} index={0} className={classes.tabPanel}>

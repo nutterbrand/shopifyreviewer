@@ -236,6 +236,9 @@ const productStyle = {
     height: '100%',
   },
   mainPrice: {},
+  tabLabel: {
+    width: '20%',
+  },
   tabPanel: {
     padding: '0',
   },
@@ -362,6 +365,7 @@ const productStyle = {
     left: '10px',
   },
   resultsTabs: {
+    margin: '20px 0 10px 0',
     backgroundColor: '#fff',
     color: '#4842F5',
     boxShadow: 'none',
