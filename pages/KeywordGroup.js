@@ -48,13 +48,20 @@ export const KeywordGroup = ({result}) => {
             </TabPanel>
             <TabPanel value={value} index={1}>
               <div className={classes.organicRow}>
-              {
-                result.organic_results.map(product => <OrganicResult product={product}/>)
-              }
+                {
+                  result.organic_results.map(product => <OrganicResult product={product}/>)
+                }
               </div>
             </TabPanel>
             <TabPanel value={value} index={2}>
-              Related Searches
+              <h3>Searches Related to {result.keyword}</h3>
+              <div className={classes.relatedSearchRow}>
+              {
+                result.related_searches.map(
+                    searchTerm => <a className={classes.relatedSearchTerm} href={searchTerm.link}>{searchTerm.query}</a>)
+
+              }
+              </div>
             </TabPanel>
             <TabPanel value={value} index={3}>
               Paid Ads

@@ -248,6 +248,22 @@ const productStyle = {
     height: '500px',
     overflowX: 'scroll',
   },
+  relatedSearchRow: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: '400px',
+    borderRadius: '8px',
+    border: '1px solid #dfe1e5',
+    padding: '10px 20px',
+  },
+  relatedSearchTerm: {
+    display: 'block',
+    width: '45%',
+    color: '#190eab',
+    fontWeight: 'bold',
+    margin: '5px 0',
+    cursor: 'pointer',
+  },
   productContainer: {
     flex: '0 0 auto',
     width: '200px',
