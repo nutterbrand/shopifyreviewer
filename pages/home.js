@@ -9,6 +9,7 @@ import {CompanyScoreCard} from './CompanyScoreCard.js';
 import {Header} from './Header';
 import {SimpleLoading} from './SimpleLoading';
 import {KeywordGroup} from './KeywordGroup';
+import {LoadingPlaceholder} from './LoadingPlaceholder';
 import 'react-circular-progressbar/dist/styles.css';
 
 const useStyles = makeStyles(productStyle);
@@ -21,6 +22,7 @@ export default function HomePage() {
   const {data, error} = useSwr('https://evening-retreat-22032.herokuapp.com/report/blindsgalore.com/', fetcher);
   if (error) return <span className={classes.center}>Failed to load data</span>;
   if (!data) return <SimpleLoading/>;
+  console.log(data.result);
   return (
       <>
         <Header/>
@@ -28,6 +30,7 @@ export default function HomePage() {
           <div className={classes.section}>
             <div className={classes.container}>
               <CompanyScoreCard/>
+              <LoadingPlaceholder/>
               {
                 data.result.map(result => <KeywordGroup result={result} key={result.keyword} showAll={showAll}/>)
               }

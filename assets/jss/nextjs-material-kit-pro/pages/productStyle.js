@@ -43,6 +43,13 @@ const productStyle = {
   loadImg: {
     width: '300px',
   },
+  loadingContainer: {
+    marginTop: '50px',
+    backgroundColor: '#fff',
+  },
+  loadingPlaceholder: {
+    width: '100%',
+  },
   loadText: {},
   header: {
     position: 'fixed',
@@ -102,7 +109,7 @@ const productStyle = {
     margin: '0',
   },
   companyHeader: {
-    backgroundColor: 'White',
+    backgroundColor: '#fff',
     marginTop: '100px',
     padding: '25px',
   },
@@ -179,7 +186,7 @@ const productStyle = {
     backgroundColor: '#fffef9',
   },
   keywordCard: {
-    backgroundColor: 'White',
+    backgroundColor: '#fff',
     margin: '50px -15px',
     padding: '40px 40px 60px 40px',
     overflowX: 'hidden',
