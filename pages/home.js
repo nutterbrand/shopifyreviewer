@@ -17,7 +17,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function HomePage() {
   const classes = useStyles();
   const router = useRouter();
-  const unblurResults = _.has(router.query, 'show');
+  const showAll = _.has(router.query, 'show');
   const {data, error} = useSwr('https://evening-retreat-22032.herokuapp.com/report/blindsgalore.com/', fetcher);
   if (error) return <span className={classes.center}>Failed to load data</span>;
   if (!data) return <SimpleLoading/>;
@@ -29,7 +29,7 @@ export default function HomePage() {
             <div className={classes.container}>
               <CompanyScoreCard/>
               {
-                data.result.map(result => <KeywordGroup result={result} key={result.keyword}/>)
+                data.result.map(result => <KeywordGroup result={result} key={result.keyword} showAll={showAll}/>)
               }
             </div>
           </div>

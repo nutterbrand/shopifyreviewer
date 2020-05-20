@@ -16,7 +16,7 @@ import {PaidAd} from './PaidAd';
 const useStyles = makeStyles(productStyle);
 const a11yProps = (index) => {id: `simple-tab-${index}`;};
 
-export const KeywordGroup = ({result}) => {
+export const KeywordGroup = ({result, showAll}) => {
   console.log(result);
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -28,50 +28,52 @@ export const KeywordGroup = ({result}) => {
         <GridContainer>
           <GridItem md={12} sm={12} className={classes.recsContainer}>
             <h3 className={classes.keywordTitle}>#{result.position} Keyword: "{result.keyword}"</h3>
-            <div className={classNames(classes.searchContainer)}>
+            <div className={classNames(classes.searchContainer, {[ classes.blur ]: !showAll})}>
               <h4 className={classes.searchingResult}>{result.keyword}</h4>
               <img className={classes.googleSearch} src={GoogleSearch}/>
             </div>
-            <AppBar position="static" className={classes.resultsTabs}>
-              <Tabs value={value} onChange={handleChange}>
-                <Tab className={classes.tabLabel} label="Shopping Results" {...a11yProps(0)} />
-                <Tab className={classes.tabLabel} label="Organic Results" {...a11yProps(1)} />
-                <Tab className={classes.tabLabel} label="Related Searches" {...a11yProps(2)} />
-                <Tab className={classes.tabLabel} label="Paid Ads" {...a11yProps(3)} />
-              </Tabs>
-            </AppBar>
-            <TabPanel value={value} index={0} className={classes.tabPanel}>
-              <div className={classes.productRow}>
-                {
-                  result.shopping_results.map(product => <ShoppingResult product={product}/>)
-                }
-              </div>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-              <div className={classes.organicRow}>
-                {
-                  result.organic_results.map(product => <OrganicResult product={product}/>)
-                }
-              </div>
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-              <div className={classes.relatedSearchRow}>
-                <h3>Searches Related to {result.keyword}</h3>
-                {
-                  result.related_searches.map(
-                      searchTerm => <a className={classes.relatedSearchTerm}
-                                       href={searchTerm.link}>{searchTerm.query}</a>)
+            <div className={classNames({[ classes.blur ]: !showAll})}>
+              <AppBar position="static" className={classes.resultsTabs}>
+                <Tabs value={value} onChange={handleChange}>
+                  <Tab className={classes.tabLabel} label="Shopping Results" {...a11yProps(0)} />
+                  <Tab className={classes.tabLabel} label="Organic Results" {...a11yProps(1)} />
+                  <Tab className={classes.tabLabel} label="Related Searches" {...a11yProps(2)} />
+                  <Tab className={classes.tabLabel} label="Paid Ads" {...a11yProps(3)} />
+                </Tabs>
+              </AppBar>
+              <TabPanel value={value} index={0} className={classes.tabPanel}>
+                <div className={classes.productRow}>
+                  {
+                    result.shopping_results.map(product => <ShoppingResult product={product}/>)
+                  }
+                </div>
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                <div className={classes.organicRow}>
+                  {
+                    result.organic_results.map(product => <OrganicResult product={product}/>)
+                  }
+                </div>
+              </TabPanel>
+              <TabPanel value={value} index={2}>
+                <div className={classes.relatedSearchRow}>
+                  <h3>Searches Related to {result.keyword}</h3>
+                  {
+                    result.related_searches.map(
+                        searchTerm => <a className={classes.relatedSearchTerm}
+                                         href={searchTerm.link}>{searchTerm.query}</a>)
 
-                }
-              </div>
-            </TabPanel>
-            <TabPanel value={value} index={3}>
-              <div className={classes.organicRow}>
-                {
-                  result.ads.map(product => <PaidAd product={product}/>)
-                }
-              </div>
-            </TabPanel>
+                  }
+                </div>
+              </TabPanel>
+              <TabPanel value={value} index={3}>
+                <div className={classes.organicRow}>
+                  {
+                    result.ads.map(product => <PaidAd product={product}/>)
+                  }
+                </div>
+              </TabPanel>
+            </div>
           </GridItem>
         </GridContainer>
       </div>
