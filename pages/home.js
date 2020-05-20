@@ -1,4 +1,6 @@
 import React from 'react';
+import {useRouter} from 'next/router';
+import _ from 'underscore';
 import {makeStyles} from '@material-ui/core/styles';
 import fetch from 'isomorphic-unfetch';
 import useSwr from 'swr';
@@ -14,6 +16,8 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function HomePage() {
   const classes = useStyles();
+  const router = useRouter();
+  const unblurResults = _.has(router.query, 'show');
   const {data, error} = useSwr('https://evening-retreat-22032.herokuapp.com/report/blindsgalore.com/', fetcher);
   if (error) return <span className={classes.center}>Failed to load data</span>;
   if (!data) return <SimpleLoading/>;
