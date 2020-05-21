@@ -43,6 +43,8 @@ export const KeywordGroup = ({result, showAll}) => {
               </AppBar>
               <TabPanel value={value} index={0} className={classes.tabPanel}>
                 <div className={classes.productRow}>
+                  {!result.shopping_results &&
+                  <h4> There aren't any product associated with {result.keyword} </h4>}
                   {
                     result.shopping_results.map(product => <ShoppingResult product={product}/>)
                   }
@@ -50,6 +52,8 @@ export const KeywordGroup = ({result, showAll}) => {
               </TabPanel>
               <TabPanel value={value} index={1}>
                 <div className={classes.organicRow}>
+                  {!result.organic_results &&
+                  <h4> There aren't any organic search result associated with {result.keyword} </h4>}
                   {
                     result.organic_results.map(product => <OrganicResult product={product}/>)
                   }
@@ -58,6 +62,8 @@ export const KeywordGroup = ({result, showAll}) => {
               <TabPanel value={value} index={2}>
                 <div className={classes.relatedSearchRow}>
                   <h3>Searches Related to {result.keyword}</h3>
+                  {!result.related_searches &&
+                  <h4> There aren't any related searches associated with {result.keyword} </h4>}
                   {
                     result.related_searches.map(
                         searchTerm => <a className={classes.relatedSearchTerm}
@@ -68,6 +74,8 @@ export const KeywordGroup = ({result, showAll}) => {
               </TabPanel>
               <TabPanel value={value} index={3}>
                 <div className={classes.organicRow}>
+                  {!result.ads &&
+                  <h4> There aren't any ads associated with {result.keyword} </h4>}
                   {
                     result.ads.map(product => <PaidAd product={product}/>)
                   }
