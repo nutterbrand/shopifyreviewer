@@ -72,8 +72,8 @@ export const KeywordGroup = ({result, showAll}) => {
               <AppBar position="static" className={classes.resultsTabs}>
                 <Tabs value={value} variant="fullWidth" onChange={handleChange}>
                   {_.map(filteredCategories, (prop, i) =>
-                      <Tab className={classes.tabLabel} label={getTabLabel(Object.keys(prop)[ 0 ])} {...a11yProps(
-                          i)} />)
+                      <Tab className={classes.tabLabel} label={getTabLabel(Object.keys(prop)[ 0 ])}
+                           {...a11yProps(i)} />)
                   }
                 </Tabs>
               </AppBar>
@@ -81,7 +81,7 @@ export const KeywordGroup = ({result, showAll}) => {
                 _.map(filteredCategories, (prop, i) =>
                     <TabPanel value={value} index={i} className={classes.tabPanel}>
                       {renderTabPanel(Object.keys(prop)[ 0 ])}
-                    </TabPanel>
+                    </TabPanel>,
                 )
               }
             </div>
