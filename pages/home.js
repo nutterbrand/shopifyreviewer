@@ -19,8 +19,8 @@ export default function HomePage() {
   const classes = useStyles();
   const router = useRouter();
   const showAll = _.has(router.query, 'show');
-  const {data, error} = useSwr('https://evening-retreat-22032.herokuapp.com/report/blindsgalore.com/', fetcher);
-  // const {data, error} = useSwr('https://evening-retreat-22032.herokuapp.com/report/signaturehardware.com/', fetcher);
+  // const {data, error} = useSwr('https://evening-retreat-22032.herokuapp.com/report/blindsgalore.com/', fetcher);
+  const {data, error} = useSwr('https://evening-retreat-22032.herokuapp.com/report/signaturehardware.com/', fetcher);
   if (error) return <span className={classes.center}>Failed to load data</span>;
   if (!data) return <SimpleLoading/>;
   console.log(data.result);

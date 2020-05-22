@@ -14,7 +14,7 @@ import {OrganicResult} from './OrganicResult';
 import {PaidAd} from './PaidAd';
 
 const useStyles = makeStyles(productStyle);
-const a11yProps = (index) => {id: `simple-tab-${index}`;};
+const a11yProps = i => {id: `simple-tab-${i}`;};
 
 export const KeywordGroup = ({result, showAll}) => {
   console.log(result);
@@ -23,6 +23,33 @@ export const KeywordGroup = ({result, showAll}) => {
     setValue(newValue);
   };
   const classes = useStyles();
+  const categories = ['shopping_results', 'organic_results', 'related_searches', 'ads'];
+  const getTabLabel = (cat) => cat.replace('_', ' ').toUpperCase();
+
+  const renderTabPanel = category => {
+    switch (category) {
+      case categories[ 0 ]:
+        return <div className={classes.productRow}>
+          {result[ category ].map(product => <ShoppingResult product={product}/>)}
+        </div>;
+      case categories[ 1 ]:
+        return <div className={classes.organicRow}>
+          {result[ category ].map(product => <OrganicResult product={product}/>)}
+        </div>;
+      case categories[ 2 ]:
+        return <div className={classes.relatedSearchRow}>
+          {result[ category ].map(
+              searchTerm => <a className={classes.relatedSearchTerm}
+                               href={searchTerm.link}>{searchTerm.query}</a>)}
+        </div>;
+      case categories[ 3 ]:
+        return <div className={classes.organicRow}>
+          {result[ category ].map(product => <PaidAd product={product}/>)}
+        </div>;
+      default:
+        return null;
+    }
+  };
   return (
       <div className={classes.keywordCard}>
         <GridContainer>
@@ -34,53 +61,17 @@ export const KeywordGroup = ({result, showAll}) => {
             </div>
             <div className={classNames({[ classes.blur ]: !showAll})}>
               <AppBar position="static" className={classes.resultsTabs}>
-                <Tabs value={value} onChange={handleChange}>
-                  <Tab className={classes.tabLabel} label="Shopping Results" {...a11yProps(0)} />
-                  <Tab className={classes.tabLabel} label="Organic Results" {...a11yProps(1)} />
-                  <Tab className={classes.tabLabel} label="Related Searches" {...a11yProps(2)} />
-                  <Tab className={classes.tabLabel} label="Paid Ads" {...a11yProps(3)} />
+                <Tabs value={value} variant="fullWidth" onChange={handleChange}>
+                  {categories.map((category, i) =>
+                      <Tab className={classes.tabLabel} label={getTabLabel(category)} {...a11yProps(i)} />)
+                  }
                 </Tabs>
               </AppBar>
-              <TabPanel value={value} index={0} className={classes.tabPanel}>
-                <div className={classes.productRow}>
-                  {!result.shopping_results &&
-                  <h4> There aren't any product associated with {result.keyword} </h4>}
-                  {
-                    result.shopping_results.map(product => <ShoppingResult product={product}/>)
-                  }
-                </div>
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-                <div className={classes.organicRow}>
-                  {!result.organic_results &&
-                  <h4> There aren't any organic search result associated with {result.keyword} </h4>}
-                  {
-                    result.organic_results.map(product => <OrganicResult product={product}/>)
-                  }
-                </div>
-              </TabPanel>
-              <TabPanel value={value} index={2}>
-                <div className={classes.relatedSearchRow}>
-                  <h3>Searches Related to {result.keyword}</h3>
-                  {!result.related_searches &&
-                  <h4> There aren't any related searches associated with {result.keyword} </h4>}
-                  {
-                    result.related_searches.map(
-                        searchTerm => <a className={classes.relatedSearchTerm}
-                                         href={searchTerm.link}>{searchTerm.query}</a>)
-
-                  }
-                </div>
-              </TabPanel>
-              <TabPanel value={value} index={3}>
-                <div className={classes.organicRow}>
-                  {!result.ads &&
-                  <h4> There aren't any ads associated with {result.keyword} </h4>}
-                  {
-                    result.ads.map(product => <PaidAd product={product}/>)
-                  }
-                </div>
-              </TabPanel>
+              {categories.map((category, i) =>
+                  <TabPanel value={value} index={i} className={classes.tabPanel}>
+                    {renderTabPanel(category)}
+                  </TabPanel>)
+              }
             </div>
           </GridItem>
         </GridContainer>
