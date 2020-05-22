@@ -32,9 +32,7 @@ export const KeywordGroup = ({result, showAll}) => {
         }
       },
   );
-  console.log(filteredCategories);
   const getTabLabel = (cat) => cat.replace('_', ' ').toUpperCase();
-
   const renderTabPanel = category => {
     switch (category) {
       case categories[ 0 ]:
@@ -60,7 +58,7 @@ export const KeywordGroup = ({result, showAll}) => {
     }
   };
   return (
-      <div className={classes.keywordCard}>
+      <div className={classes.keywordCard} key={result.id}>
         <GridContainer>
           <GridItem md={12} sm={12} className={classes.recsContainer}>
             <h3 className={classes.keywordTitle}>#{result.position} Keyword: "{result.keyword}"</h3>
