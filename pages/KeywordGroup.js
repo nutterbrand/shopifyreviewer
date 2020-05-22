@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'underscore';
 import {makeStyles} from '@material-ui/core/styles';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
 import classNames from 'classnames';
@@ -24,6 +25,14 @@ export const KeywordGroup = ({result, showAll}) => {
   };
   const classes = useStyles();
   const categories = ['shopping_results', 'organic_results', 'related_searches', 'ads'];
+  const filteredCategories = [];
+  _.each(result, (value, key) => {
+        if (Array.isArray(value) && value.length > 0) {
+          filteredCategories.push({[ key ]: value});
+        }
+      },
+  );
+  console.log(filteredCategories);
   const getTabLabel = (cat) => cat.replace('_', ' ').toUpperCase();
 
   const renderTabPanel = category => {
@@ -62,15 +71,18 @@ export const KeywordGroup = ({result, showAll}) => {
             <div className={classNames({[ classes.blur ]: !showAll})}>
               <AppBar position="static" className={classes.resultsTabs}>
                 <Tabs value={value} variant="fullWidth" onChange={handleChange}>
-                  {categories.map((category, i) =>
-                      <Tab className={classes.tabLabel} label={getTabLabel(category)} {...a11yProps(i)} />)
+                  {_.map(filteredCategories, (prop, i) =>
+                      <Tab className={classes.tabLabel} label={getTabLabel(Object.keys(prop)[ 0 ])} {...a11yProps(
+                          i)} />)
                   }
                 </Tabs>
               </AppBar>
-              {categories.map((category, i) =>
-                  <TabPanel value={value} index={i} className={classes.tabPanel}>
-                    {renderTabPanel(category)}
-                  </TabPanel>)
+              {
+                _.map(filteredCategories, (prop, i) =>
+                    <TabPanel value={value} index={i} className={classes.tabPanel}>
+                      {renderTabPanel(Object.keys(prop)[ 0 ])}
+                    </TabPanel>
+                )
               }
             </div>
           </GridItem>
