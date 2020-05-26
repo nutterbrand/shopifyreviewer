@@ -8,13 +8,18 @@ import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.
 const useStyles = makeStyles(productStyle);
 
 export const KeyWordRecommendations = (props) => {
-  const {products, companyListings, yourCompany, keyword} = props;
+  const {shopping_results, keyword, domain} = props.result;
+  const companyListings = _.where(shopping_results, {source: domain});
+  const yourCompany = companyListings && companyListings[ 0 ];
   const classes = useStyles();
-  const prices = _(products).pluck('extracted_price');
-  const ratings = _.compact(_(products).pluck('rating'));
+  const prices = _(shopping_results).pluck('extracted_price');
+  const ratings = _.compact(_(shopping_results).pluck('rating'));
   const numRatings = ratings ? ratings.length + 1 : 0;
-  const minPrice = _.min(products, elem => elem.extracted_price);
+  const minPrice = _.min(shopping_results, elem => elem.extracted_price);
   const avgPrice = Math.floor(_.reduce(prices, (memo, num) => memo + num, 0) / prices.length || 1);
+  if (shopping_results?.length === 0) return <div className={classes.rec}>
+    <Icon className={classes.recRed} fontSize="small">info</Icon>There aren't any results showing up for this keyword.
+  </div>;
   if (companyListings.length) {
     const isTop5 = yourCompany.position <= 5;
     const isTop5Class = classNames({[ classes.recGreen ]: isTop5}, {[ classes.recRed ]: !isTop5});

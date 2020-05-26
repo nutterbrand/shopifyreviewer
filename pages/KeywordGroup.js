@@ -25,9 +25,6 @@ export const KeywordGroup = ({result, index, showAll}) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const shoppingResults = result.shopping_results;
-  const companyListings = _.where(shoppingResults, {source: result.domain});
-  const yourCompany = companyListings && companyListings[ 0 ];
   const categories = ['shopping_results', 'organic_results', 'related_searches', 'ads'];
   const filteredCategories = [];
   _.each(result, (value, key) => {
@@ -68,8 +65,7 @@ export const KeywordGroup = ({result, index, showAll}) => {
             <h3 className={classes.keywordTitle}>#{index + 1} Keyword: "{result.keyword}"</h3>
             <div className={classNames(classes.recs, {[ classes.blur ]: !showAll})}>
               <h4 className={classes.recTitle}>Recommendations:</h4>
-              <KeyWordRecommendations products={shoppingResults} yourCompany={yourCompany}
-                                      companyListings={{companyListings}} keyword={result.keyword}/>
+              <KeyWordRecommendations result={result}/>
             </div>
             <div className={classNames(classes.searchContainer, {[ classes.blur ]: !showAll})}>
               <h4 className={classes.searchingResult}>{result.keyword}</h4>
