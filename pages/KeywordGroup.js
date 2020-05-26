@@ -17,7 +17,7 @@ import {PaidAd} from './PaidAd';
 const useStyles = makeStyles(productStyle);
 const a11yProps = i => {id: `simple-tab-${i}`;};
 
-export const KeywordGroup = ({result, showAll}) => {
+export const KeywordGroup = ({result, index, showAll}) => {
   console.log(result);
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -61,7 +61,7 @@ export const KeywordGroup = ({result, showAll}) => {
       <div className={classes.keywordCard} key={result.id}>
         <GridContainer>
           <GridItem md={12} sm={12} className={classes.recsContainer}>
-            <h3 className={classes.keywordTitle}>#{result.position} Keyword: "{result.keyword}"</h3>
+            <h3 className={classes.keywordTitle}>#{index + 1} Keyword: "{result.keyword}"</h3>
             <div className={classNames(classes.searchContainer, {[ classes.blur ]: !showAll})}>
               <h4 className={classes.searchingResult}>{result.keyword}</h4>
               <img className={classes.googleSearch} src={GoogleSearch}/>
