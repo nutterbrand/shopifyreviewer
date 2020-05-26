@@ -10,7 +10,7 @@ export const PaidAd = props => {
   const classes = useStyles();
   return (
       <div className={classNames(classes.searchTermContainer)}>
-        <h3><a className={classes.productLink} href={classes.url}>{product.title}</a></h3>
+        <h4><a className={classes.productLink} href={classes.url}>{product.title}</a></h4>
         <span className={classes.ad}>Ad</span>
         <a className={classes.companyLink} href={classes.link}>{product.domain}{product.displayed_link}</a>
         <div className={classes.snippet}>

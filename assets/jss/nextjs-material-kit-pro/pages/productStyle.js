@@ -299,7 +299,7 @@ const productStyle = {
   },
   companyLink: {
     color: '#202124',
-    fontSize: '22px',
+    fontSize: '18px',
     fontWeight: '500',
   },
   highlighted: {
