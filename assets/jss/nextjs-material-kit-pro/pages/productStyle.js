@@ -50,6 +50,25 @@ const productStyle = {
   loadingPlaceholder: {
     width: '100%',
   },
+  loadingSpinnerContainer: {
+    position: 'relative',
+    width: '500px',
+    height: '600px',
+  },
+  loadingSpinnerImage: {
+    display: 'none',
+    position: 'absolute',
+    top: '0',
+    width: '100%',
+  },
+  loadingSpinnerProgress: {
+    position: 'absolute',
+    bottom: '0',
+    width: '100%',
+  },
+  shown: {
+    display: 'block',
+  },
   loadText: {},
   header: {
     position: 'fixed',
