@@ -34,7 +34,6 @@ export default function HomePage() {
         'Building Landing Page...',
       ]}
   />;
-  // console.log(data.result);
   return (
       <>
         <Header/>

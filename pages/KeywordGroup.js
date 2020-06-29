@@ -19,20 +19,20 @@ const useStyles = makeStyles(productStyle);
 const a11yProps = i => {id: `simple-tab-${i}`;};
 
 export const KeywordGroup = ({result, index, showAll}) => {
-  console.log(result);
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const categories = ['shopping_results', 'organic_results', 'related_searches', 'ads'];
-  const filteredCategories = [];
+  const categories = ['shopping_results', 'ads', 'organic_results', 'related_searches'];
+  const displayCategories = [];
   _.each(result, (value, key) => {
         if (Array.isArray(value) && value.length > 0) {
-          filteredCategories.push({[ key ]: value});
+          displayCategories[categories.indexOf(key)] = {[ key ]: value};
         }
       },
   );
+  const filteredCategories = displayCategories.filter(Boolean)
   const getTabLabel = (cat) => cat.replace('_', ' ').toUpperCase();
   const renderTabPanel = category => {
     switch (category) {
@@ -42,17 +42,17 @@ export const KeywordGroup = ({result, index, showAll}) => {
         </div>;
       case categories[ 1 ]:
         return <div className={classes.organicRow}>
-          {result[ category ].map(product => <OrganicResult product={product}/>)}
+          {result[ category ].map(product => <PaidAd product={product}/>)}
         </div>;
       case categories[ 2 ]:
+        return <div className={classes.organicRow}>
+          {result[ category ].map(product => <OrganicResult product={product}/>)}
+        </div>;
+      case categories[ 3 ]:
         return <div className={classes.relatedSearchRow}>
           {result[ category ].map(
               searchTerm => <a className={classes.relatedSearchTerm}
                                href={searchTerm.link}>{searchTerm.query}</a>)}
-        </div>;
-      case categories[ 3 ]:
-        return <div className={classes.organicRow}>
-          {result[ category ].map(product => <PaidAd product={product}/>)}
         </div>;
       default:
         return null;
