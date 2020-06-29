@@ -330,6 +330,7 @@ const productStyle = {
     height: '200px',
     borderTopLeftRadius: '6px',
     borderTopRightRadius: '6px',
+    objectFit: 'contain',
   },
   productKeyword: {
     margin: '20px 5px 10px 5px',
