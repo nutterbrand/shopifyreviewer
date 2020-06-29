@@ -84,17 +84,27 @@ const productStyle = {
     zIndex: '2',
     boxShadow: '0 2px 5px -1px rgba(0,0,0,0.3)',
   },
-  domain: {
+  domainSearch: {
     width: '300px',
     '& div': {
-      borderRadius: '4px 0 0 4px',
+      borderRadius: '4px 4px 4xp 4px',
       '& input': {
-        padding: '8.5px 10px',
+        padding: '8.5px 15px',
       },
     },
+    marginRight: "10px",
+  },
+  productSearch: {
+    width: '200px',
+    '& div': {
+      borderRadius: '4px 4px 4xp 4px',
+      '& input': {
+        padding: '8.5px 15px',
+      },
+    },
+    marginRight: "10px",
   },
   submit: {
-    borderRadius: '0 4px 4px 0',
     backgroundColor: '#4bb051',
     height: '36px',
     color: '#ffffff',

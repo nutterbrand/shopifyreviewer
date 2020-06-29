@@ -6,16 +6,16 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(productStyle);
 
-export const Header = () => {
+export const Header = ({onSearch}) => {
   const classes = useStyles();
-  const [values, setValues] = useState({domain: '', product: ''});
+  const [values, setValues] = useState({domain: 'woodencork.com', product: 'irish whiskey'});
   const handleInputChange = e => {
     const {name, value} = e.target;
     setValues({...values, [ name ]: value});
   };
   const handleDomainSubmit = (event) => {
-    //TODO: Make Call to BE API To get data
-    setValues({...values, domain: ''});
+    onSearch( values )
+    setValues({product: '', domain: ''});
     event.preventDefault();
   };
   return (
@@ -23,8 +23,13 @@ export const Header = () => {
         <div className={classes.header}>
           <h4>Shopify Reviewer</h4>
           <form className={classes.form} noValidate autoComplete="off" onSubmit={handleDomainSubmit}>
-            <TextField className={classes.domain} id="domainName" name='domain' placeholder='Enter Your Company Website'
+            <TextField className={classes.domainSearch} id="domainName" name='domain'
+                       placeholder='Search Your Company Website'
                        variant="outlined" size="small" value={values.domain} onChange={handleInputChange}/>
+            <TextField className={classes.productSearch} id="productName" name='product'
+                       placeholder='Search Your Product'
+                       variant="outlined" size="small" value={values.product} onChange={handleInputChange}/>
+
             <Button className={classes.submit} type="submit">SUBMIT</Button>
           </form>
         </div>
