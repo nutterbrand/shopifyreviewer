@@ -38,6 +38,7 @@ export default function HomePage() {
     const {domain, product} = values;
     const filteredDomain = domain.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '').split('/')[ 0 ];
     setLoading(true);
+    setData(null);
     fetch(`${BASE_URL}${product ? 'keyword/' : 'domain/'}${filteredDomain}/${product}`).
         then(response => response.json()).
         then(data => {
@@ -53,7 +54,7 @@ export default function HomePage() {
         <div className={classes.companyPage}>
           <div className={classes.section}>
             <div className={classes.container}>
-              <CompanyHeader/>
+              {data && <CompanyHeader/>}
               {
                 data?.result?.map(
                     (result, i) => <KeywordGroup result={result} handleOpen={handleOpen} key={result.keyword} index={i}
