@@ -44,7 +44,8 @@ export default function HomePage() {
               <CompanyHeader/>
               {
                 data.result.map(
-                    (result, i) => <KeywordGroup result={result} key={result.keyword} index={i} showAll={showAll}/>)
+                    (result, i) => <KeywordGroup result={result} key={result.keyword} index={i}
+                                                 showAll={i < 10 || showAll}/>)
               }
             </div>
           </div>
