@@ -18,7 +18,7 @@ import {PaidAd} from './PaidAd';
 const useStyles = makeStyles(productStyle);
 const a11yProps = i => {id: `simple-tab-${i}`;};
 
-export const KeywordGroup = ({result, index, showAll}) => {
+export const KeywordGroup = ({result, handleOpen, index, showAll}) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -28,11 +28,11 @@ export const KeywordGroup = ({result, index, showAll}) => {
   const displayCategories = [];
   _.each(result, (value, key) => {
         if (Array.isArray(value) && value.length > 0) {
-          displayCategories[categories.indexOf(key)] = {[ key ]: value};
+          displayCategories[ categories.indexOf(key) ] = {[ key ]: value};
         }
       },
   );
-  const filteredCategories = displayCategories.filter(Boolean)
+  const filteredCategories = displayCategories.filter(Boolean);
   const getTabLabel = (cat) => cat.replace('_', ' ').toUpperCase();
   const renderTabPanel = category => {
     switch (category) {
@@ -59,7 +59,8 @@ export const KeywordGroup = ({result, index, showAll}) => {
     }
   };
   return (
-      <div className={classes.keywordCard} key={result.id}>
+      <div className={classNames(classes.keywordCard, {[ classes.pointer ]: !showAll})} key={result.id}
+           onClick={() => !showAll && handleOpen()}>
         <GridContainer>
           <GridItem md={12} sm={12} className={classes.recsContainer}>
             <h3 className={classes.keywordTitle}>#{index + 1} Keyword: "{result.keyword}"</h3>

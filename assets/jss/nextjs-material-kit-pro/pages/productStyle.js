@@ -398,6 +398,9 @@ const productStyle = {
     boxShadow: 'none',
     zIndex: '0',
   },
+  pointer: {
+    cursor: 'pointer',
+  },
 };
 
 export default productStyle;

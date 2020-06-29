@@ -2,16 +2,13 @@ import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
 import TextField from '@material-ui/core/TextField';
-import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(productStyle);
 
-export const Header = (props) => {
-  const [values, setValues] = useState({domain: '', email: ''});
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export const Header = () => {
+  const classes = useStyles();
+  const [values, setValues] = useState({domain: '', product: ''});
   const handleInputChange = e => {
     const {name, value} = e.target;
     setValues({...values, [ name ]: value});
@@ -21,14 +18,6 @@ export const Header = (props) => {
     setValues({...values, domain: ''});
     event.preventDefault();
   };
-  const handleEmailSubmit = (event) => {
-    //TODO: Make Call to BE API to submit email
-    setValues({...values, email: ''});
-    setOpen(false);
-    event.preventDefault();
-  };
-  const classes = useStyles();
-
   return (
       <>
         <div className={classes.header}>
@@ -38,18 +27,7 @@ export const Header = (props) => {
                        variant="outlined" size="small" value={values.domain} onChange={handleInputChange}/>
             <Button className={classes.submit} type="submit">SUBMIT</Button>
           </form>
-          <Button variant="contained" className={classes.signUp} onClick={handleOpen}>Sign Up</Button>
         </div>
-        <Modal open={open} onClose={handleClose} className={classes.modalContainer}>
-          <div className={classes.modal}>
-            <h5>Please enter your email for our team to contact you</h5>
-            <form className={classes.form} noValidate autoComplete="off" onSubmit={handleEmailSubmit}>
-              <TextField className={classes.domain} id="email" name='email' placeholder='Enter Your Email'
-                         variant="outlined" size="small" value={values.email} onChange={handleInputChange}/>
-              <Button className={classes.submit} type="submit">SUBMIT</Button>
-            </form>
-          </div>
-        </Modal>
       </>
   );
 };
