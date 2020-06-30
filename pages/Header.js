@@ -1,21 +1,26 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {useRouter} from 'next/router';
 import {makeStyles} from '@material-ui/core/styles';
-import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
 
 const useStyles = makeStyles(productStyle);
 
 export const Header = ({onSearch}) => {
   const classes = useStyles();
+  const router = useRouter();
   const [values, setValues] = useState({domain: 'woodencork.com', product: 'irish whiskey'});
+  useEffect(() => {
+    if (router.query.hasOwnProperty('domain') || router.query.hasOwnProperty('product'))
+      setValues({...values, ...router.query});
+  }, [router]);
   const handleInputChange = e => {
     const {name, value} = e.target;
     setValues({...values, [ name ]: value});
   };
   const handleDomainSubmit = (event) => {
-    onSearch( values )
-    setValues({product: '', domain: ''});
+    onSearch(values);
     event.preventDefault();
   };
   return (

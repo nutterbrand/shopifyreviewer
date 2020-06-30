@@ -27,8 +27,7 @@ const BASE_URL = 'https://evening-retreat-22032.herokuapp.com/';
 export default function HomePage() {
   const classes = useStyles();
   const router = useRouter();
-  const showAll
-      = _.has(router.query, 'show');
+  const showAll = _.has(router.query, 'show');
   const [open, setOpen] = useState(false);
   const [data, setData] = useState();
   const [isLoading, setLoading] = useState(false);
