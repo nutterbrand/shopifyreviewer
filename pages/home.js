@@ -10,6 +10,7 @@ import {KeywordGroup} from './KeywordGroup';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
+import GridContainer from '../components/Grid/GridContainer';
 
 const useStyles = makeStyles(productStyle);
 
@@ -19,7 +20,7 @@ const LOADING_IMAGES = [
   'https://henrymetricstory.s3-us-west-1.amazonaws.com/load_3.png',
 ];
 const LOADING_MESSAGES = [
-  'Downloading Amazon Product Page...',
+  'Downloading Shopify Product Page...',
   'Analyzing Competitors...',
   'Building Landing Page...',
 ];
@@ -49,11 +50,11 @@ export default function HomePage() {
       <>
         {isLoading &&
         <LoadingSpinner loadingImages={LOADING_IMAGES} loadingMessages={LOADING_MESSAGES}/>}
-        <Header onSearch={handleOnSearch}/>
+        <Header/>
         <div className={classes.companyPage}>
           <div className={classes.section}>
             <div className={classes.container}>
-              {data && <CompanyHeader/>}
+              {!isLoading && <CompanyHeader onSearch={handleOnSearch} hasData={!!data}/>}
               {
                 data?.result?.map(
                     (result, i) => <KeywordGroup result={result} handleOpen={handleOpen} key={result.keyword} index={i}

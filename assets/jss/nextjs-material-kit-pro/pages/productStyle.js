@@ -85,24 +85,24 @@ const productStyle = {
     boxShadow: '0 2px 5px -1px rgba(0,0,0,0.3)',
   },
   domainSearch: {
-    width: '300px',
+    width: '55%',
     '& div': {
       borderRadius: '4px 4px 4xp 4px',
       '& input': {
         padding: '8.5px 15px',
       },
     },
-    marginRight: "10px",
+    marginRight: '10px',
   },
   productSearch: {
-    width: '200px',
+    width: '27%',
     '& div': {
       borderRadius: '4px 4px 4xp 4px',
       '& input': {
         padding: '8.5px 15px',
       },
     },
-    marginRight: "10px",
+    marginRight: '10px',
   },
   submit: {
     backgroundColor: '#4bb051',
@@ -135,6 +135,9 @@ const productStyle = {
     padding: '0 30px',
   },
   form: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
     margin: '0',
   },
   companyHeader: {
@@ -207,12 +210,38 @@ const productStyle = {
     textAlign: 'center',
     fontSize: '55px',
   },
+  searchHeader: {
+    height: '300px',
+    position: 'absolute',
+    top: '0',
+    right: '5%',
+  },
+  qCircle: {
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '50%',
+    height: '400px',
+    background: '#fafafa',
+    borderRadius: '0 0 400px 0',
+  },
+  headerForm: {
+    margin: '45px 30px',
+  },
+  headerTitle: {
+    width: '60%',
+    fontWeight: 'bold',
+    marginBottom: '85px',
+  },
+  headerSub: {
+    marginBottom: '25px',
+  },
   statDes: {
     margin: '25px 30px',
     borderRadius: '5px',
     border: '1px solid #eeeeee',
-    padding: '40px 25px',
-    backgroundColor: '#fffef9',
+    padding: '0 25px 15px 25px',
+    backgroundColor: '#fafafa',
   },
   keywordCard: {
     backgroundColor: '#fff',
