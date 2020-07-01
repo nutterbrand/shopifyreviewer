@@ -10,7 +10,6 @@ import {KeywordGroup} from './KeywordGroup';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
-import GridContainer from '../components/Grid/GridContainer';
 import PlaceHolder from '../assets/img/placeHolder.png';
 
 const useStyles = makeStyles(productStyle);
