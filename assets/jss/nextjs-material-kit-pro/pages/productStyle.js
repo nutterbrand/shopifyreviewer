@@ -153,7 +153,7 @@ const productStyle = {
   },
   companyHeader: {
     backgroundColor: '#fff',
-    marginTop: '100px',
+    margin: '100px 0 0 0',
     padding: '25px',
   },
   scoreHeader: {
