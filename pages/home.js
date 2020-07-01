@@ -11,6 +11,7 @@ import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
 import GridContainer from '../components/Grid/GridContainer';
+import PlaceHolder from '../assets/img/placeHolder.png';
 
 const useStyles = makeStyles(productStyle);
 
@@ -46,6 +47,8 @@ export default function HomePage() {
           setLoading(false);
         });
   };
+  const placeHolderArr = new Array(30);
+  placeHolderArr.fill(0);
   return (
       <>
         {isLoading &&
@@ -58,7 +61,11 @@ export default function HomePage() {
               {
                 data?.result?.map(
                     (result, i) => <KeywordGroup result={result} handleOpen={handleOpen} key={result.keyword} index={i}
-                                                 showAll={i < 10 || showAll}/>)
+                                                 showAll={i < 4 || showAll}/>)
+              }
+              {
+                data?.result?.length < 4 &&
+                placeHolderArr.map(i => <img className={classes.placeHolder} src={PlaceHolder} onClick={handleOpen}/>)
               }
             </div>
           </div>

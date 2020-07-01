@@ -40,6 +40,12 @@ const productStyle = {
     alignItems: 'center',
     backgroundColor: '#fff',
   },
+  placeHolder: {
+    width: '100%',
+    cursor: 'pointer',
+    marginBottom: '50px',
+    filter: 'blur(10px)',
+  },
   loadImg: {
     width: '300px',
   },
@@ -250,7 +256,7 @@ const productStyle = {
   },
   keywordCard: {
     backgroundColor: '#fff',
-    margin: '50px -15px',
+    margin: '50px 0',
     padding: '40px 40px 60px 40px',
     overflowX: 'hidden',
   },
