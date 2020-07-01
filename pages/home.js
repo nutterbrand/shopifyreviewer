@@ -65,7 +65,9 @@ export default function HomePage() {
         </div>
         <Modal open={open} onClose={handleClose} className={classes.modalContainer}>
           <div className={classes.modal}>
-            <Button color="secondary" variant="contained" size="large" target="_"
+            <h3>Want to see the full list? Download Keyword Genius to see the full list and add automatically advertise
+              for those keywords</h3>
+            <Button color="primary" className={classes.downloadBtn} variant="contained" size="large" target="_"
                     href='https://apps.shopify.com/keyword-genius'>
               Download Here</Button>
           </div>

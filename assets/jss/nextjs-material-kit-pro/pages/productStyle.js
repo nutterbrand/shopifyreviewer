@@ -125,14 +125,19 @@ const productStyle = {
   modal: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     textAlign: 'center',
-    width: '500px',
-    height: '175px',
+    width: '600px',
+    height: '300px',
     backgroundColor: '#ffffff',
     boxShadow: '2px 2px 2px -1px rgba(0,0,0,0.2)',
     padding: '0 30px',
+  },
+  downloadBtn: {
+    '&:hover': {
+      color: 'white',
+    },
   },
   form: {
     display: 'flex',
