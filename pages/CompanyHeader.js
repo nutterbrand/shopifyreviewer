@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useRouter} from 'next/router';
+import Router, {useRouter} from 'next/router';
 import GridItem from '../components/Grid/GridItem';
 import GridContainer from '../components/Grid/GridContainer';
 import Button from '@material-ui/core/Button';
@@ -13,17 +13,28 @@ const useStyles = makeStyles(productStyle);
 export const CompanyHeader = ({onSearch, hasData}) => {
   const classes = useStyles();
   const router = useRouter();
-  const [values, setValues] = useState({domain: 'woodencork.com', product: 'irish whiskey'});
+  const [values, setValues] = useState({domain: '', product: ''});
   useEffect(() => {
     if (router.query.hasOwnProperty('domain') || router.query.hasOwnProperty('product'))
       setValues({...values, ...router.query});
   }, [router]);
+
+  useEffect(() => {
+    if (!hasData && values.domain) {
+      onSearch(values);
+    }
+  }, [values.domain, values.product]);
+
   const handleInputChange = e => {
     const {name, value} = e.target;
     setValues({...values, [ name ]: value});
   };
   const handleDomainSubmit = (event) => {
     onSearch(values);
+    Router.push({
+      pathname: '/home',
+      query: values,
+    });
     event.preventDefault();
   };
   return (

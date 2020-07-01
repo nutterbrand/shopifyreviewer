@@ -7,10 +7,8 @@ const useStyles = makeStyles(productStyle);
 export const Header = () => {
   const classes = useStyles();
   return (
-      <>
-        <div className={classes.header}>
-          <h4>Shopify Reviewer</h4>
-        </div>
-      </>
+      <div className={classes.header}>
+        <h4>Shopify Reviewer</h4>
+      </div>
   );
 };
