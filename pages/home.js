@@ -63,9 +63,11 @@ export default function HomePage() {
                                                  showAll={i < 4 || showAll}/>)
               }
               {
-                data?.result?.length < 4 &&
-                placeHolderArr.map(i => <img className={classes.placeHolder} src={PlaceHolder} onClick={handleOpen}/>)
-              }
+                data?.keywords?.map((keyword, index) =>
+                    <div className={classes.placeHolderContainer} onClick={handleOpen}>
+                      <h3 className={classes.placeHolderTitle}>#{index + 3} Keyword: "{keyword.keyword}"</h3>
+                      <img className={classes.placeHolder} src={PlaceHolder}/>
+                    </div>)}
             </div>
           </div>
         </div>

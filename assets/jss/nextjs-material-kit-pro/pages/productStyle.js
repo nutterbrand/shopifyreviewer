@@ -40,11 +40,22 @@ const productStyle = {
     alignItems: 'center',
     backgroundColor: '#fff',
   },
-  placeHolder: {
+  placeHolderContainer: {
+    position: 'relative',
     width: '100%',
     cursor: 'pointer',
     marginBottom: '50px',
-    filter: 'blur(10px)',
+  },
+  placeHolder: {
+    width: '100%',
+    filter: 'blur(8px)',
+  },
+  placeHolderTitle: {
+    fontWeight: 'Bold',
+    position: 'absolute',
+    top: '25px',
+    left: '50px',
+    zIndex: '2',
   },
   loadImg: {
     width: '300px',
