@@ -35,17 +35,27 @@ export default function HomePage() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleOnSearch = values => {
+    for (let i = 0; i < 100; i++) window.clearInterval(i);
     const {domain, product} = values;
     const filteredDomain = domain.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '').split('/')[ 0 ];
     setLoading(true);
     setData(null);
-    fetch(`${BASE_URL}${product ? 'keyword/' : 'domain/'}${filteredDomain}/${product}`).
-        then(response => response.json()).
-        then(data => {
-          setData(data);
-          setLoading(false);
-        });
+    const makeRequest = () => {
+      const reqestUrl = `${BASE_URL}${product ? 'keyword/' : 'domain/'}${filteredDomain}/${product}`;
+      fetch(reqestUrl).
+          then(response => response.json()).
+          then(data => {
+            setData(data);
+            setLoading(false);
+            if (data?.result?.length > 15) {
+              clearInterval(requestInterval);
+            }
+          });
+    };
+    makeRequest();
+    const requestInterval = setInterval(makeRequest, 5000);
   };
+
   return (
       <>
         {isLoading &&
@@ -60,12 +70,11 @@ export default function HomePage() {
                     (result, i) => <KeywordGroup result={result} handleOpen={handleOpen} key={result.keyword} index={i}
                                                  showAll={i < 4 || showAll}/>)
               }
-              {
-                data?.keywords?.map((keyword, index) =>
-                    <div className={classes.placeHolderContainer} onClick={handleOpen}>
-                      <h3 className={classes.placeHolderTitle}>#{index + 3} Keyword: "{keyword.keyword}"</h3>
-                      <img className={classes.placeHolder} src={PlaceHolder}/>
-                    </div>)}
+              {data?.result?.length < 3 && data?.keywords?.map((keyword, index) =>
+                  <div className={classes.placeHolderContainer} onClick={handleOpen}>
+                    <h3 className={classes.placeHolderTitle}>#{index + 3} Keyword: "{keyword.keyword}"</h3>
+                    <img className={classes.placeHolder} src={PlaceHolder}/>
+                  </div>)}
             </div>
           </div>
         </div>
