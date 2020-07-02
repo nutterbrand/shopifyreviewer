@@ -70,7 +70,7 @@ export default function HomePage() {
                     (result, i) => <KeywordGroup result={result} handleOpen={handleOpen} key={result.keyword} index={i}
                                                  showAll={i < 4 || showAll}/>)
               }
-              {data?.result?.length < 3 && data?.keywords?.map((keyword, index) =>
+              {data?.result?.length < 10 && data?.keywords?.map((keyword, index) =>
                   <div className={classes.placeHolderContainer} onClick={handleOpen}>
                     <h3 className={classes.placeHolderTitle}>#{index + 3} Keyword: "{keyword.keyword}"</h3>
                     <img className={classes.placeHolder} src={PlaceHolder}/>
