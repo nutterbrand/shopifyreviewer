@@ -46,8 +46,6 @@ export default function HomePage() {
           setLoading(false);
         });
   };
-  const placeHolderArr = new Array(30);
-  placeHolderArr.fill(0);
   return (
       <>
         {isLoading &&
