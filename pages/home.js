@@ -68,7 +68,7 @@ export default function HomePage() {
               {
                 data?.result?.map(
                     (result, i) => <KeywordGroup result={result} handleOpen={handleOpen} key={result.keyword} index={i}
-                                                 showAll={i < 4 || showAll}/>)
+                                                 showAll={i < 5 || showAll}/>)
               }
               {data?.result?.length < 10 && data?.keywords?.map((keyword, index) =>
                   <div className={classes.placeHolderContainer} onClick={handleOpen}>
