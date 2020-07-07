@@ -12,15 +12,14 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
 import ProductLoading from '../assets/img/productLoading.svg';
+import Download1 from '../assets/img/download_1.svg';
+import Download2 from '../assets/img/download_1.svg';
+import Download3 from '../assets/img/download_1.svg';
 import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(productStyle);
 
-const LOADING_IMAGES = [
-  'https://henrymetricstory.s3-us-west-1.amazonaws.com/load_1.png',
-  'https://henrymetricstory.s3-us-west-1.amazonaws.com/load_2.png',
-  'https://henrymetricstory.s3-us-west-1.amazonaws.com/load_3.png',
-];
+const LOADING_IMAGES = [Download1, Download2, Download3];
 const LOADING_MESSAGES = [
   'Downloading Shopify Product Page...',
   'Analyzing Competitors...',
