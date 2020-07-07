@@ -80,10 +80,8 @@ export default function HomePage() {
                       showAll={i < 5 || showAll}
                   />
               ))}
-              <div
-                  className={classes.placeHolderContainer}
-                  onClick={handleOpen}
-              >
+              {data?.keywords &&
+              <div className={classes.placeHolderContainer} onClick={handleOpen}>
                 <LinearProgress color="primary"/>
                 <h3 className={classes.placeHolderTitle}>
                   #{data?.result?.length + 1} Keyword: "{data?.keywords[ data?.result?.length + 1 ]?.keyword}"
@@ -93,6 +91,7 @@ export default function HomePage() {
                   <h4>Loading Products...</h4>
                 </div>
               </div>
+              }
             </div>
           </div>
         </div>
