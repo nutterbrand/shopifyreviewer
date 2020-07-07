@@ -11,7 +11,6 @@ import {
 import tooltipsStyle from 'assets/jss/nextjs-material-kit-pro/tooltipsStyle.js';
 import imagesStyles from 'assets/jss/nextjs-material-kit-pro/imagesStyles.js';
 import customSelectStyle from 'assets/jss/nextjs-material-kit-pro/customSelectStyle.js';
-import ProductLoading from '../../../img/productLoading.svg';
 
 const productStyle = {
   mlAuto,
