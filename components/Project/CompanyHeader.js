@@ -77,7 +77,6 @@ export const CompanyHeader = ({ onSearch, hasData }) => {
               value={values.product}
               onChange={handleInputChange}
             />
-
             <Button className={classes.submit} type="submit">
               Search
             </Button>
