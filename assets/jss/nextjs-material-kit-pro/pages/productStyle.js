@@ -471,6 +471,18 @@ const productStyle = {
   pointer: {
     cursor: 'pointer',
   },
+  email: {
+    width: '415px',
+  },
+  submitEmail: {
+    backgroundColor: '#4bb051',
+    height: '40px',
+    color: '#ffffff',
+    width: '125px',
+    '&:hover': {
+      backgroundColor: 'none',
+    },
+  },
 };
 
 export default productStyle;

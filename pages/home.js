@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
 import ProductLoading from '../assets/img/productLoading.svg';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(productStyle);
 
@@ -33,6 +34,7 @@ export default function HomePage() {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState();
   const [isLoading, setLoading] = useState(false);
+  const [email, updateEmail] = useState('');
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleOnSearch = (values) => {
@@ -55,6 +57,10 @@ export default function HomePage() {
     };
     makeRequest();
     const requestInterval = setInterval(makeRequest, 5000);
+  };
+  const handleInputChange = (e) => {
+    const {name, value} = e.target;
+    updateEmail(value);
   };
   return (
       <>
@@ -102,19 +108,29 @@ export default function HomePage() {
         >
           <div className={classes.modal}>
             <h3>
-              Want to see the full list? Download Keyword Genius to see the full
+              Want to see the full list? Please submit your email to see the full
               list and add automatically advertise for those keywords
             </h3>
-            <Button
-                color="primary"
-                className={classes.downloadBtn}
-                variant="contained"
-                size="large"
-                target="_"
-                href="https://apps.shopify.com/keyword-genius"
+            <form
+                className={classes.form}
+                noValidate
+                autoComplete="off"
+                onSubmit={() => {}}
             >
-              Download Here
-            </Button>
+              <TextField
+                  className={classes.email}
+                  id="email"
+                  name="email"
+                  placeholder="Enter Your Email here"
+                  variant="outlined"
+                  value={email}
+                  size="small"
+                  onChange={handleInputChange}
+              />
+              <Button className={classes.submitEmail} type="submit">
+                Submit Email
+              </Button>
+            </form>
           </div>
         </Modal>
       </>
