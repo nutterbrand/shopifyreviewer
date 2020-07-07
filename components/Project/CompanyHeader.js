@@ -23,7 +23,7 @@ export const CompanyHeader = ({onSearch, hasData}) => {
         router.query.hasOwnProperty('product')
     )
       setParamValues(updatedValues);
-      setInputValues(updatedValues);
+    setInputValues(updatedValues);
   }, [router]);
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export const CompanyHeader = ({onSearch, hasData}) => {
                   placeholder="Search Your Company Website"
                   variant="outlined"
                   size="small"
-                  value={paramValues.domain || inputValues.domain}
+                  value={inputValues.domain || paramValues.domain}
                   onChange={handleInputChange}
               />
               <TextField
@@ -78,7 +78,7 @@ export const CompanyHeader = ({onSearch, hasData}) => {
                   placeholder="Search Your Product"
                   variant="outlined"
                   size="small"
-                  value={paramValues.product || inputValues.product}
+                  value={inputValues.product || paramValues.product}
                   onChange={handleInputChange}
               />
               <Button className={classes.submit} type="submit">
