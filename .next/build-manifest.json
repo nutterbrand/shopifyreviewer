@@ -22,6 +22,10 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
+    "/all": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/home": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"

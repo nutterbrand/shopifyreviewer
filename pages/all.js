@@ -6,7 +6,7 @@ import fetch from "isomorphic-unfetch";
 import { Header } from "../components/Project/Header";
 import { CompanyHeader } from "../components/Project/CompanyHeader";
 import { LoadingSpinner } from "../components/Project/LoadingSpinner";
-import { KeywordGroup } from "../components/Project/KeywordGroup";
+import { ProductGroup } from "../components/Project/ProductGroup";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import productStyle from "assets/jss/nextjs-material-kit-pro/pages/productStyle.js";
@@ -36,7 +36,7 @@ export default function HomePage() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleOnSearch = (values) => {
-    for (let i = 0; i < 100; i++) window.clearInterval(i);
+    // for (let i = 0; i < 100; i++) window.clearInterval(i);
     const { domain, product } = values;
     const filteredDomain = domain
       .replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")
@@ -50,13 +50,14 @@ export default function HomePage() {
         .then((data) => {
           setData(data);
           setLoading(false);
-          if (data?.result?.length > 15) {
-            clearInterval(requestInterval);
-          }
+          // if (data?.result?.length > 15) {
+          //   clearInterval(requestInterval);
+          // }
+          console.log(data);
         });
     };
     makeRequest();
-    const requestInterval = setInterval(makeRequest, 5000);
+    // const requestInterval = setInterval(makeRequest, 5000);
   };
 
   return (
@@ -75,26 +76,8 @@ export default function HomePage() {
               <CompanyHeader onSearch={handleOnSearch} hasData={!!data} />
             )}
             {data?.result?.map((result, i) => (
-              <KeywordGroup
-                result={result}
-                handleOpen={handleOpen}
-                key={result.keyword}
-                index={i}
-                showAll={i < 5 || showAll}
-              />
+              <ProductGroup result={result} handleOpen={handleOpen} index={i} />
             ))}
-            {data?.result?.length < 10 &&
-              data?.keywords?.map((keyword, index) => (
-                <div
-                  className={classes.placeHolderContainer}
-                  onClick={handleOpen}
-                >
-                  <h3 className={classes.placeHolderTitle}>
-                    #{index + 3} Keyword: "{keyword.keyword}"
-                  </h3>
-                  <img className={classes.placeHolder} src={PlaceHolder} />
-                </div>
-              ))}
           </div>
         </div>
       </div>
