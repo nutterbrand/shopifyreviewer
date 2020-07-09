@@ -85,7 +85,7 @@ export default function HomePage() {
                       showAll={i < 5 || showAll}
                   />
               ))}
-              {data?.keywords &&
+              {data?.keywords && data.result.length < 20 &&
               <div className={classes.placeHolderContainer} onClick={handleOpen}>
                 <LinearProgress color="primary"/>
                 <h3 className={classes.placeHolderTitle}>
