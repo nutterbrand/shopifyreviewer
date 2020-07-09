@@ -482,6 +482,28 @@ const productStyle = {
       backgroundColor: 'none',
     },
   },
+  productGroupImg: {
+    width: '100%',
+    minHeight: '400px',
+    margin: '50px 0',
+    objectFit: 'cover',
+  },
+  productSearchWords: {
+    position: 'absolute',
+    top: '50px',
+    right: '15px',
+    display:'flex',
+    flexWrap: 'wrap',
+    width: '100%',
+    height: '400px',
+    overflowY: 'scroll',
+    borderRadius: '8px',
+    border: '1px solid #dfe1e5',
+    padding: '10px 10px',
+  },
+  keywordChip: {
+    margin: '5px 10px',
+  }
 };
 
 export default productStyle;
