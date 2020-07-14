@@ -170,6 +170,13 @@ const productStyle = {
     width: '100%',
     margin: '0',
   },
+  formTwo: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    width: '100%',
+    margin: '0',
+  },
   companyHeader: {
     backgroundColor: '#fff',
     margin: '100px 0 0 0',
@@ -492,7 +499,7 @@ const productStyle = {
     position: 'absolute',
     top: '50px',
     right: '15px',
-    display:'flex',
+    display: 'flex',
     flexWrap: 'wrap',
     width: '100%',
     height: '400px',
@@ -503,7 +510,33 @@ const productStyle = {
   },
   keywordChip: {
     margin: '5px 10px',
-  }
+  },
+  headerAvatar: {
+    display: 'flex',
+    margin: '35px 0 15px 0',
+    alignItems: 'center',
+  },
+  greenAvatar: {
+    backgroundColor: '#4bb051',
+    color: '#ffffff',
+    margin: '0 15px 0 0',
+  },
+  productUrlAuto: {
+    width: '75%',
+    marginRight: '10px',
+  },
+  autoContainer: {
+    display: 'flex',
+  },
+  autoSubmit: {
+    fontSize: '20px',
+    backgroundColor: '#4bb051',
+    color: '#ffffff',
+    width: '175px',
+    '&:hover': {
+      backgroundColor: 'none',
+    },
+  },
 };
 
 export default productStyle;
