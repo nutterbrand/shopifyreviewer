@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import Router, {useRouter} from 'next/router';
+import React, {useState} from 'react';
 import GridItem from '../Grid/GridItem';
 import GridContainer from '../Grid/GridContainer';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import {makeStyles} from '@material-ui/core/styles';
 import productStyle from '../../assets/jss/nextjs-material-kit-pro/pages/productStyle';
 import SearchHeader from '../../assets/img/searchHeader.svg';
@@ -15,28 +15,29 @@ const useStyles = makeStyles(productStyle);
 
 export const EcommerceHeader = ({onSearch, hasData}) => {
   const classes = useStyles();
-  let valueObj = {domain: '', product: ''};
+  let valueObj = {domain: '', productUrlValue: ''};
   const [inputValues, setInputValues] = useState(valueObj);
   const [productUrls, setUrls] = useState([]);
+  const [productUrl, setProductUrl] = useState();
+  const [isLoading, updateLoading] = useState(false);
 
   const handleInputChange = e => {
     const {name, value} = e.target;
+    setUrls([]);
     setInputValues({...inputValues, [ name ]: value});
-  };
-
-  const handleDomainSubmit = e => {
-    onSearch(inputValues);
-    e.preventDefault();
   };
 
   const handleUrlRequest = e => {
     e.preventDefault();
-    // const requestUrl = `https://evening-retreat-22032.herokuapp.com/urls/${inputValues.domain}`;
-    const requestUrl = `https://evening-retreat-22032.herokuapp.com/urls/woodencork.com`;
+    updateLoading(true);
+    const requestUrl = `https://evening-retreat-22032.herokuapp.com/urls/${inputValues.domain}`;
     fetch(requestUrl).then((response) => response.json()).then((data) => {
       setUrls(data.result.urls);
+      updateLoading(false);
     });
   };
+
+  const handleDomainSubmit = () => onSearch(productUrl);
 
   return (
       <GridContainer className={classes.companyHeader}>
@@ -46,14 +47,8 @@ export const EcommerceHeader = ({onSearch, hasData}) => {
             <h2 className={classes.headerTitle}>
               Is your top ecommerce product being found on Google?
             </h2>
-            <form
-                className={classes.formTwo}
-                noValidate
-                autoComplete="off"
-                onSubmit={handleDomainSubmit}
-            >
-              <h3 className={classes.headerAvatar}>
-                <Avatar className={classes.greenAvatar}>1</Avatar>
+            <div className={classes.formTwo}>
+              <h3 className={classes.headerAvatar}><Avatar className={classes.greenAvatar}>1</Avatar>
                 Enter Your Shopify Domain
               </h3>
               <div>
@@ -64,47 +59,45 @@ export const EcommerceHeader = ({onSearch, hasData}) => {
                     placeholder="Search Your Company Website"
                     variant="outlined"
                     size="small"
-                    value={'woodencork.com'}
+                    value={inputValues.domain}
                     onChange={handleInputChange}
                 />
-                <Button className={classes.submit} onClick={handleUrlRequest}>
-                  Next
-                </Button>
+                {!!inputValues.domain && <Button className={classes.submit} onClick={handleUrlRequest}>Next</Button>}
               </div>
               {!!productUrls.length &&
               <>
                 <h3 className={classes.headerAvatar}>
-                  <Avatar className={classes.greenAvatar}>2</Avatar>
-                  Selected Your Product Page
+                  <Avatar className={classes.greenAvatar}>2</Avatar> Selected Your Product Page
                 </h3>
                 <div className={classes.autoContainer}>
                   <Autocomplete
                       className={classes.productUrlAuto}
-                      size="large"
                       id="product-urls"
+                      value={productUrl}
+                      onChange={(e, productUrl) => setProductUrl(productUrl)}
+                      inputValue={inputValues.productUrlValue}
+                      onInputChange={(e, productUrl) => setInputValues({...inputValues, productUrlValue: productUrl})}
                       options={productUrls}
                       getOptionLabel={option => option}
                       renderInput={(params) => <TextField {...params} variant="outlined"/>}
                   />
-                  <Button className={classes.autoSubmit} type="submit">
-                    Search
-                  </Button>
+                  {
+                    !!inputValues.productUrlValue &&
+                    <Button className={classes.autoSubmit} onClick={handleDomainSubmit}>Search</Button>
+                  }
                 </div>
               </>}
-            </form>
+              {
+                isLoading && <div><h3>Loading Product Urls</h3><LinearProgress/></div>
+              }
+            </div>
           </div>
           {hasData && (
               <div className={classes.statDes}>
                 <h3>Summary</h3>
-                <h4>
-                  Your customers are searching for your products. Are you being
-                  found?
-                </h4>
-                <h4>
-                  We automatically analyze the competition on 20 keywords on
-                  Shopping, Paid Search Ads, Organic, and even related keywords for
-                  your top product.
-                </h4>
+                <h4>Your customers are searching for your products. Are you being found?</h4>
+                <h4>We automatically analyze the competition on 20 keywords on Shopping, Paid Search Ads, Organic, and
+                  even related keywords for your top product.</h4>
                 <h4>The results will load in as you are reading the page.</h4>
               </div>
           )}
