@@ -18,7 +18,7 @@ export const EcommerceHeader = ({onSearch, hasData}) => {
   let valueObj = {domain: '', productUrlValue: ''};
   const [inputValues, setInputValues] = useState(valueObj);
   const [productUrls, setUrls] = useState([]);
-  const [productUrl, setProductUrl] = useState();
+  const [productUrl, setProductUrl] = useState('');
   const [isLoading, updateLoading] = useState(false);
 
   const handleInputChange = e => {
@@ -37,7 +37,7 @@ export const EcommerceHeader = ({onSearch, hasData}) => {
     });
   };
 
-  const handleDomainSubmit = () => onSearch(productUrl);
+  const handleDomainSubmit = () => onSearch(inputValues);
 
   return (
       <GridContainer className={classes.companyHeader}>
