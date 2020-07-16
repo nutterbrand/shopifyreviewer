@@ -13,7 +13,7 @@ import fetch from 'isomorphic-unfetch';
 
 const useStyles = makeStyles(productStyle);
 
-export const EcommerceHeader = ({onSearch, hasData}) => {
+export const EcommerceHeader = ({onSearch, onChange, hasData}) => {
   const classes = useStyles();
   let valueObj = {domain: '', productUrlValue: ''};
   const [inputValues, setInputValues] = useState(valueObj);
@@ -23,6 +23,7 @@ export const EcommerceHeader = ({onSearch, hasData}) => {
 
   const handleInputChange = e => {
     const {name, value} = e.target;
+    onChange()
     setUrls([]);
     setInputValues({...inputValues, [ name ]: value});
   };
@@ -33,6 +34,8 @@ export const EcommerceHeader = ({onSearch, hasData}) => {
     const requestUrl = `https://evening-retreat-22032.herokuapp.com/urls/${inputValues.domain}`;
     fetch(requestUrl).then((response) => response.json()).then((data) => {
       setUrls(data.result.urls);
+      setProductUrl('');
+      setInputValues({...inputValues, productUrlValue: ''});
       updateLoading(false);
     });
   };
@@ -92,7 +95,7 @@ export const EcommerceHeader = ({onSearch, hasData}) => {
               }
             </div>
           </div>
-          {hasData && (
+          {productUrl && hasData && (
               <div className={classes.statDes}>
                 <h3>Summary</h3>
                 <h4>Your customers are searching for your products. Are you being found?</h4>

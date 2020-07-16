@@ -311,6 +311,10 @@ const productStyle = {
   rec: {
     margin: '5px 0',
   },
+  keyRec: {
+    display: 'flex',
+    alignItems: 'center'
+  },
   recGreen: {
     margin: '-5px 5px',
     color: '#4bb051',
@@ -518,6 +522,11 @@ const productStyle = {
   },
   greenAvatar: {
     backgroundColor: '#4bb051',
+    color: '#ffffff',
+    margin: '0 15px 0 0',
+  },
+  blueAvatar: {
+    backgroundColor: '#27a0ff',
     color: '#ffffff',
     margin: '0 15px 0 0',
   },
