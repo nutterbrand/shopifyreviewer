@@ -110,7 +110,7 @@ export default function HomePage() {
                       onChange={handleAdHeadlineChange}
                       label="2nd Headline">
                     {
-                      adHeadlinesArr.map(ad => <MenuItem value={ad} key={``${ad} - 1``}>{ad}</MenuItem>)
+                      adHeadlinesArr.map(ad => <MenuItem value={ad} key={`${ad} - 1`}>{ad}</MenuItem>)
                     }
                   </Select>
                 </FormControl>
@@ -124,7 +124,7 @@ export default function HomePage() {
                       onChange={handleAdHeadlineChange}
                       label="3rd Headline">
                     {
-                      adHeadlinesArr.map(ad => <MenuItem value={ad} key={``${ad} - 2``}>{ad}</MenuItem>)
+                      adHeadlinesArr.map(ad => <MenuItem value={ad} key={`${ad} - 2`}>{ad}</MenuItem>)
                     }
                   </Select>
                 </FormControl>
