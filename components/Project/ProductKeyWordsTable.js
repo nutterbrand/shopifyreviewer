@@ -19,7 +19,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function descendingComparator(a, b, orderBy) {
+const descendingComparator = (a, b, orderBy) => {
   if (b[ orderBy ] < a[ orderBy ]) {
     return -1;
   }
@@ -29,13 +29,13 @@ function descendingComparator(a, b, orderBy) {
   return 0;
 }
 
-function getComparator(order, orderBy) {
+const getComparator = (order, orderBy) => {
   return order === 'desc'
       ? (a, b) => descendingComparator(a, b, orderBy)
       : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-function stableSort(array, comparator) {
+const stableSort = (array, comparator) => {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[ 0 ], b[ 0 ]);
@@ -50,7 +50,7 @@ const headCells = [
   {id: 'volume', numeric: true, disablePadding: false, label: 'Volume'},
 ];
 
-function EnhancedTableHead(props) {
+const EnhancedTableHead = props => {
   const {classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort} = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -111,11 +111,16 @@ const useToolbarStyles = makeStyles((theme) => ( {
   title: {
     flex: '1 1 100%',
   },
+  headerUrl: {
+    color: theme.palette.secondary.main,
+  },
+  createAdBtn:{
+    width: '350px'
+  }
 } ));
 
-const EnhancedTableToolbar = (props) => {
+const EnhancedTableToolbar = ({numSelected, productURL}) => {
   const classes = useToolbarStyles();
-  const {numSelected} = props;
 
   return (
       <Toolbar
@@ -129,13 +134,13 @@ const EnhancedTableToolbar = (props) => {
             </Typography>
         ) : (
             <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-              Nutrition
+              Your Product Keywords for <i className={classes.headerUrl}>{productURL}</i>
             </Typography>
         )}
 
         {numSelected > 0 ? (
-            <Tooltip title="next to create your Ads">
-              <Button>Next</Button>
+            <Tooltip title="Create Your Product Ad">
+              <Button className={classes.createAdBtn} variant="contained" color="secondary" disableElevation>Create Your Ad</Button>
             </Tooltip>
         ) : (
             <Tooltip title="Filter list">
@@ -172,7 +177,7 @@ const useStyles = makeStyles((theme) => ( {
   },
 } ));
 
-export const ProductKeyWordsTable = ({rows}) => {
+export const ProductKeyWordsTable = ({rows, productURL}) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('keyword');
@@ -188,7 +193,7 @@ export const ProductKeyWordsTable = ({rows}) => {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.keyword);
+      const newSelecteds = rows?.map((n) => n.keyword);
       setSelected(newSelecteds);
       return;
     }
@@ -226,19 +231,14 @@ export const ProductKeyWordsTable = ({rows}) => {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows?.length - page * rowsPerPage);
 
   return (
       <div className={classes.root}>
         <Paper className={classes.paper}>
-          <EnhancedTableToolbar numSelected={selected.length}/>
+          <EnhancedTableToolbar numSelected={selected.length} productURL={productURL}/>
           <TableContainer>
-            <Table
-                className={classes.table}
-                aria-labelledby="tableTitle"
-                size='medium'
-                aria-label="enhanced table"
-            >
+            <Table className={classes.table} size='medium'>
               <EnhancedTableHead
                   classes={classes}
                   numSelected={selected.length}
@@ -246,7 +246,7 @@ export const ProductKeyWordsTable = ({rows}) => {
                   orderBy={orderBy}
                   onSelectAllClick={handleSelectAllClick}
                   onRequestSort={handleRequestSort}
-                  rowCount={rows.length}
+                  rowCount={rows?.length}
               />
               <TableBody>
                 {stableSort(rows, getComparator(order, orderBy)).
@@ -287,9 +287,9 @@ export const ProductKeyWordsTable = ({rows}) => {
             </Table>
           </TableContainer>
           <TablePagination
-              rowsPerPageOptions={[ 10, 20, 50]}
+              rowsPerPageOptions={[10, 20, 50]}
               component="div"
-              count={rows.length}
+              count={rows?.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}
