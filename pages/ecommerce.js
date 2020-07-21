@@ -41,6 +41,7 @@ export default function HomePage() {
     makeRequest();
   };
   const handleOnChange = () => setData(null);
+  const handleCreateAd = selected => console.log(selected);
   return (
       <>
         {isLoading && <LoadingSpinner loadingImages={LOADING_IMAGES} loadingMessages={LOADING_MESSAGES}/>}
@@ -50,7 +51,7 @@ export default function HomePage() {
             <div className={classes.container}>
               {!isLoading && <EcommerceHeader onSearch={handleOnSearch} onChange={handleOnChange} hasData={!!data}/>}
               {!!data && <div className={classes.keywordCard}>
-                <ProductKeyWordsTable rows={data.result} productURL={data.result.url}/>}
+                <ProductKeyWordsTable rows={data.result} productURL={data.result.url} createAd={handleCreateAd}/>
               </div>}
             </div>
           </div>

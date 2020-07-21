@@ -27,13 +27,13 @@ const descendingComparator = (a, b, orderBy) => {
     return 1;
   }
   return 0;
-}
+};
 
 const getComparator = (order, orderBy) => {
   return order === 'desc'
       ? (a, b) => descendingComparator(a, b, orderBy)
       : (a, b) => -descendingComparator(a, b, orderBy);
-}
+};
 
 const stableSort = (array, comparator) => {
   const stabilizedThis = array.map((el, index) => [el, index]);
@@ -43,7 +43,7 @@ const stableSort = (array, comparator) => {
     return a[ 1 ] - b[ 1 ];
   });
   return stabilizedThis.map((el) => el[ 0 ]);
-}
+};
 
 const headCells = [
   {id: 'keyword', numeric: false, disablePadding: true, label: 'Keyword'},
@@ -91,7 +91,7 @@ const EnhancedTableHead = props => {
         </TableRow>
       </TableHead>
   );
-}
+};
 
 const useToolbarStyles = makeStyles((theme) => ( {
   root: {
@@ -114,12 +114,12 @@ const useToolbarStyles = makeStyles((theme) => ( {
   headerUrl: {
     color: theme.palette.secondary.main,
   },
-  createAdBtn:{
-    width: '350px'
-  }
+  createAdBtn: {
+    width: '350px',
+  },
 } ));
 
-const EnhancedTableToolbar = ({numSelected, productURL}) => {
+const EnhancedTableToolbar = ({numSelected, productURL, createAd, selected}) => {
   const classes = useToolbarStyles();
 
   return (
@@ -140,7 +140,8 @@ const EnhancedTableToolbar = ({numSelected, productURL}) => {
 
         {numSelected > 0 ? (
             <Tooltip title="Create Your Product Ad">
-              <Button className={classes.createAdBtn} variant="contained" color="secondary" disableElevation>Create Your Ad</Button>
+              <Button className={classes.createAdBtn} onClick={()=> createAd(selected)}
+                      variant="contained" color="secondary" disableElevation>Create Your Ad</Button>
             </Tooltip>
         ) : (
             <Tooltip title="Filter list">
@@ -177,7 +178,7 @@ const useStyles = makeStyles((theme) => ( {
   },
 } ));
 
-export const ProductKeyWordsTable = ({rows, productURL}) => {
+export const ProductKeyWordsTable = ({rows, productURL, createAd}) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('keyword');
@@ -236,7 +237,7 @@ export const ProductKeyWordsTable = ({rows, productURL}) => {
   return (
       <div className={classes.root}>
         <Paper className={classes.paper}>
-          <EnhancedTableToolbar numSelected={selected.length} productURL={productURL}/>
+          <EnhancedTableToolbar numSelected={selected.length} productURL={productURL} createAd={createAd} selected={selected}/>
           <TableContainer>
             <Table className={classes.table} size='medium'>
               <EnhancedTableHead
