@@ -33,7 +33,7 @@ export default function HomePage() {
     const makeRequest = () => {
       const requestUrl = `${BASE_URL}url-keyword/${filteredDomain}/${productUrlValue}`;
       fetch(requestUrl).then((response) => response.json()).then((data) => {
-        console.log(data)
+        console.log(data);
         setData(data);
         setLoading(false);
       });
@@ -50,9 +50,8 @@ export default function HomePage() {
             <div className={classes.container}>
               {!isLoading && <EcommerceHeader onSearch={handleOnSearch} onChange={handleOnChange} hasData={!!data}/>}
               {!!data && <div className={classes.keywordCard}>
-                <ProductKeyWordsTable rows={data.result.keywords} productURL={data.result.url}/>
-              </div>
-              }
+                <ProductKeyWordsTable rows={data.result} productURL={data.result.url}/>}
+              </div>}
             </div>
           </div>
         </div>

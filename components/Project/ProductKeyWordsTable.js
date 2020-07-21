@@ -231,7 +231,7 @@ export const ProductKeyWordsTable = ({rows, productURL}) => {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows?.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
       <div className={classes.root}>
@@ -246,7 +246,7 @@ export const ProductKeyWordsTable = ({rows, productURL}) => {
                   orderBy={orderBy}
                   onSelectAllClick={handleSelectAllClick}
                   onRequestSort={handleRequestSort}
-                  rowCount={rows?.length}
+                  rowCount={rows.length}
               />
               <TableBody>
                 {stableSort(rows, getComparator(order, orderBy)).
@@ -289,7 +289,7 @@ export const ProductKeyWordsTable = ({rows, productURL}) => {
           <TablePagination
               rowsPerPageOptions={[10, 20, 50]}
               component="div"
-              count={rows?.length}
+              count={rows.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}
