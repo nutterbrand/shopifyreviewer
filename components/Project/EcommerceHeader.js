@@ -23,7 +23,7 @@ export const EcommerceHeader = ({onSearch, onChange, hasData}) => {
 
   const handleInputChange = e => {
     const {name, value} = e.target;
-    onChange()
+    onChange();
     setUrls([]);
     setInputValues({...inputValues, [ name ]: value});
   };
@@ -67,29 +67,27 @@ export const EcommerceHeader = ({onSearch, onChange, hasData}) => {
                 />
                 {!!inputValues.domain && <Button className={classes.submit} onClick={handleUrlRequest}>Next</Button>}
               </div>
-              {!!productUrls.length &&
-              <>
-                <h3 className={classes.headerAvatar}>
-                  <Avatar className={classes.greenAvatar}>2</Avatar> Selected Your Product Page
-                </h3>
-                <div className={classes.autoContainer}>
-                  <Autocomplete
-                      className={classes.productUrlAuto}
-                      id="product-urls"
-                      value={productUrl}
-                      onChange={(e, productUrl) => setProductUrl(productUrl)}
-                      inputValue={inputValues.productUrlValue}
-                      onInputChange={(e, productUrl) => setInputValues({...inputValues, productUrlValue: productUrl})}
-                      options={productUrls}
-                      getOptionLabel={option => option}
-                      renderInput={(params) => <TextField {...params} variant="outlined"/>}
-                  />
-                  {
-                    !!inputValues.productUrlValue &&
-                    <Button className={classes.autoSubmit} onClick={handleDomainSubmit}>Search</Button>
-                  }
-                </div>
-              </>}
+
+              <h3 className={classes.headerAvatar}>
+                <Avatar className={classes.greenAvatar}>2</Avatar> Selected Your Product Page
+              </h3>
+              <div className={classes.autoContainer}>
+                <Autocomplete
+                    className={classes.productUrlAuto}
+                    id="product-urls"
+                    value={productUrl}
+                    onChange={(e, productUrl) => setProductUrl(productUrl)}
+                    inputValue={inputValues.productUrlValue}
+                    onInputChange={(e, productUrl) => setInputValues({...inputValues, productUrlValue: productUrl})}
+                    options={productUrls}
+                    getOptionLabel={option => option}
+                    renderInput={(params) => <TextField {...params} variant="outlined"/>}
+                />
+                {
+                  !!inputValues.productUrlValue &&
+                  <Button className={classes.autoSubmit} onClick={handleDomainSubmit}>Search</Button>
+                }
+              </div>
               {
                 isLoading && <div><h3>Loading Product Urls</h3><LinearProgress/></div>
               }

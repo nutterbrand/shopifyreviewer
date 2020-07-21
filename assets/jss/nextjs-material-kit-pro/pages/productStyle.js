@@ -147,7 +147,39 @@ const productStyle = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  modal: {
+  modalBtnGroup:{
+    marginTop: '100px',
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  modalNavBtn:{
+    width: '250px',
+    backgroundColor:'#4bb051',
+    color: '#ffffff',
+  },
+  adModal: {
+    width: '1200px',
+    height: '800px',
+    backgroundColor: '#ffffff',
+    boxShadow: '2px 2px 2px -1px rgba(0,0,0,0.2)',
+    padding: '0 30px',
+  },
+  adForm: {
+    margin: '25px',
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  adTitle: {
+    margin: '75px 25px 25px 25px',
+  },
+  adFormSection: {
+    width: '100%',
+  },
+  adField:{
+    width: '90%',
+    marginBottom: '10px',
+  },
+  emailModal: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
@@ -313,7 +345,7 @@ const productStyle = {
   },
   keyRec: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   recGreen: {
     margin: '-5px 5px',
@@ -388,6 +420,19 @@ const productStyle = {
     border: '1px solid #dfe1e5',
     borderRadius: '8px',
     textAlign: 'left',
+  },
+  exDesContainer: {
+    margin: '30px 0',
+    padding: '20px',
+    border: '1px solid #bddfe6',
+    borderRadius: '8px',
+    color: '#76a4b3',
+    textAlign: 'left',
+    backgroundColor: '#f8ffff'
+  },
+  phoneIcon:{
+    fontSize: '18px',
+    margin: '-3px 4px',
   },
   ad: {
     color: '#016720',
