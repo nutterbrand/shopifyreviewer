@@ -13,10 +13,10 @@ import fetch from 'isomorphic-unfetch';
 
 const useStyles = makeStyles(productStyle);
 
-export const EcommerceHeader = ({onSearch, onChange, hasData}) => {
+export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
+
   const classes = useStyles();
-  let valueObj = {domain: '', productUrlValue: ''};
-  const [inputValues, setInputValues] = useState(valueObj);
+  const [inputValues, setInputValues] = useState({domain: '', productUrlValue: ''});
   const [productUrls, setUrls] = useState([]);
   const [productUrl, setProductUrl] = useState('');
   const [isLoading, updateLoading] = useState(false);
@@ -24,7 +24,6 @@ export const EcommerceHeader = ({onSearch, onChange, hasData}) => {
   const handleInputChange = e => {
     const {name, value} = e.target;
     onChange();
-    setUrls([]);
     setInputValues({...inputValues, [ name ]: value});
   };
 
@@ -34,14 +33,12 @@ export const EcommerceHeader = ({onSearch, onChange, hasData}) => {
     const requestUrl = `https://evening-retreat-22032.herokuapp.com/urls/${inputValues.domain}`;
     fetch(requestUrl).then((response) => response.json()).then((data) => {
       setUrls(data.result.urls);
-      setProductUrl('');
-      setInputValues({...inputValues, productUrlValue: ''});
       updateLoading(false);
     });
   };
 
   const handleDomainSubmit = () => onSearch(inputValues);
-
+  if (loadingTable) return null;
   return (
       <GridContainer className={classes.companyHeader}>
         <GridItem md={12} sm={12}>
@@ -71,37 +68,29 @@ export const EcommerceHeader = ({onSearch, onChange, hasData}) => {
               <h3 className={classes.headerAvatar}>
                 <Avatar className={classes.greenAvatar}>2</Avatar> Selected Your Product Page
               </h3>
-              <div className={classes.autoContainer}>
-                <Autocomplete
-                    className={classes.productUrlAuto}
-                    id="product-urls"
-                    value={productUrl}
-                    onChange={(e, productUrl) => setProductUrl(productUrl)}
-                    inputValue={inputValues.productUrlValue}
-                    onInputChange={(e, productUrl) => setInputValues({...inputValues, productUrlValue: productUrl})}
-                    options={productUrls}
-                    getOptionLabel={option => option}
-                    renderInput={(params) => <TextField {...params} variant="outlined"/>}
-                />
-                {
-                  !!inputValues.productUrlValue &&
-                  <Button className={classes.autoSubmit} onClick={handleDomainSubmit}>Search</Button>
-                }
-              </div>
               {
-                isLoading && <div><h3>Loading Product Urls</h3><LinearProgress/></div>
+                isLoading ? <div><h3>Loading Product Urls</h3><LinearProgress/></div> :
+                    <div className={classes.autoContainer}>
+                      <Autocomplete
+                          className={classes.productUrlAuto}
+                          id="product-urls"
+                          value={productUrl}
+                          onChange={(e, productUrl) => setProductUrl(productUrl)}
+                          inputValue={inputValues.productUrlValue}
+                          onInputChange={(e, productUrl) => setInputValues(
+                              {...inputValues, productUrlValue: productUrl})}
+                          options={productUrls}
+                          getOptionLabel={option => option}
+                          renderInput={(params) => <TextField {...params} variant="outlined"/>}
+                      />
+                    </div>
+              }
+              {
+                !!inputValues.productUrlValue &&
+                <Button className={classes.autoSubmit} onClick={handleDomainSubmit}>Search</Button>
               }
             </div>
           </div>
-          {productUrl && hasData && (
-              <div className={classes.statDes}>
-                <h3>Summary</h3>
-                <h4>Your customers are searching for your products. Are you being found?</h4>
-                <h4>We automatically analyze the competition on 20 keywords on Shopping, Paid Search Ads, Organic, and
-                  even related keywords for your top product.</h4>
-                <h4>The results will load in as you are reading the page.</h4>
-              </div>
-          )}
         </GridItem>
       </GridContainer>
   );

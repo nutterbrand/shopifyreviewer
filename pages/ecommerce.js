@@ -85,7 +85,7 @@ export default function HomePage() {
         <div className={classes.companyPage}>
           <div className={classes.section}>
             <div className={classes.container}>
-              {!isLoading && <EcommerceHeader onSearch={handleOnSearch} onChange={handleOnChange} hasData={!!data}/>}
+              <EcommerceHeader onSearch={handleOnSearch} onChange={handleOnChange} loadingTable={isLoading}/>
               {!!data && <div className={classes.keywordCard}>
                 <ProductKeyWordsTable rows={data.result} productURL={productURL} createAd={handleCreateAd}/>
               </div>}
