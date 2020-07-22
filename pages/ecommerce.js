@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import fetch from 'isomorphic-unfetch';
-import {Header} from '../components/Project/Header';
+import {HeaderShopify} from '../components/Project/HeaderShopify';
 import {EcommerceHeader} from '../components/Project/EcommerceHeader';
 import {LoadingSpinner} from '../components/Project/LoadingSpinner';
 import {ProductKeyWordsTable} from '../components/Project/ProductKeyWordsTable';
@@ -19,6 +19,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Icon from '@material-ui/core/Icon';
 import Select from '@material-ui/core/Select';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles(productStyle);
 
@@ -81,12 +82,15 @@ export default function HomePage() {
   return (
       <>
         {isLoading && <LoadingSpinner loadingImages={LOADING_IMAGES} loadingMessages={LOADING_MESSAGES}/>}
-        <Header/>
+        <HeaderShopify/>
         <div className={classes.companyPage}>
           <div className={classes.section}>
             <div className={classes.container}>
               <EcommerceHeader onSearch={handleOnSearch} onChange={handleOnChange} loadingTable={isLoading}/>
               {!!data && <div className={classes.keywordCard}>
+                <h3 className={classes.headerAvatar}>
+                  <Avatar className={classes.greenAvatar}>3</Avatar> Pick the 5 best keywords to add your site.
+                </h3>
                 <ProductKeyWordsTable rows={data.result} productURL={productURL} createAd={handleCreateAd}/>
               </div>}
             </div>
@@ -94,7 +98,11 @@ export default function HomePage() {
         </div>
         {ad && <Modal open={createAdModalOpen} onClose={() => toggleAdModal(false)} className={classes.modalContainer}>
           <div className={classes.adModal}>
-            <h3 className={classes.adTitle}>Create Your Product Ad</h3>
+            <div className={classes.adTitle}>
+              <h3 className={classes.headerAvatar}>
+                <Avatar className={classes.greenAvatar}>4</Avatar> Approve your ad copy
+              </h3>
+            </div>
             <div className={classes.adForm}>
               <div className={classes.adFormSection}>
                 <h4>HeadLines</h4>

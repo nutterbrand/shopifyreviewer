@@ -45,8 +45,9 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
           <div className={classes.headerForm}>
             <img className={classes.searchHeader} src={SearchHeader}/>
             <h2 className={classes.headerTitle}>
-              Is your top ecommerce product being found on Google?
+              Create a campaign for your top Shopify product today
             </h2>
+            <h4><b>This is the fastest way to create high-converting campaigns for your top products.</b></h4>
             <div className={classes.formTwo}>
               <h3 className={classes.headerAvatar}><Avatar className={classes.greenAvatar}>1</Avatar>
                 Enter Your Shopify Domain

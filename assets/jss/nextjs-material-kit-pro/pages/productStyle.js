@@ -148,7 +148,7 @@ const productStyle = {
     alignItems: 'center',
   },
   modalBtnGroup: {
-    marginTop: '100px',
+    margin: '100px 25px 0 25px',
     display: 'flex',
     justifyContent: 'space-between',
   },

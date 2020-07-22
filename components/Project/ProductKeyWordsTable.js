@@ -101,8 +101,8 @@ const useToolbarStyles = makeStyles((theme) => ( {
   highlight:
       theme.palette.type === 'light'
           ? {
-            color: theme.palette.secondary.main,
-            backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+            color: '#4bb051',
+            backgroundColor: lighten('#4bb051', 0.90),
           }
           : {
             color: theme.palette.text.primary,
@@ -112,10 +112,12 @@ const useToolbarStyles = makeStyles((theme) => ( {
     flex: '1 1 100%',
   },
   headerUrl: {
-    color: theme.palette.secondary.main,
+    color: '#4bb051',
   },
   createAdBtn: {
-    width: '350px',
+    backgroundColor: '#4bb051',
+    color: '#ffffff',
+    width: '300px',
   },
 } ));
 
@@ -123,33 +125,12 @@ const EnhancedTableToolbar = ({numSelected, productURL, createAd, selected}) => 
   const classes = useToolbarStyles();
 
   return (
-      <Toolbar
-          className={classNames(classes.root, {
-            [ classes.highlight ]: numSelected > 0,
-          })}
-      >
-        {numSelected > 0 ? (
-            <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-              {numSelected} selected
-            </Typography>
-        ) : (
-            <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-              Your Product Keywords for <i className={classes.headerUrl}>{productURL}</i>
-            </Typography>
-        )}
-
-        {numSelected > 0 ? (
-            <Tooltip title="Create Your Product Ad">
-              <Button className={classes.createAdBtn} onClick={()=> createAd(selected)}
-                      variant="contained" color="secondary" disableElevation>Create Your Ad</Button>
-            </Tooltip>
-        ) : (
-            <Tooltip title="Filter list">
-              <IconButton aria-label="filter list">
-                <FilterListIcon/>
-              </IconButton>
-            </Tooltip>
-        )}
+      <Toolbar className={classNames(classes.root, {[ classes.highlight ]: numSelected > 0})}>
+        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+          <b className={classes.headerUrl}>{productURL}</b>
+        </Typography>
+        {numSelected > 0 && <Button className={classes.createAdBtn} onClick={() => createAd(selected)}
+                                    variant="contained" disableElevation>Create Your Ad</Button>}
       </Toolbar>
   );
 };
@@ -237,7 +218,8 @@ export const ProductKeyWordsTable = ({rows, productURL, createAd}) => {
   return (
       <div className={classes.root}>
         <Paper className={classes.paper}>
-          <EnhancedTableToolbar numSelected={selected.length} productURL={productURL} createAd={createAd} selected={selected}/>
+          <EnhancedTableToolbar numSelected={selected.length} productURL={productURL} createAd={createAd}
+                                selected={selected}/>
           <TableContainer>
             <Table className={classes.table} size='medium'>
               <EnhancedTableHead
