@@ -148,7 +148,7 @@ const productStyle = {
     alignItems: 'center',
   },
   modalBtnGroup: {
-    margin: '100px 25px 0 25px',
+    margin: '0 25px',
     display: 'flex',
     justifyContent: 'space-between',
   },
@@ -177,16 +177,18 @@ const productStyle = {
   },
   adField: {
     width: '90%',
-    marginBottom: '10px',
+    marginBottom: '25px',
+  },
+  adKeywordChip: {
+    margin: '0 10px 5px 0',
+    backgroundColor: '#27a0ff',
+    color: '#ffffff',
   },
   emailModal: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    textAlign: 'center',
-    width: '600px',
-    height: '300px',
+    width: '700px',
+    height: '450px',
     backgroundColor: '#ffffff',
     boxShadow: '2px 2px 2px -1px rgba(0,0,0,0.2)',
     padding: '0 30px',
@@ -194,6 +196,15 @@ const productStyle = {
   downloadBtn: {
     '&:hover': {
       color: 'white',
+    },
+  },
+  downloadLinkBtn:{
+    width: '400px',
+    margin: '0 auto',
+    backgroundColor: '#4bb051',
+    color: '#ffffff',
+    '&:hover': {
+      color: '#4bb051',
     },
   },
   form: {
@@ -431,6 +442,15 @@ const productStyle = {
     textAlign: 'left',
     backgroundColor: '#f8ffff',
   },
+  downloadDesContainer: {
+    margin: '15px 0 25px 0',
+    padding: '20px',
+    border: '1px solid #bddfe6',
+    borderRadius: '8px',
+    color: '#76a4b3',
+    textAlign: 'left',
+    backgroundColor: '#f8ffff',
+  },
   phoneIcon: {
     fontSize: '18px',
     margin: '-3px 4px',
@@ -528,7 +548,7 @@ const productStyle = {
     cursor: 'pointer',
   },
   email: {
-    width: '415px',
+    width: '515px',
   },
   submitEmail: {
     backgroundColor: '#4bb051',

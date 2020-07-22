@@ -20,6 +20,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Icon from '@material-ui/core/Icon';
 import Select from '@material-ui/core/Select';
 import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles(productStyle);
 
@@ -38,6 +39,7 @@ export default function HomePage() {
   const [createAdModalOpen, toggleAdModal] = useState(false);
   const [emailModalOpen, toggleEmailModal] = useState(false);
   const [email, updateEmail] = useState('');
+  const [keywords, updateKeywords] = useState([]);
 
   const [isLoading, setLoading] = useState(false);
 
@@ -60,7 +62,11 @@ export default function HomePage() {
   };
   const handleInputChange = e => updateEmail(e.target.value);
   const handleOnChange = () => setData(null);
-  const handleCreateAd = selected => toggleAdModal(true);
+  const handleCreateAd = selected => {
+    console.log(selected);
+    updateKeywords(selected);
+    toggleAdModal(true);
+  };
   const adHeadlinesArr = ad ? [
     ad[ 'headline-1' ],
     ad[ 'headline-2' ],
@@ -136,13 +142,17 @@ export default function HomePage() {
                     }
                   </Select>
                 </FormControl>
-                <h4>Describe your product and your store</h4>
+                <h4 className={classes.marginTop}>Describe your product and your store</h4>
                 <TextField className={classes.adField} id="des1" label="Description 1" variant="outlined"
                            value={ad[ 'description-1' ]} defaultValue={ad[ 'description-1' ]}/>
                 <TextField className={classes.adField} id="sed2" label="Description 2" variant="outlined"
                            value={ad[ 'description-2' ]} defaultValue={ad[ 'description-2' ]}/>
               </div>
               <div className={classes.adFormSection}>
+                <h4>Keywords Selected</h4>
+                <div>
+                  {keywords.map(key => <Chip className={classes.adKeywordChip} key={key} label={key}/>)}
+                </div>
                 <h4>Example of the Ad</h4>
                 <div className={classNames(classes.searchTermContainer)}>
                   <h4>
@@ -177,9 +187,8 @@ export default function HomePage() {
         </Modal>}
         <Modal open={emailModalOpen} onClose={() => toggleEmailModal(false)} className={classes.modalContainer}>
           <div className={classes.emailModal}>
-            <h3>
-              Want to see the full list? Please submit your email to see the full
-              list and add automatically advertise for those keywords
+            <h3 className={classes.headerAvatar}>
+              <Avatar className={classes.greenAvatar}>5</Avatar> Please submit your email
             </h3>
             <form
                 className={classes.form}
@@ -201,6 +210,16 @@ export default function HomePage() {
                 Submit Email
               </Button>
             </form>
+            <h3 className={classes.headerAvatar}>
+              <Avatar className={classes.greenAvatar}>6</Avatar> Download Keyword Genius to launch the campaign
+            </h3>
+            <div className={classes.downloadDesContainer}>Final step in order to launch this campaign is to connect KG to your
+              Google Ads account. Once you
+              connect Keyword Genius, this campaign will be launched! Feel free to launch a site wide campaign in the
+              app as well
+            </div>
+            <Button className={classes.downloadLinkBtn} size='large' target="_blank"
+                    href="https://apps.shopify.com/keyword-genius">Download</Button>
           </div>
         </Modal>
       </>
