@@ -147,14 +147,14 @@ const productStyle = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  modalBtnGroup:{
+  modalBtnGroup: {
     marginTop: '100px',
     display: 'flex',
     justifyContent: 'space-between',
   },
-  modalNavBtn:{
+  modalNavBtn: {
     width: '250px',
-    backgroundColor:'#4bb051',
+    backgroundColor: '#4bb051',
     color: '#ffffff',
   },
   adModal: {
@@ -175,7 +175,7 @@ const productStyle = {
   adFormSection: {
     width: '100%',
   },
-  adField:{
+  adField: {
     width: '90%',
     marginBottom: '10px',
   },
@@ -300,7 +300,8 @@ const productStyle = {
   headerTitle: {
     width: '60%',
     fontWeight: 'bold',
-    marginBottom: '85px',
+    marginTop: '0',
+    marginBottom: '15px',
   },
   headerSub: {
     marginBottom: '25px',
@@ -428,9 +429,9 @@ const productStyle = {
     borderRadius: '8px',
     color: '#76a4b3',
     textAlign: 'left',
-    backgroundColor: '#f8ffff'
+    backgroundColor: '#f8ffff',
   },
-  phoneIcon:{
+  phoneIcon: {
     fontSize: '18px',
     margin: '-3px 4px',
   },
@@ -579,11 +580,18 @@ const productStyle = {
     width: '75%',
     marginRight: '10px',
   },
+  productUrlTextField: {
+    '& div': {
+      height: '36px',
+      '& input': {
+        marginTop: '-10px',
+      },
+    },
+  },
   autoContainer: {
     display: 'flex',
   },
   autoSubmit: {
-    fontSize: '20px',
     backgroundColor: '#4bb051',
     color: '#ffffff',
     width: '175px',

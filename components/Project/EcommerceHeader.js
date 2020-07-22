@@ -68,26 +68,26 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
               <h3 className={classes.headerAvatar}>
                 <Avatar className={classes.greenAvatar}>2</Avatar> Selected Your Product Page
               </h3>
-              {
-                isLoading ? <div><h3>Loading Product Urls</h3><LinearProgress/></div> :
-                    <div className={classes.autoContainer}>
-                      <Autocomplete
-                          className={classes.productUrlAuto}
-                          id="product-urls"
-                          value={productUrl}
-                          onChange={(e, productUrl) => setProductUrl(productUrl)}
-                          inputValue={inputValues.productUrlValue}
-                          onInputChange={(e, productUrl) => setInputValues(
-                              {...inputValues, productUrlValue: productUrl})}
-                          options={productUrls}
-                          getOptionLabel={option => option}
-                          renderInput={(params) => <TextField {...params} variant="outlined"/>}
-                      />
-                    </div>
-              }
-              {
-                !!inputValues.productUrlValue &&
-                <Button className={classes.autoSubmit} onClick={handleDomainSubmit}>Search</Button>
+              {isLoading && <div><h4>Loading Product Urls</h4><LinearProgress/></div>}
+              {!isLoading && !!productUrls.length && <div className={classes.autoContainer}>
+                <Autocomplete
+                    className={classes.productUrlAuto}
+                    id="product-urls"
+                    value={productUrl}
+                    onChange={(e, productUrl) => setProductUrl(productUrl)}
+                    inputValue={inputValues.productUrlValue}
+                    onInputChange={(e, productUrl) => setInputValues(
+                        {...inputValues, productUrlValue: productUrl})}
+                    options={productUrls}
+                    getOptionLabel={option => option}
+                    renderInput={(params) => <TextField
+                        {...params} className={classes.productUrlTextField} variant="outlined"/>}
+                />
+                {
+                  !!inputValues.productUrlValue &&
+                  <Button className={classes.autoSubmit} onClick={handleDomainSubmit}>Search</Button>
+                }
+              </div>
               }
             </div>
           </div>

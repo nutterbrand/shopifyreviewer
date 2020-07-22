@@ -181,10 +181,10 @@ const useStyles = makeStyles((theme) => ( {
 export const ProductKeyWordsTable = ({rows, productURL, createAd}) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState('volume');
+  const [orderBy, setOrderBy] = React.useState();
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(50);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -288,7 +288,6 @@ export const ProductKeyWordsTable = ({rows, productURL, createAd}) => {
             </Table>
           </TableContainer>
           <TablePagination
-              rowsPerPageOptions={[10, 20, 50]}
               component="div"
               count={rows.length}
               rowsPerPage={rowsPerPage}
