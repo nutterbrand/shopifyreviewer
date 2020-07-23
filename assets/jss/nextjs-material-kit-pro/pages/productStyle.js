@@ -148,7 +148,7 @@ const productStyle = {
     alignItems: 'center',
   },
   modalBtnGroup: {
-    margin: '0 25px',
+    margin: '0 25px 25px 25px',
     display: 'flex',
     justifyContent: 'space-between',
   },
@@ -159,7 +159,7 @@ const productStyle = {
   },
   adModal: {
     width: '1200px',
-    height: '800px',
+    minHeight: '800px',
     backgroundColor: '#ffffff',
     boxShadow: '2px 2px 2px -1px rgba(0,0,0,0.2)',
     padding: '0 30px',

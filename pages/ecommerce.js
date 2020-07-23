@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import fetch from 'isomorphic-unfetch';
+import axios from 'axios';
 import {HeaderShopify} from '../components/Project/HeaderShopify';
 import {EcommerceHeader} from '../components/Project/EcommerceHeader';
 import {LoadingSpinner} from '../components/Project/LoadingSpinner';
@@ -17,7 +18,6 @@ import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import Icon from '@material-ui/core/Icon';
 import Select from '@material-ui/core/Select';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
@@ -36,17 +36,19 @@ export default function HomePage() {
   const [data, setData] = useState();
   const [ad, setAd] = useState();
   const [productURL, updateProductURL] = useState();
+  const [domain, updateDomain] = useState();
   const [createAdModalOpen, toggleAdModal] = useState(false);
   const [emailModalOpen, toggleEmailModal] = useState(false);
   const [email, updateEmail] = useState('');
   const [keywords, updateKeywords] = useState([]);
-
+  console.log('render')
   const [isLoading, setLoading] = useState(false);
 
   const handleOnSearch = values => {
     const {domain, productUrlValue} = values;
     updateProductURL(productUrlValue);
     const filteredDomain = domain.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '').split('/')[ 0 ];
+    updateDomain(filteredDomain);
     setLoading(true);
     setData(null);
     const makeRequest = () => {
@@ -101,6 +103,31 @@ export default function HomePage() {
     updateAdSelection({
       ...adSelection,
       [ name ]: e.target.value,
+    });
+  };
+
+  const handleEmailSubmit = e => {
+    e.preventDefault();
+    const requestUrl = `${BASE_URL}url-keyword-post`;
+
+    const data = {
+      email,
+      domain,
+      url: productURL,
+      keywords,
+      spend,
+      headlines: [adSelection.headlineSelect1, adSelection.headlineSelect2, adSelection.headlineSelect3],
+      descriptions: [adSelection.description1, adSelection.description2],
+    };
+
+    axios.post(requestUrl, data, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+    ).then(res => {
+      console.log(res);
+      toggleEmailModal(false);
     });
   };
 
@@ -225,7 +252,7 @@ export default function HomePage() {
                 className={classes.form}
                 noValidate
                 autoComplete="off"
-                onSubmit={() => {}}
+                onSubmit={handleEmailSubmit}
             >
               <TextField
                   className={classes.email}
@@ -237,7 +264,7 @@ export default function HomePage() {
                   size="small"
                   onChange={handleInputChange}
               />
-              <Button className={classes.submitEmail} type="submit" onClick={() => toggleEmailModal(false)}>
+              <Button className={classes.submitEmail} type="submit">
                 Submit Email
               </Button>
             </form>
