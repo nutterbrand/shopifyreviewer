@@ -133,7 +133,7 @@ const productStyle = {
     backgroundColor: '#4bb051',
     height: '36px',
     color: '#ffffff',
-    width: '125px',
+    width: '175px',
     '&:hover': {
       backgroundColor: 'none',
     },
@@ -595,6 +595,13 @@ const productStyle = {
     backgroundColor: '#27a0ff',
     color: '#ffffff',
     margin: '0 15px 0 0',
+  },
+  domainUrl: {
+    width: '75%',
+    marginRight: '10px',
+    '& div': {
+      height: '36px',
+    }
   },
   productUrlAuto: {
     width: '75%',

@@ -54,7 +54,7 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
               </h3>
               <div>
                 <TextField
-                    className={classes.domainSearch}
+                    className={classes.domainUrl}
                     id="domainName"
                     name="domain"
                     placeholder="Search Your Company Website"
