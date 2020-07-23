@@ -25,6 +25,8 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
     const {name, value} = e.target;
     onChange();
     setInputValues({...inputValues, [ name ]: value});
+    setUrls([]);
+    setProductUrl('');
   };
 
   const handleUrlRequest = e => {
