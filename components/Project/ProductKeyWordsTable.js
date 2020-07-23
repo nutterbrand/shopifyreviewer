@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
+import Search from '@material-ui/icons/Search';
 import Tooltip from '@material-ui/core/Tooltip';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
@@ -47,7 +47,8 @@ const stableSort = (array, comparator) => {
 
 const headCells = [
   {id: 'keyword', numeric: false, disablePadding: true, label: 'Keyword'},
-  {id: 'volume', numeric: true, disablePadding: false, label: 'Volume'},
+  {id: 'google', numeric: false, disablePadding: true, label: ''},
+  {id: 'volume', numeric: true, disablePadding: false, label: 'Monthly Searches'},
 ];
 
 const EnhancedTableHead = props => {
@@ -157,6 +158,14 @@ const useStyles = makeStyles((theme) => ( {
     top: 20,
     width: 1,
   },
+  googleBtn: {
+    backgroundColor: '#4285F4',
+    color: '#ffffff',
+    '&:hover': {
+      backgroundColor: 'none',
+      color: '#ffffff'
+    },
+  },
 } ));
 
 export const ProductKeyWordsTable = ({rows, productURL, createAd}) => {
@@ -256,6 +265,15 @@ export const ProductKeyWordsTable = ({rows, productURL, createAd}) => {
                             </TableCell>
                             <TableCell component="th" id={labelId} scope="row" padding="none">
                               {row.keyword}
+                            </TableCell>
+                            <TableCell align="left">
+                              <Button variant='contained'
+                                      className={classes.googleBtn}
+                                      startIcon={<Search/>}
+                                      disableElevation
+                                      href={`http://www.google.com/search?q=${row.keyword}`}
+                                      target='_blank'
+                              >Google Search</Button>
                             </TableCell>
                             <TableCell align="right">{row.volume}</TableCell>
                           </TableRow>

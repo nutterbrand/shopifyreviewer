@@ -198,7 +198,7 @@ const productStyle = {
       color: 'white',
     },
   },
-  downloadLinkBtn:{
+  downloadLinkBtn: {
     width: '400px',
     margin: '0 auto',
     backgroundColor: '#4bb051',
@@ -601,7 +601,7 @@ const productStyle = {
     marginRight: '10px',
     '& div': {
       height: '36px',
-    }
+    },
   },
   productUrlAuto: {
     width: '75%',
