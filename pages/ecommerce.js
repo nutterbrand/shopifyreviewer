@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import fetch from 'isomorphic-unfetch';
 import {HeaderShopify} from '../components/Project/HeaderShopify';
@@ -58,6 +58,9 @@ export default function HomePage() {
     updateKeywords(selected);
     toggleAdModal(true);
   };
+  const reset = () => {
+    setData(null);
+  };
 
   return (
       <>
@@ -66,7 +69,7 @@ export default function HomePage() {
         <div className={classes.companyPage}>
           <div className={classes.section}>
             <div className={classes.container}>
-              <EcommerceHeader onSearch={handleOnSearch} onChange={handleOnChange} loadingTable={isLoading}/>
+              <EcommerceHeader onSearch={handleOnSearch} onChange={handleOnChange} loadingTable={isLoading} hasData={!!data}/>
               {!!data && <div className={classes.keywordCard}>
                 <h3 className={classes.headerAvatar}>
                   <Avatar className={classes.greenAvatar}>3</Avatar> Pick the 5 best keywords to add your site.
@@ -89,6 +92,7 @@ export default function HomePage() {
                     postData={postData}
                     domain={domain}
                     url={productURL}
+                    reset={reset}
         />
       </>
   );

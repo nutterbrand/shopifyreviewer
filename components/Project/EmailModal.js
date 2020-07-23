@@ -11,7 +11,7 @@ const BASE_URL = 'https://evening-retreat-22032.herokuapp.com/';
 const useStyles = makeStyles(productStyle);
 
 export const EmailModal = (props) => {
-  const {postData, emailModalOpen, toggleEmailModal, domain, url} = props;
+  const {postData, emailModalOpen, toggleEmailModal, domain, url, reset} = props;
 
   const [email, updateEmail] = useState('');
   const handleInputChange = e => updateEmail(e.target.value);
@@ -27,6 +27,7 @@ export const EmailModal = (props) => {
     ).then(res => {
       console.log(res);
       toggleEmailModal(false);
+      reset()
     });
   };
 

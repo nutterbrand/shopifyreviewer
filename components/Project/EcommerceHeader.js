@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import GridItem from '../Grid/GridItem';
 import GridContainer from '../Grid/GridContainer';
 import Avatar from '@material-ui/core/Avatar';
@@ -13,10 +13,10 @@ import fetch from 'isomorphic-unfetch';
 
 const useStyles = makeStyles(productStyle);
 
-export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
-
+export const EcommerceHeader = ({onSearch, onChange, loadingTable, hasData}) => {
   const classes = useStyles();
-  const [inputValues, setInputValues] = useState({domain: '', productUrlValue: ''});
+  const defaultInput = {domain: '', productUrlValue: ''};
+  const [inputValues, setInputValues] = useState(defaultInput);
   const [productUrls, setUrls] = useState([]);
   const [productUrl, setProductUrl] = useState('');
   const [isLoading, updateLoading] = useState(false);
@@ -40,6 +40,15 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
   };
 
   const handleDomainSubmit = () => onSearch(inputValues);
+  useEffect(() => {
+    if (!hasData) {
+      setUrls([]);
+      setProductUrl('');
+      setInputValues(defaultInput);
+    }
+
+  }, [hasData]);
+
   if (loadingTable) return null;
   return (
       <GridContainer className={classes.companyHeader}>
