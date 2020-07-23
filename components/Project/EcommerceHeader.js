@@ -30,7 +30,7 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
   const handleUrlRequest = e => {
     e.preventDefault();
     updateLoading(true);
-    const requestUrl = `https://evening-retreat-22032.herokuapp.com/urls/${inputValues.domain}`;
+    const requestUrl = `https://evening-retreat-22032.herokuapp.com/products/${inputValues.domain}`;
     fetch(requestUrl).then((response) => response.json()).then((data) => {
       setUrls(data.result.urls);
       updateLoading(false);

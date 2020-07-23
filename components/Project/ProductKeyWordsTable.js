@@ -128,7 +128,7 @@ const EnhancedTableToolbar = ({numSelected, productURL, createAd, selected}) => 
   return (
       <Toolbar className={classNames(classes.root, {[ classes.highlight ]: numSelected > 0})}>
         <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          <b className={classes.headerUrl}>{productURL}</b>
+          Your Product: <b className={classes.headerUrl}>{productURL}</b>
         </Typography>
         {numSelected > 0 && <Button className={classes.createAdBtn} onClick={() => createAd(selected)}
                                     variant="contained" disableElevation>Create Your Ad</Button>}

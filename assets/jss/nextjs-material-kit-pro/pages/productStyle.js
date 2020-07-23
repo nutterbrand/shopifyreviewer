@@ -175,8 +175,17 @@ const productStyle = {
   adFormSection: {
     width: '100%',
   },
+  chipContainer: {
+    marginBottom: '25px',
+  },
   adField: {
     width: '90%',
+    marginTop: '5px',
+    marginBottom: '25px',
+  },
+  spendField: {
+    width: '100%',
+    marginTop: '5px',
     marginBottom: '25px',
   },
   adKeywordChip: {

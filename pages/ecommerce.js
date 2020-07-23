@@ -50,7 +50,7 @@ export default function HomePage() {
     setLoading(true);
     setData(null);
     const makeRequest = () => {
-      const requestUrl = `${BASE_URL}url-keyword/${filteredDomain}/${productUrlValue}`;
+      const requestUrl = `${BASE_URL}product-keyword/${filteredDomain}/${productUrlValue}`;
       fetch(requestUrl).then((response) => response.json()).then((data) => {
         console.log(data);
         setData(data);
@@ -63,7 +63,6 @@ export default function HomePage() {
   const handleInputChange = e => updateEmail(e.target.value);
   const handleOnChange = () => setData(null);
   const handleCreateAd = selected => {
-    console.log(selected);
     updateKeywords(selected);
     toggleAdModal(true);
   };
@@ -74,9 +73,28 @@ export default function HomePage() {
     ad[ 'headline-4' ],
     ad[ 'headline-5' ],
     ad[ 'headline-6' ]] : [];
-  const [adSelection, updateAdSelection] = useState({headlineSelect2: '', headlineSelect3: ''});
+
+  const dailySpendArr = [8, 10, 12];
+
+  const [adSelection, updateAdSelection] = useState(
+      {
+        headlineSelect1: '',
+        headlineSelect2: '',
+        headlineSelect3: '',
+        description1: '',
+        description2: '',
+      });
+  const [spend, updateSpendSelection] = useState(8);
+  const handleAdDailySpendChange = e => updateSpendSelection(e.target.value);
+
   useEffect(() => {
-    updateAdSelection({headlineSelect2: ad && ad[ 'headline-1' ], headlineSelect3: ad && ad[ 'headline-2' ]});
+    updateAdSelection({
+      headlineSelect1: ad && ad[ 'headline-required' ],
+      headlineSelect2: ad && ad[ 'headline-1' ],
+      headlineSelect3: ad && ad[ 'headline-2' ],
+      description1: ad && ad[ 'description-1' ],
+      description2: ad && ad[ 'description-2' ],
+    });
   }, [ad]);
   const handleAdHeadlineChange = e => {
     const name = e.target.name;
@@ -85,6 +103,7 @@ export default function HomePage() {
       [ name ]: e.target.value,
     });
   };
+
   return (
       <>
         {isLoading && <LoadingSpinner loadingImages={LOADING_IMAGES} loadingMessages={LOADING_MESSAGES}/>}
@@ -113,7 +132,8 @@ export default function HomePage() {
               <div className={classes.adFormSection}>
                 <h4>HeadLines</h4>
                 <TextField className={classes.adField} id="head1" label="1st Headline" variant="outlined"
-                           value={ad[ 'headline-required' ]} defaultValue={ad[ 'headline-required' ]}/>
+                           value={adSelection.headlineSelect1} defaultValue={ad[ 'headline-required' ]}
+                           name="headlineSelect1" onChange={handleAdHeadlineChange}/>
                 <FormControl variant="outlined" className={classes.adField}>
                   <InputLabel id="headlineSelectLabel2">2nd Headline</InputLabel>
                   <Select
@@ -144,20 +164,35 @@ export default function HomePage() {
                 </FormControl>
                 <h4 className={classes.marginTop}>Describe your product and your store</h4>
                 <TextField className={classes.adField} id="des1" label="Description 1" variant="outlined"
-                           value={ad[ 'description-1' ]} defaultValue={ad[ 'description-1' ]}/>
+                           value={adSelection.description1} name="description1" onChange={handleAdHeadlineChange}/>
                 <TextField className={classes.adField} id="sed2" label="Description 2" variant="outlined"
-                           value={ad[ 'description-2' ]} defaultValue={ad[ 'description-2' ]}/>
+                           value={adSelection.description2} name="description2" onChange={handleAdHeadlineChange}/>
               </div>
               <div className={classes.adFormSection}>
                 <h4>Keywords Selected</h4>
-                <div>
+                <div className={classes.chipContainer}>
                   {keywords.map(key => <Chip className={classes.adKeywordChip} key={key} label={key}/>)}
                 </div>
+                <h4>Daily Ad Spend</h4>
+                <FormControl variant="outlined" className={classes.spendField}>
+                  <InputLabel id="adSpend">Daily Ad Spend</InputLabel>
+                  <Select
+                      labelId="adSpend"
+                      id="adSpend"
+                      name="adSpend"
+                      value={spend}
+                      onChange={handleAdDailySpendChange}
+                      label="Daily Ad Spend">
+                    {
+                      dailySpendArr.map(s => <MenuItem value={s} key={s}>$ {s}</MenuItem>)
+                    }
+                  </Select>
+                </FormControl>
                 <h4>Example of the Ad</h4>
                 <div className={classNames(classes.searchTermContainer)}>
                   <h4>
                     <a className={classes.productLink} href={classes.url}>
-                      {ad[ 'headline-required' ]} | {adSelection.headlineSelect2} | {adSelection.headlineSelect3}
+                      {adSelection.headlineSelect1} | {adSelection.headlineSelect2} | {adSelection.headlineSelect3}
                     </a>
                   </h4>
                   <span className={classes.ad}>Ad</span>
@@ -165,12 +200,8 @@ export default function HomePage() {
                     {ad.url}
                   </a>
                   <div className={classes.snippet}>
-                    <div>{ad[ 'description-1' ]} {ad[ 'description-2' ]}</div>
+                    <div>{adSelection.description1} {adSelection.description2}</div>
                   </div>
-                </div>
-                <div className={classNames(classes.exDesContainer)}>
-                  We've started your ad. Please modify the description to convey the value of your product.
-                  <Icon className={classes.phoneIcon}>phone</Icon> Chat with us
                 </div>
               </div>
             </div>
@@ -213,10 +244,9 @@ export default function HomePage() {
             <h3 className={classes.headerAvatar}>
               <Avatar className={classes.greenAvatar}>6</Avatar> Download Keyword Genius to launch the campaign
             </h3>
-            <div className={classes.downloadDesContainer}>Final step in order to launch this campaign is to connect KG to your
-              Google Ads account. Once you
-              connect Keyword Genius, this campaign will be launched! Feel free to launch a site wide campaign in the
-              app as well
+            <div className={classes.downloadDesContainer}>Final step in order to launch this campaign is to connect KG
+              to your Google Ads account. Once you connect Keyword Genius, this campaign will be launched! Feel free to
+              launch a site wide campaign in the app as well
             </div>
             <Button className={classes.downloadLinkBtn} size='large' target="_blank"
                     href="https://apps.shopify.com/keyword-genius">Download</Button>
