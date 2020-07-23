@@ -8,7 +8,7 @@ export const HeaderShopify = () => {
   const classes = useStyles();
   return (
     <div className={classes.header}>
-      <h4>Made with &hearts; for Shopify Stores</h4>
+      <h4>Made with &hearts; for Shopify</h4>
     </div>
   );
 };
