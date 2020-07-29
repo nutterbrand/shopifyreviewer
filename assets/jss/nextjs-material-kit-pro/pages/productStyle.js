@@ -600,6 +600,11 @@ const productStyle = {
     color: '#ffffff',
     margin: '0 15px 0 0',
   },
+  redAvatar: {
+    backgroundColor: '#f65a4e',
+    color: '#ffffff',
+    margin: '0 15px 0 0',
+  },
   blueAvatar: {
     backgroundColor: '#27a0ff',
     color: '#ffffff',

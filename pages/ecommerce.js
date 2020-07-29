@@ -85,6 +85,7 @@ export default function HomePage() {
             <div className={classes.container}>
               <EcommerceHeader
                   onSearch={handleOnSearch}
+                  onSearchAgain={handleSearchAgain}
                   onChange={handleOnChange}
                   loadingTable={isLoading}
                   hasData={!!data}
@@ -97,7 +98,7 @@ export default function HomePage() {
                         <Button variant="contained"
                                 disableElevation
                                 className={classes.searchAgain}
-                                size="medium" onClick={handleSearchAgain}>Search Again</Button>
+                                onClick={handleSearchAgain}>Search Again</Button>
                       </div> : <>
                         <h3 className={classes.headerAvatar}>
                           <Avatar className={classes.greenAvatar}>3</Avatar> Pick the 5
