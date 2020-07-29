@@ -17,7 +17,6 @@ import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import Search from "@material-ui/icons/Search";
 import Tooltip from "@material-ui/core/Tooltip";
-import FilterListIcon from "@material-ui/icons/FilterList";
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
