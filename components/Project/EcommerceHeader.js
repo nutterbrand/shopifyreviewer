@@ -88,8 +88,7 @@ export const EcommerceHeader = ({
               </div>
 
               <h3 className={classes.headerAvatar}>
-                <Avatar className={classes.greenAvatar}>2</Avatar> Search for your
-                top product
+                <Avatar className={classes.greenAvatar}>2</Avatar> Select one of your products
               </h3>
               {isLoading && (
                   <div>

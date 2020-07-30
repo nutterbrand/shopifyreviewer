@@ -100,8 +100,8 @@ export default function HomePage() {
                         </h3>
                         <Button variant="contained"
                                 disableElevation
-                                className={classes.searchAgain}
-                                onClick={handleSearchAgain}>Search Again</Button>
+                                className={classes.genSearchAgain}
+                                onClick={handleSearchAgain}>Try a More Generic Search Again</Button>
 
                       </div>
                     }

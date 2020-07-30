@@ -659,6 +659,15 @@ const productStyle = {
       backgroundColor: 'none',
     },
   },
+  genSearchAgain: {
+    backgroundColor: '#4bb051',
+    color: '#ffffff',
+    width: '300px',
+    height: '36px',
+    '&:hover': {
+      backgroundColor: 'none',
+    },
+  },
 };
 
 export default productStyle;
