@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {useRouter} from 'next/router';
 import fetch from 'isomorphic-unfetch';
 import {filterDomain} from './helpers/helper';
 import GridItem from '../Grid/GridItem';
@@ -14,17 +15,27 @@ import SearchHeader from '../../assets/img/searchHeader.svg';
 
 const useStyles = makeStyles(productStyle);
 
-export const EcommerceHeader = ({
-  onSearch,
-  onChange,
-  loadingTable,
-}) => {
+export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
+  const router = useRouter();
   const classes = useStyles();
-  const defaultInput = {domain: '', productUrlValue: ''};
+  const defaultInput = {domain: '', product: ''};
   const [inputValues, setInputValues] = useState(defaultInput);
   const [productUrls, setUrls] = useState([]);
   const [productUrl, setProductUrl] = useState('');
   const [isLoading, updateLoading] = useState(false);
+
+  useEffect(() => {
+    let updatedValues = {...inputValues, ...router.query};
+    if (
+        router.query.hasOwnProperty('domain') ||
+        router.query.hasOwnProperty('product')
+    ) {
+      setInputValues(updatedValues);
+      setUrls([updatedValues.product]);
+      setProductUrl(updatedValues.product);
+      onSearch(updatedValues);
+    }
+  }, [router]);
 
   useEffect(() => {
     if (productUrls.length > 0) {
@@ -43,7 +54,7 @@ export const EcommerceHeader = ({
   const handleUrlRequest = (e) => {
     e.preventDefault();
     updateLoading(true);
-    const filteredDomain = filterDomain(inputValues.domain)
+    const filteredDomain = filterDomain(inputValues.domain);
     const requestUrl = `https://evening-retreat-22032.herokuapp.com/products/${filteredDomain}`;
     fetch(requestUrl).then((response) => response.json()).then((data) => {
       setUrls(data.result.urls);

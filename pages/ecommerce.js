@@ -48,14 +48,14 @@ export default function HomePage() {
   };
 
   const handleOnSearch = values => {
-    const {domain, productUrlValue} = values;
-    updateProductURL(productUrlValue);
+    const {domain, product} = values;
+    updateProductURL(product);
     updateSearchedAgain(true);
     const filteredDomain = filterDomain(domain)
     updateDomain(filteredDomain);
     setLoading(true);
     setData(null);
-    const requestUrl = `${BASE_URL}product-keyword/${filteredDomain}/${productUrlValue}`;
+    const requestUrl = `${BASE_URL}product-keyword/${filteredDomain}/${product}`;
     makeRequest(requestUrl);
   };
 
