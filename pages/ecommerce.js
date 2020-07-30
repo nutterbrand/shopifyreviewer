@@ -96,7 +96,7 @@ export default function HomePage() {
                     {
                       hasSearched && <div className={classes.noResult}>
                         <h3 className={classes.headerSearch}>
-                          <Avatar className={classes.redAvatar}>👀</Avatar> Not seeing the keywords you are expecting?
+                          <Avatar className={classes.yellowAvatar}>👀</Avatar> Not seeing the keywords you are expecting?
                         </h3>
                         <Button variant="contained"
                                 disableElevation

@@ -605,8 +605,8 @@ const productStyle = {
     color: '#ffffff',
     margin: '0 15px 0 0',
   },
-  redAvatar: {
-    backgroundColor: '#f65a4e',
+  yellowAvatar: {
+    backgroundColor: '#ffce44',
     color: '#ffffff',
     margin: '0 15px 0 0',
   },
