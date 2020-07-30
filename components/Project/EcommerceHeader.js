@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useRouter} from 'next/router';
+import Router, {useRouter} from 'next/router';
 import fetch from 'isomorphic-unfetch';
 import {filterDomain} from './helpers/helper';
 import GridItem from '../Grid/GridItem';
@@ -27,11 +27,11 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
   useEffect(() => {
     let updatedValues = {...inputValues, ...router.query};
     if (
-        router.query.hasOwnProperty('domain') ||
+        router.query.hasOwnProperty('domain') &&
         router.query.hasOwnProperty('product')
     ) {
+      handleUrlRequest(updatedValues.domain);
       setInputValues(updatedValues);
-      setUrls([updatedValues.product]);
       setProductUrl(updatedValues.product);
       onSearch(updatedValues);
     }
@@ -39,11 +39,11 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
 
   useEffect(() => {
     if (productUrls.length > 0) {
-      setProductUrl(productUrls[ 0 ]);
+      setProductUrl(router.query?.product || productUrls[ 0 ]);
     }
   }, [productUrls]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const {name, value} = e.target;
     onChange();
     setInputValues({...inputValues, [ name ]: value});
@@ -51,10 +51,10 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
     setProductUrl('');
   };
 
-  const handleUrlRequest = (e) => {
-    e.preventDefault();
+  const handleUrlRequest = domain => {
     updateLoading(true);
-    const filteredDomain = filterDomain(inputValues.domain);
+    const inputDomain = typeof domain === 'string' || domain instanceof String ? domain : inputValues.domain;
+    const filteredDomain = filterDomain(inputDomain);
     const requestUrl = `https://evening-retreat-22032.herokuapp.com/products/${filteredDomain}`;
     fetch(requestUrl).then((response) => response.json()).then((data) => {
       setUrls(data.result.urls);
@@ -115,11 +115,11 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
                         id="product-urls"
                         value={productUrl}
                         onChange={(e, productUrl) => setProductUrl(productUrl)}
-                        inputValue={inputValues.productUrlValue}
+                        inputValue={inputValues.product}
                         onInputChange={(e, productUrl) =>
                             setInputValues({
                               ...inputValues,
-                              productUrlValue: productUrl,
+                              product: productUrl,
                             })
                         }
                         options={productUrls}
@@ -132,8 +132,13 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
                             />
                         )}
                     />
-                    {!!inputValues.productUrlValue && (
-                        <Button className={classes.autoSubmit} onClick={() => onSearch(inputValues)}>
+                    {!!inputValues.product && (
+                        <Button className={classes.autoSubmit} onClick={() => {
+                          Router.push({
+                            pathname: '/ecommerce',
+                            query: inputValues,
+                          });
+                        }}>
                           Search
                         </Button>
                     )}
