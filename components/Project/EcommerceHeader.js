@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import fetch from 'isomorphic-unfetch';
+import {filterDomain} from './helpers/helper';
 import GridItem from '../Grid/GridItem';
 import GridContainer from '../Grid/GridContainer';
 import Avatar from '@material-ui/core/Avatar';
@@ -9,14 +11,13 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import {makeStyles} from '@material-ui/core/styles';
 import productStyle from '../../assets/jss/nextjs-material-kit-pro/pages/productStyle';
 import SearchHeader from '../../assets/img/searchHeader.svg';
-import fetch from 'isomorphic-unfetch';
 
 const useStyles = makeStyles(productStyle);
 
 export const EcommerceHeader = ({
   onSearch,
   onChange,
-  loadingTable
+  loadingTable,
 }) => {
   const classes = useStyles();
   const defaultInput = {domain: '', productUrlValue: ''};
@@ -25,11 +26,11 @@ export const EcommerceHeader = ({
   const [productUrl, setProductUrl] = useState('');
   const [isLoading, updateLoading] = useState(false);
 
-  useEffect(()=>{
-    if  (productUrls.length > 0) {
-      setProductUrl( productUrls[0])
+  useEffect(() => {
+    if (productUrls.length > 0) {
+      setProductUrl(productUrls[ 0 ]);
     }
-  }, [productUrls])
+  }, [productUrls]);
 
   const handleInputChange = (e) => {
     const {name, value} = e.target;
@@ -42,7 +43,8 @@ export const EcommerceHeader = ({
   const handleUrlRequest = (e) => {
     e.preventDefault();
     updateLoading(true);
-    const requestUrl = `https://evening-retreat-22032.herokuapp.com/products/${inputValues.domain}`;
+    const filteredDomain = filterDomain(inputValues.domain)
+    const requestUrl = `https://evening-retreat-22032.herokuapp.com/products/${filteredDomain}`;
     fetch(requestUrl).then((response) => response.json()).then((data) => {
       setUrls(data.result.urls);
       updateLoading(false);
@@ -60,8 +62,7 @@ export const EcommerceHeader = ({
             </h2>
             <h4>
               <b>
-                In less than 2 min, create a high converting campaign for your
-                product
+                In less than 2 min, create a high converting campaign for your product
               </b>
             </h4>
             <div className={classes.formTwo}>

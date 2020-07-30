@@ -5,6 +5,7 @@ import {HeaderShopify} from '../components/Project/HeaderShopify';
 import {EcommerceHeader} from '../components/Project/EcommerceHeader';
 import {LoadingSpinner} from '../components/Project/LoadingSpinner';
 import {ProductKeyWordsTable} from '../components/Project/ProductKeyWordsTable';
+import {filterDomain} from '../components/Project/helpers/helper';
 
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
 import Download1 from '../assets/img/download_1.svg';
@@ -46,11 +47,11 @@ export default function HomePage() {
     });
   };
 
-  const handleOnSearch = (values) => {
+  const handleOnSearch = values => {
     const {domain, productUrlValue} = values;
     updateProductURL(productUrlValue);
     updateSearchedAgain(true);
-    const filteredDomain = domain.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '').split('/')[ 0 ];
+    const filteredDomain = filterDomain(domain)
     updateDomain(filteredDomain);
     setLoading(true);
     setData(null);
