@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import GridItem from '../Grid/GridItem';
 import GridContainer from '../Grid/GridContainer';
 import Avatar from '@material-ui/core/Avatar';
@@ -15,10 +15,8 @@ const useStyles = makeStyles(productStyle);
 
 export const EcommerceHeader = ({
   onSearch,
-  onSearchAgain,
   onChange,
-  loadingTable,
-  hasData,
+  loadingTable
 }) => {
   const classes = useStyles();
   const defaultInput = {domain: '', productUrlValue: ''};
@@ -26,7 +24,6 @@ export const EcommerceHeader = ({
   const [productUrls, setUrls] = useState([]);
   const [productUrl, setProductUrl] = useState('');
   const [isLoading, updateLoading] = useState(false);
-  const [hasSearched, updateSearched] = useState(false);
 
   const handleInputChange = (e) => {
     const {name, value} = e.target;
@@ -45,18 +42,6 @@ export const EcommerceHeader = ({
       updateLoading(false);
     });
   };
-
-  const handleDomainSubmit = () => {
-    onSearch(inputValues);
-    updateSearched(true);
-  };
-  useEffect(() => {
-    if (!hasData) {
-      setUrls([]);
-      setProductUrl('');
-      setInputValues(defaultInput);
-    }
-  }, [hasData]);
 
   if (loadingTable) return null;
   return (
@@ -131,29 +116,12 @@ export const EcommerceHeader = ({
                         )}
                     />
                     {!!inputValues.productUrlValue && (
-                        <Button
-                            className={classes.autoSubmit}
-                            onClick={handleDomainSubmit}
-                        >
+                        <Button className={classes.autoSubmit} onClick={() => onSearch(inputValues)}>
                           Search
                         </Button>
                     )}
                   </div>
               )}
-              {
-                hasSearched && <>
-                  <h3 className={classes.headerAvatar}>
-                    <Avatar className={classes.redAvatar}>!</Avatar> Not seeing the keywords you are expecting?
-                  </h3>
-                  <div className={classes.noResult}>
-                    <h4>Click here to get a new batch</h4>
-                    <Button variant="contained"
-                            disableElevation
-                            className={classes.searchAgain}
-                            onClick={onSearchAgain}>Search Again</Button>
-                  </div>
-                </>
-              }
             </div>
           </div>
         </GridItem>

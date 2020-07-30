@@ -590,6 +590,11 @@ const productStyle = {
   keywordChip: {
     margin: '5px 10px',
   },
+  headerSearch: {
+    display: 'flex',
+    margin: '0',
+    alignItems: 'center',
+  },
   headerAvatar: {
     display: 'flex',
     margin: '35px 0 15px 0',

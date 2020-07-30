@@ -35,6 +35,7 @@ export default function HomePage() {
   const [emailModalOpen, toggleEmailModal] = useState(false);
   const [keywords, updateKeywords] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [hasSearched, updateSearchedAgain] = useState(true);
 
   const makeRequest = requestUrl => {
     fetch(requestUrl).then((response) => response.json()).then((data) => {
@@ -48,6 +49,7 @@ export default function HomePage() {
   const handleOnSearch = (values) => {
     const {domain, productUrlValue} = values;
     updateProductURL(productUrlValue);
+    updateSearchedAgain(true);
     const filteredDomain = domain.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '').split('/')[ 0 ];
     updateDomain(filteredDomain);
     setLoading(true);
@@ -58,6 +60,7 @@ export default function HomePage() {
 
   const handleSearchAgain = () => {
     setLoading(true);
+    updateSearchedAgain(false);
     setData(null);
     const requestUrl = `${BASE_URL}product-url/${domain}/${productURL}`;
     makeRequest(requestUrl);
@@ -85,13 +88,23 @@ export default function HomePage() {
             <div className={classes.container}>
               <EcommerceHeader
                   onSearch={handleOnSearch}
-                  onSearchAgain={handleSearchAgain}
                   onChange={handleOnChange}
                   loadingTable={isLoading}
-                  hasData={!!data}
               />
               {!!data && (
                   <div className={classes.keywordCard}>
+                    {
+                      hasSearched && <div className={classes.noResult}>
+                        <h3 className={classes.headerSearch}>
+                          <Avatar className={classes.redAvatar}>👀</Avatar> Not seeing the keywords you are expecting?
+                        </h3>
+                        <Button variant="contained"
+                                disableElevation
+                                className={classes.searchAgain}
+                                onClick={handleSearchAgain}>Search Again</Button>
+
+                      </div>
+                    }
                     {
                       data.result.length < 1 ? <div className={classes.noResult}>
                         <h4>Sorry, there aren't any keyword results for {productURL}...</h4>
