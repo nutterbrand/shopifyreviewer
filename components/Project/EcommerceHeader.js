@@ -25,6 +25,12 @@ export const EcommerceHeader = ({
   const [productUrl, setProductUrl] = useState('');
   const [isLoading, updateLoading] = useState(false);
 
+  useEffect(()=>{
+    if  (productUrls.length > 0) {
+      setProductUrl( productUrls[0])
+    }
+  }, [productUrls])
+
   const handleInputChange = (e) => {
     const {name, value} = e.target;
     onChange();

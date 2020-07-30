@@ -94,7 +94,7 @@ export default function HomePage() {
               {!!data && (
                   <div className={classes.keywordCard}>
                     {
-                      hasSearched && <div className={classes.noResult}>
+                      data.result.length > 0 && hasSearched && <div className={classes.noResult}>
                         <h3 className={classes.headerSearch}>
                           <Avatar className={classes.yellowAvatar}>👀</Avatar> Not seeing the keywords you are expecting?
                         </h3>
