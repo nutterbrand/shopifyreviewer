@@ -16,7 +16,6 @@ import Button from '@material-ui/core/Button';
 import {CreateAdModal} from '../components/Project/CreateAdModal';
 import {EmailModal} from '../components/Project/EmailModal';
 
-
 const useStyles = makeStyles(productStyle);
 
 const LOADING_IMAGES = [Download1, Download2, Download3];
@@ -39,6 +38,10 @@ export default function HomePage() {
   const [isLoading, setLoading] = useState(false);
   const [hasSearched, updateSearchedAgain] = useState(true);
 
+  useEffect(() => {
+    updateSearchedAgain(!createAdModalOpen);
+  }, [createAdModalOpen]);
+
   const makeRequest = requestUrl => {
     fetch(requestUrl).then((response) => response.json()).then((data) => {
       console.log(data);
@@ -52,7 +55,7 @@ export default function HomePage() {
     const {domain, product} = values;
     updateProductURL(product);
     updateSearchedAgain(true);
-    const filteredDomain = filterDomain(domain)
+    const filteredDomain = filterDomain(domain);
     updateDomain(filteredDomain);
     setLoading(true);
     setData(null);
@@ -98,7 +101,8 @@ export default function HomePage() {
                     {
                       data.result.length > 0 && hasSearched && <div className={classes.fixNoResult}>
                         <h4 className={classes.headerSearch}>
-                          <Avatar className={classes.yellowAvatar}>👀</Avatar> Not seeing the keywords you are expecting?
+                          <Avatar className={classes.yellowAvatar}>👀</Avatar> Not seeing the keywords you are
+                          expecting?
                         </h4>
                         <Button variant="contained"
                                 disableElevation

@@ -653,12 +653,11 @@ const productStyle = {
   fixNoResult: {
     position: 'fixed',
     width: '850px',
-    height: '50px',
+    height: '80px',
     backgroundColor: '#ffffff',
     bottom: '0',
     left: '50%',
     marginLeft: '-425px',
-    margin: '0 40',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
