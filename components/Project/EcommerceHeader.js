@@ -46,6 +46,10 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
   const handleInputChange = e => {
     const {name, value} = e.target;
     onChange();
+    Router.push({
+      pathname: '/ecommerce',
+      query: null,
+    });
     setInputValues({...inputValues, [ name ]: value});
     setUrls([]);
     setProductUrl('');
