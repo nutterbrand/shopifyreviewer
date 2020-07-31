@@ -96,10 +96,10 @@ export default function HomePage() {
               {!!data && (
                   <div className={classes.keywordCard}>
                     {
-                      data.result.length > 0 && hasSearched && <div className={classes.noResult}>
-                        <h3 className={classes.headerSearch}>
+                      data.result.length > 0 && hasSearched && <div className={classes.fixNoResult}>
+                        <h4 className={classes.headerSearch}>
                           <Avatar className={classes.yellowAvatar}>👀</Avatar> Not seeing the keywords you are expecting?
-                        </h3>
+                        </h4>
                         <Button variant="contained"
                                 disableElevation
                                 className={classes.genSearchAgain}

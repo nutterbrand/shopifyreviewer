@@ -593,7 +593,7 @@ const productStyle = {
   headerSearch: {
     display: 'flex',
     margin: '0',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   headerAvatar: {
     display: 'flex',
@@ -649,6 +649,20 @@ const productStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  fixNoResult: {
+    position: 'fixed',
+    width: '850px',
+    height: '50px',
+    backgroundColor: '#ffffff',
+    bottom: '0',
+    left: '50%',
+    marginLeft: '-425px',
+    margin: '0 40',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    zIndex: '99999',
   },
   searchAgain: {
     backgroundColor: '#4bb051',
