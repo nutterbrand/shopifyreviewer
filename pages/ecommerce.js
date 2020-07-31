@@ -39,8 +39,8 @@ export default function HomePage() {
   const [hasSearched, updateSearchedAgain] = useState(true);
 
   useEffect(() => {
-    updateSearchedAgain(!createAdModalOpen);
-  }, [createAdModalOpen]);
+    updateSearchedAgain(!createAdModalOpen && !emailModalOpen);
+  }, [createAdModalOpen, emailModalOpen]);
 
   const makeRequest = requestUrl => {
     fetch(requestUrl).then((response) => response.json()).then((data) => {
