@@ -15,12 +15,14 @@ import SearchHeader from '../../assets/img/searchHeader.svg';
 
 const useStyles = makeStyles(productStyle);
 
-export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
+export const EcommerceHeader = ({onSearch, onChange, loadingTable, updateDisplayProduct}) => {
   const router = useRouter();
   const classes = useStyles();
   const defaultInput = {domain: '', product: ''};
   const [inputValues, setInputValues] = useState(defaultInput);
   const [productUrls, setUrls] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [displayProduct, setDisplayingProduct] = useState();
   const [productUrl, setProductUrl] = useState('');
   const [isLoading, updateLoading] = useState(false);
 
@@ -40,8 +42,22 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
   useEffect(() => {
     if (productUrls.length > 0) {
       setProductUrl(router.query?.product || productUrls[ 0 ]);
+      if (router.query?.product) {
+        setDisplayingProduct(
+            products.find(p => p.title === router.query.product));
+      } else {
+        setDisplayingProduct(products[ 0 ]);
+      }
     }
-  }, [productUrls]);
+  }, [productUrls, products]);
+
+  useEffect(() => {
+    setDisplayingProduct(products.find(p => p.title === productUrl));
+  }, [productUrl]);
+
+  useEffect(() => {
+    updateDisplayProduct(displayProduct);
+  }, [displayProduct]);
 
   const handleInputChange = e => {
     const {name, value} = e.target;
@@ -59,9 +75,12 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
     updateLoading(true);
     const inputDomain = typeof domain === 'string' || domain instanceof String ? domain : inputValues.domain;
     const filteredDomain = filterDomain(inputDomain);
-    const requestUrl = `https://evening-retreat-22032.herokuapp.com/products/${filteredDomain}`;
+    // const requestUrl = `https://evening-retreat-22032.herokuapp.com/products/${filteredDomain}`;
+    const requestUrl = `https://evening-retreat-22032.herokuapp.com/urls-json/${filteredDomain}`;
     fetch(requestUrl).then((response) => response.json()).then((data) => {
-      setUrls(data.result.urls);
+      // setUrls(data.result.urls);
+      setUrls(data.result.products.map(p => p.title));
+      setProducts(data.result.products);
       updateLoading(false);
     });
   };

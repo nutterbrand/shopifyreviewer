@@ -593,7 +593,7 @@ const productStyle = {
   headerSearch: {
     display: 'flex',
     margin: '0',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   headerAvatar: {
     display: 'flex',
@@ -652,12 +652,13 @@ const productStyle = {
   },
   fixNoResult: {
     position: 'fixed',
-    width: '850px',
-    height: '80px',
-    backgroundColor: '#ffffff',
+    width: '100%',
+    padding: '0 20%',
     bottom: '0',
-    left: '50%',
-    marginLeft: '-425px',
+    left: '0',
+    height: '60px',
+    backgroundColor: '#ffffff',
+    boxShadow: '0 -1px 5px -1px rgba(0,0,0,0.3)',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -680,6 +681,49 @@ const productStyle = {
     '&:hover': {
       backgroundColor: 'none',
     },
+  },
+  displaySection: {
+    backgroundColor: '#fff',
+    margin: '25px 0 0 0',
+    padding: '50px',
+  },
+  displayTitle: {
+    margin: '0 0 25px 0',
+    width: '70%',
+  },
+  displayImg: {
+    width: '200px',
+    height: '200px',
+    objectFit: 'contain',
+    position: 'absolute',
+    bottom: '0',
+    right: '0',
+  },
+  displayDesContainer: {
+    maxHeight: '150px',
+    overflowY: 'scroll',
+    width: '70%',
+    margin: '15px 0 25px 0',
+    padding: '20px',
+    border: '1px solid #bddfe6',
+    borderRadius: '8px',
+    color: '#000',
+    textAlign: 'left',
+    backgroundColor: '#f8ffff',
+  },
+  displayPrice: {
+    position: 'absolute',
+    top: '-50px',
+    right: '-25px',
+    color: '#fff',
+    backgroundColor: '#f65a4e',
+    width: '140px',
+    height: '40px',
+    fontSize: '25px',
+    lineHeight: '40px',
+    textAlign: 'center',
+    borderBottomRightRadius: '10px',
+    borderBottomLeftRadius: '10px',
   },
 };
 

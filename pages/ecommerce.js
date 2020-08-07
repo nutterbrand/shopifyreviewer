@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import fetch from 'isomorphic-unfetch';
-import {HeaderShopify} from '../components/Project/HeaderShopify';
+import {CreateAdModal} from '../components/Project/CreateAdModal';
+import {DisplayProduct} from '../components/Project/DisplayProduct';
 import {EcommerceHeader} from '../components/Project/EcommerceHeader';
+import {EmailModal} from '../components/Project/EmailModal';
+import {HeaderShopify} from '../components/Project/HeaderShopify';
 import {LoadingSpinner} from '../components/Project/LoadingSpinner';
 import {ProductKeyWordsTable} from '../components/Project/ProductKeyWordsTable';
 import {filterDomain} from '../components/Project/helpers/helper';
@@ -13,8 +16,6 @@ import Download2 from '../assets/img/download_1.svg';
 import Download3 from '../assets/img/download_1.svg';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import {CreateAdModal} from '../components/Project/CreateAdModal';
-import {EmailModal} from '../components/Project/EmailModal';
 
 const useStyles = makeStyles(productStyle);
 
@@ -32,6 +33,7 @@ export default function HomePage() {
   const [productURL, updateProductURL] = useState();
   const [postData, updatePostData] = useState();
   const [domain, updateDomain] = useState();
+  const [displayProduct, setDisplayProduct] = useState();
   const [createAdModalOpen, toggleAdModal] = useState(false);
   const [emailModalOpen, toggleEmailModal] = useState(false);
   const [keywords, updateKeywords] = useState([]);
@@ -75,6 +77,7 @@ export default function HomePage() {
     updateKeywords(selected);
     toggleAdModal(true);
   };
+  const handleUpdateDisplayProduct = product => setDisplayProduct(product);
   const reset = () => {
     setData(null);
   };
@@ -95,7 +98,11 @@ export default function HomePage() {
                   onSearch={handleOnSearch}
                   onChange={handleOnChange}
                   loadingTable={isLoading}
+                  updateDisplayProduct={handleUpdateDisplayProduct}
               />
+              {
+                displayProduct && !isLoading && <DisplayProduct product={displayProduct}/>
+              }
               {!!data && (
                   <div className={classes.keywordCard}>
                     {
