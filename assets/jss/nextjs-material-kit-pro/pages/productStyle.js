@@ -336,7 +336,7 @@ const productStyle = {
   keywordCard: {
     backgroundColor: '#fff',
     margin: '50px 0',
-    padding: '40px 40px 60px 40px',
+    padding: '50px',
     overflowX: 'hidden',
   },
   keywordTitle: {
@@ -687,22 +687,21 @@ const productStyle = {
     margin: '25px 0 0 0',
     padding: '50px',
   },
+  displayContainer: {
+    display: 'flex',
+    marginTop: '50px',
+  },
   displayTitle: {
     margin: '0 0 25px 0',
-    width: '70%',
+    width: '90%',
   },
   displayImg: {
-    width: '200px',
-    height: '200px',
+    width: '300px',
+    height: '300px',
     objectFit: 'contain',
-    position: 'absolute',
-    bottom: '0',
-    right: '0',
   },
   displayDesContainer: {
-    maxHeight: '150px',
-    overflowY: 'scroll',
-    width: '70%',
+    width: '90%',
     margin: '15px 0 25px 0',
     padding: '20px',
     border: '1px solid #bddfe6',
@@ -713,17 +712,18 @@ const productStyle = {
   },
   displayPrice: {
     position: 'absolute',
-    top: '-50px',
-    right: '-25px',
+    bottom: '0',
+    left: '15px',
     color: '#fff',
     backgroundColor: '#f65a4e',
-    width: '140px',
-    height: '40px',
-    fontSize: '25px',
-    lineHeight: '40px',
+    width: '100px',
+    height: '30px',
+    fontSize: '18px',
+    lineHeight: '30px',
     textAlign: 'center',
-    borderBottomRightRadius: '10px',
-    borderBottomLeftRadius: '10px',
+  },
+  displayChipContainer: {
+    width: '90%',
   },
 };
 

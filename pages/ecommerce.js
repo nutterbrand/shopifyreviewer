@@ -2,13 +2,14 @@ import React, {useState, useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import fetch from 'isomorphic-unfetch';
 import {CreateAdModal} from '../components/Project/CreateAdModal';
-import {DisplayProduct} from '../components/Project/DisplayProduct';
 import {EcommerceHeader} from '../components/Project/EcommerceHeader';
 import {EmailModal} from '../components/Project/EmailModal';
 import {HeaderShopify} from '../components/Project/HeaderShopify';
 import {LoadingSpinner} from '../components/Project/LoadingSpinner';
 import {ProductKeyWordsTable} from '../components/Project/ProductKeyWordsTable';
 import {filterDomain} from '../components/Project/helpers/helper';
+import GridContainer from '../components/Grid/GridContainer';
+import GridItem from '../components/Grid/GridItem';
 
 import productStyle from 'assets/jss/nextjs-material-kit-pro/pages/productStyle.js';
 import Download1 from '../assets/img/download_1.svg';
@@ -33,7 +34,6 @@ export default function HomePage() {
   const [productURL, updateProductURL] = useState();
   const [postData, updatePostData] = useState();
   const [domain, updateDomain] = useState();
-  const [displayProduct, setDisplayProduct] = useState();
   const [createAdModalOpen, toggleAdModal] = useState(false);
   const [emailModalOpen, toggleEmailModal] = useState(false);
   const [keywords, updateKeywords] = useState([]);
@@ -77,7 +77,6 @@ export default function HomePage() {
     updateKeywords(selected);
     toggleAdModal(true);
   };
-  const handleUpdateDisplayProduct = product => setDisplayProduct(product);
   const reset = () => {
     setData(null);
   };
@@ -98,46 +97,44 @@ export default function HomePage() {
                   onSearch={handleOnSearch}
                   onChange={handleOnChange}
                   loadingTable={isLoading}
-                  updateDisplayProduct={handleUpdateDisplayProduct}
               />
-              {
-                displayProduct && !isLoading && <DisplayProduct product={displayProduct}/>
-              }
               {!!data && (
-                  <div className={classes.keywordCard}>
-                    {
-                      data.result.length > 0 && hasSearched && <div className={classes.fixNoResult}>
-                        <h4 className={classes.headerSearch}>
-                          <Avatar className={classes.yellowAvatar}>👀</Avatar> Not seeing the keywords you are
-                          expecting?
-                        </h4>
-                        <Button variant="contained"
-                                disableElevation
-                                className={classes.genSearchAgain}
-                                onClick={handleSearchAgain}>Try a More Generic Search Again</Button>
+                  <GridContainer className={classes.keywordCard}>
+                    <GridItem md={12} sm={12}>
+                      {
+                        data.result.length > 0 && hasSearched && <div className={classes.fixNoResult}>
+                          <h4 className={classes.headerSearch}>
+                            <Avatar className={classes.yellowAvatar}>👀</Avatar> Not seeing the keywords you are
+                            expecting?
+                          </h4>
+                          <Button variant="contained"
+                                  disableElevation
+                                  className={classes.genSearchAgain}
+                                  onClick={handleSearchAgain}>Try a More Generic Search Again</Button>
 
-                      </div>
-                    }
-                    {
-                      data.result.length < 1 ? <div className={classes.noResult}>
-                        <h4>Sorry, there aren't any keyword results for {productURL}...</h4>
-                        <Button variant="contained"
-                                disableElevation
-                                className={classes.searchAgain}
-                                onClick={handleSearchAgain}>Search Again</Button>
-                      </div> : <>
-                        <h3 className={classes.headerAvatar}>
-                          <Avatar className={classes.greenAvatar}>3</Avatar> Pick the 5
-                          best keywords to add your site.
-                        </h3>
-                        <ProductKeyWordsTable
-                            rows={data.result}
-                            productURL={productURL}
-                            createAd={handleCreateAd}
-                        />
-                      </>
-                    }
-                  </div>
+                        </div>
+                      }
+                      {
+                        data.result.length < 1 ? <div className={classes.noResult}>
+                          <h4>Sorry, there aren't any keyword results for {productURL}...</h4>
+                          <Button variant="contained"
+                                  disableElevation
+                                  className={classes.searchAgain}
+                                  onClick={handleSearchAgain}>Search Again</Button>
+                        </div> : <>
+                          <h3 className={classes.headerAvatar}>
+                            <Avatar className={classes.greenAvatar}>3</Avatar> Pick the 5
+                            best keywords to add your site.
+                          </h3>
+                          <ProductKeyWordsTable
+                              rows={data.result}
+                              productURL={productURL}
+                              createAd={handleCreateAd}
+                          />
+                        </>
+                      }
+                    </GridItem>
+                  </GridContainer>
               )}
             </div>
           </div>
