@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import fetch from 'isomorphic-unfetch';
 import {CreateAdModal} from '../components/Project/CreateAdModal';
@@ -27,6 +27,8 @@ const LOADING_MESSAGES = [
   'Displaying Keywords...',
 ];
 const BASE_URL = 'https://evening-retreat-22032.herokuapp.com/';
+const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
+
 export default function HomePage() {
   const classes = useStyles();
   const [data, setData] = useState();
@@ -39,6 +41,7 @@ export default function HomePage() {
   const [keywords, updateKeywords] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [hasSearched, updateSearchedAgain] = useState(true);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     updateSearchedAgain(!createAdModalOpen && !emailModalOpen);
@@ -50,6 +53,7 @@ export default function HomePage() {
       setData(data);
       setAd(data.result[ 0 ]);
       setLoading(false);
+      scrollToRef(scrollRef);
     });
   };
 
@@ -98,6 +102,7 @@ export default function HomePage() {
                   onChange={handleOnChange}
                   loadingTable={isLoading}
               />
+              <div ref={scrollRef}></div>
               {!!data && (
                   <GridContainer className={classes.keywordCard}>
                     <GridItem md={12} sm={12}>

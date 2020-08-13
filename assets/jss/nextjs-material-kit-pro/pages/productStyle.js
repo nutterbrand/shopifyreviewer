@@ -133,7 +133,7 @@ const productStyle = {
     backgroundColor: '#4bb051',
     height: '36px',
     color: '#ffffff',
-    width: '175px',
+    width: '23%',
     '&:hover': {
       backgroundColor: 'none',
     },
@@ -640,7 +640,7 @@ const productStyle = {
   autoSubmit: {
     backgroundColor: '#4bb051',
     color: '#ffffff',
-    width: '175px',
+    width: '23%',
     '&:hover': {
       backgroundColor: 'none',
     },
@@ -690,6 +690,8 @@ const productStyle = {
   displayContainer: {
     display: 'flex',
     marginTop: '50px',
+    border: '1px solid #eeeeee',
+    width: '99%',
   },
   displayTitle: {
     margin: '0 0 25px 0',
@@ -701,7 +703,7 @@ const productStyle = {
     objectFit: 'contain',
   },
   displayDesContainer: {
-    width: '90%',
+    width: '97%',
     margin: '15px 0 25px 0',
     padding: '20px',
     border: '1px solid #bddfe6',
