@@ -17,6 +17,9 @@ import Download2 from '../assets/img/download_1.svg';
 import Download3 from '../assets/img/download_1.svg';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Modal';
+import TextField from '@material-ui/core/TextField';
+import Router from 'next/router';
 
 const useStyles = makeStyles(productStyle);
 
@@ -38,6 +41,12 @@ export default function HomePage() {
   const [domain, updateDomain] = useState();
   const [createAdModalOpen, toggleAdModal] = useState(false);
   const [emailModalOpen, toggleEmailModal] = useState(false);
+  const [searchAgainModalOpen, toggleSearchAgainModal] = useState(false);
+  const [keys, updateKeys] = useState({key1: '', key2: ''});
+  const handleKeysChange = e => {
+    const {name, value} = e.target;
+    updateKeys({...keys, [ name ]: value});
+  };
   const [keywords, updateKeywords] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [hasSearched, updateSearchedAgain] = useState(true);
@@ -53,6 +62,7 @@ export default function HomePage() {
       setData(data);
       setAd(data.result[ 0 ]);
       setLoading(false);
+      updateKeys({key1: '', key2: ''});
       scrollToRef(scrollRef);
     });
   };
@@ -69,11 +79,17 @@ export default function HomePage() {
     makeRequest(requestUrl);
   };
 
-  const handleSearchAgain = () => {
+  const handleSearchAgainSubmit = e => {
+    e.preventDefault();
+    Router.push({
+      pathname: '/ecommerce',
+      query: null,
+    });
+    updateProductURL(null)
+    toggleSearchAgainModal(false);
     setLoading(true);
-    updateSearchedAgain(false);
     setData(null);
-    const requestUrl = `${BASE_URL}product-url/${domain}/${productURL}`;
+    const requestUrl = `${BASE_URL}multiple-keywords/${keys.key1}/${keys.key2}`;
     makeRequest(requestUrl);
   };
   const handleOnChange = () => setData(null);
@@ -115,8 +131,8 @@ export default function HomePage() {
                           <Button variant="contained"
                                   disableElevation
                                   className={classes.genSearchAgain}
-                                  onClick={handleSearchAgain}>Try a More Generic Search Again</Button>
-
+                                  onClick={() => toggleSearchAgainModal(true)}>
+                            Try a More Generic Search Again</Button>
                         </div>
                       }
                       {
@@ -125,7 +141,7 @@ export default function HomePage() {
                           <Button variant="contained"
                                   disableElevation
                                   className={classes.searchAgain}
-                                  onClick={handleSearchAgain}>Search Again</Button>
+                                  onClick={() => toggleSearchAgainModal(true)}>Search Again</Button>
                         </div> : <>
                           <h3 className={classes.headerAvatar}>
                             <Avatar className={classes.greenAvatar}>3</Avatar> Pick the 5
@@ -162,6 +178,47 @@ export default function HomePage() {
             url={productURL}
             reset={reset}
         />
+        <Modal
+            open={searchAgainModalOpen}
+            onClose={() => toggleSearchAgainModal(false)}
+            className={classes.modalContainer}
+        >
+          <div className={classes.searchAgainModal}>
+            <h3 className={classes.headerAvatar}>
+              <Avatar className={classes.greenAvatar}>!</Avatar> Enter Two Keywords and Search Again
+            </h3>
+            <form
+                className={classes.form}
+                noValidate
+                autoComplete="off"
+                onSubmit={handleSearchAgainSubmit}
+            >
+              <TextField
+                  className={classes.key}
+                  id="key1"
+                  name="key1"
+                  placeholder="Keyword 1"
+                  variant="outlined"
+                  value={keys.key1}
+                  size="small"
+                  onChange={handleKeysChange}
+              />
+              <TextField
+                  className={classes.key}
+                  id="key2"
+                  name="key2"
+                  placeholder="Keyword 2"
+                  variant="outlined"
+                  value={keywords.key2}
+                  size="small"
+                  onChange={handleKeysChange}
+              />
+              <Button className={classes.submitEmail} type="submit">
+                Search Again
+              </Button>
+            </form>
+          </div>
+        </Modal>
       </>
   );
 }

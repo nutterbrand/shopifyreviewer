@@ -727,6 +727,15 @@ const productStyle = {
   displayChipContainer: {
     width: '90%',
   },
+  searchAgainModal: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '600px',
+    height: '180px',
+    backgroundColor: '#ffffff',
+    boxShadow: '2px 2px 2px -1px rgba(0,0,0,0.2)',
+    padding: '0 30px',
+  },
 };
 
 export default productStyle;
