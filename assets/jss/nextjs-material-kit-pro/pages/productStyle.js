@@ -570,6 +570,11 @@ const productStyle = {
     '&:hover': {
       backgroundColor: 'none',
     },
+    '&:disabled': {
+      backgroundColor: '#eee',
+      color: '#fff'
+    },
+
   },
   productGroupImg: {
     width: '100%',

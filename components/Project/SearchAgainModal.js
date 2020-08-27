@@ -58,7 +58,7 @@ export const SearchAgainModal = props => {
                 size="small"
                 onChange={handleKeysChange}
             />
-            <Button className={classes.submitEmail} type="submit">
+            <Button className={classes.submitEmail} type="submit" disabled={!keys.key1 || !keys.key2}>
               Search Again
             </Button>
           </form>
