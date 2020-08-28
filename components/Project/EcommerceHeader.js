@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Router, {useRouter} from 'next/router';
 import fetch from 'isomorphic-unfetch';
-import classNames from "classnames";
+import classNames from 'classnames';
 import ReactHtmlParser from 'react-html-parser';
 import {filterDomain} from './helpers/helper';
 import GridItem from '../Grid/GridItem';
@@ -46,7 +46,7 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
       setProductUrl(router.query?.product || productUrls[ 0 ]);
       if (router.query?.product) {
         setDisplayingProduct(
-            products.find(p => p.title === router.query.product));
+            products.find(p => p.handle === router.query.product));
       } else {
         setDisplayingProduct(products[ 0 ]);
       }
@@ -54,7 +54,7 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
   }, [productUrls, products]);
 
   useEffect(() => {
-    setDisplayingProduct(products.find(p => p.title === productUrl));
+    setDisplayingProduct(products.find(p => p.handle === productUrl));
   }, [productUrl]);
 
   const handleInputChange = e => {
@@ -69,13 +69,15 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
     setProductUrl('');
   };
 
+  // const findHandle = title => products.find(p => p.title === title).handle;
+
   const handleUrlRequest = domain => {
     updateLoading(true);
     const inputDomain = typeof domain === 'string' || domain instanceof String ? domain : inputValues.domain;
     const filteredDomain = filterDomain(inputDomain);
     const requestUrl = `https://evening-retreat-22032.herokuapp.com/urls-json/${filteredDomain}`;
     fetch(requestUrl).then((response) => response.json()).then((data) => {
-      setUrls(data.result.products.map(p => p.title));
+      setUrls(data.result.products.map(p => p.handle));
       setProducts(data.result.products);
       updateLoading(false);
     });

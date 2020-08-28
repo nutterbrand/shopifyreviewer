@@ -574,7 +574,6 @@ const productStyle = {
       backgroundColor: '#eee',
       color: '#fff'
     },
-
   },
   productGroupImg: {
     width: '100%',
