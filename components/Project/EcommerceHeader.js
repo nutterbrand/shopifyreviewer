@@ -22,10 +22,8 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
   const classes = useStyles();
   const defaultInput = {domain: '', product: ''};
   const [inputValues, setInputValues] = useState(defaultInput);
-  const [productUrls, setUrls] = useState([]);
+  const [product, setProduct] = useState();
   const [products, setProducts] = useState([]);
-  const [displayProduct, setDisplayingProduct] = useState();
-  const [productUrl, setProductUrl] = useState('');
   const [isLoading, updateLoading] = useState(false);
 
   useEffect(() => {
@@ -36,26 +34,19 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
     ) {
       handleUrlRequest(updatedValues.domain);
       setInputValues(updatedValues);
-      setProductUrl(updatedValues.product);
       onSearch(updatedValues);
     }
   }, [router]);
 
   useEffect(() => {
-    if (productUrls.length > 0) {
-      setProductUrl(router.query?.product || productUrls[ 0 ]);
-      if (router.query?.product) {
-        setDisplayingProduct(
-            products.find(p => p.handle === router.query.product));
-      } else {
-        setDisplayingProduct(products[ 0 ]);
-      }
+    if (products.length > 0) {
+      setProduct(products.find(p => p.handle === router.query.product));
     }
-  }, [productUrls, products]);
+  }, [products]);
 
   useEffect(() => {
-    setDisplayingProduct(products.find(p => p.handle === productUrl));
-  }, [productUrl]);
+    setInputValues({...inputValues, product: product?.handle});
+  }, [product]);
 
   const handleInputChange = e => {
     const {name, value} = e.target;
@@ -65,11 +56,9 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
       query: null,
     });
     setInputValues({...inputValues, [ name ]: value});
-    setUrls([]);
-    setProductUrl('');
+    setProducts([]);
+    setProduct(null);
   };
-
-  // const findHandle = title => products.find(p => p.title === title).handle;
 
   const handleUrlRequest = domain => {
     updateLoading(true);
@@ -77,7 +66,6 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
     const filteredDomain = filterDomain(inputDomain);
     const requestUrl = `https://evening-retreat-22032.herokuapp.com/urls-json/${filteredDomain}`;
     fetch(requestUrl).then((response) => response.json()).then((data) => {
-      setUrls(data.result.products.map(p => p.handle));
       setProducts(data.result.products);
       updateLoading(false);
     });
@@ -87,7 +75,7 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
   return (
       <>
         <GridContainer className={classNames(classes.companyHeader,
-            {[ classes.moveLeft ]: !!displayProduct},
+            {[ classes.moveLeft ]: !!product},
         )}>
           <GridItem md={12} sm={12}>
             <div className={classes.headerForm}>
@@ -130,22 +118,22 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
                   <LinearProgress/>
                 </div>
                 }
-                {!isLoading && !!productUrls.length && (
+                {!isLoading && !!products.length && (
                     <div className={classes.autoContainer}>
                       <Autocomplete
                           className={classes.productUrlAuto}
                           id="product-urls"
-                          value={productUrl}
-                          onChange={(e, productUrl) => setProductUrl(productUrl)}
-                          inputValue={inputValues.product}
-                          onInputChange={(e, productUrl) =>
-                              setInputValues({
-                                ...inputValues,
-                                product: productUrl,
-                              })
-                          }
-                          options={productUrls}
-                          getOptionLabel={(option) => option}
+                          value={product}
+                          onChange={(e, product) => {
+                            setProduct(product);
+                            setInputValues({
+                              ...inputValues,
+                              product: product?.handle,
+                            });
+                          }}
+                          inputValue={products.find(p => p.handle === inputValues.product)?.title}
+                          options={products}
+                          getOptionLabel={(option) => option.title}
                           renderInput={(params) => (
                               <TextField
                                   {...params}
@@ -170,14 +158,14 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
             </div>
           </GridItem>
         </GridContainer>
-        {displayProduct &&
+        {product &&
         <div className={classes.displaySection}>
           <div>
-            <div className={classes.displayPrice}>${displayProduct.variants[ 0 ].price}</div>
-            <img className={classes.displayImg} src={displayProduct.images[ 0 ].src}/>
+            <div className={classes.displayPrice}>${product.variants[ 0 ].price}</div>
+            <img className={classes.displayImg} src={product.images[ 0 ].src}/>
           </div>
           <div>
-            <div className={classes.displayDesContainer}>{ReactHtmlParser(displayProduct.body_html)}</div>
+            <div className={classes.displayDesContainer}>{ReactHtmlParser(product.body_html)}</div>
           </div>
         </div>
         }
