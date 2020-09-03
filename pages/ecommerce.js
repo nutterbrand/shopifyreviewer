@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
+import {useAuth0} from '@auth0/auth0-react';
 import {makeStyles} from '@material-ui/core/styles';
 import fetch from 'isomorphic-unfetch';
 import {CreateAdModal} from '../components/Project/CreateAdModal';
@@ -47,6 +48,14 @@ export default function HomePage() {
   const [hasSearched, updateSearchedAgain] = useState(true);
   const scrollRef = useRef(null);
 
+  const {
+    error,
+    isAuthenticated,
+    user,
+    loginWithRedirect,
+    logout,
+  } = useAuth0();
+
   useEffect(() => {
     updateSearchedAgain(!createAdModalOpen && !emailModalOpen);
   }, [createAdModalOpen, emailModalOpen]);
@@ -94,7 +103,6 @@ export default function HomePage() {
   const reset = () => {
     setData(null);
   };
-
   return (
       <>
         {isLoading && (
@@ -103,7 +111,7 @@ export default function HomePage() {
                 loadingMessages={LOADING_MESSAGES}
             />
         )}
-        <HeaderShopify/>
+        <HeaderShopify isAuthenticated={isAuthenticated} loginWithRedirect={loginWithRedirect} logout={logout} user={user}/>
         <div className={classes.companyPage}>
           <div className={classes.section}>
             <div className={classes.container}>
