@@ -151,6 +151,8 @@ const EnhancedTableToolbar = ({
 }) => {
   const classes = useToolbarStyles();
 
+  let csvData = [['keywords'], ...selected.map(k => [k])];
+
   return (
       <Toolbar
           className={classNames(classes.root, {
@@ -180,7 +182,7 @@ const EnhancedTableToolbar = ({
                 disableElevation
             >
               <CSVLink
-                  data={selected.join(',')}
+                  data={csvData}
                   filename={'keywords.csv'}
                   className={classes.csv}
                   target="_blank"
