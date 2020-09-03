@@ -109,6 +109,33 @@ const productStyle = {
     zIndex: '2',
     boxShadow: '0 2px 5px -1px rgba(0,0,0,0.3)',
   },
+  user: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  userImg: {
+    marginRight: '5px',
+    width: '30px',
+    height: '30px',
+    borderRadius: '50%',
+  },
+  loginBtn: {
+    backgroundColor: '#f65a4e',
+    color: '#ffffff',
+    width: '300px',
+    '&:hover': {
+      color: '#f65a4e',
+    },
+  },
+  logoutBtn: {
+    backgroundColor: '#4842F5',
+    color: '#ffffff',
+    width: '300px',
+    '&:hover': {
+      color: '#4842F5',
+    },
+  },
   domainSearch: {
     width: '55%',
     '& div': {
@@ -572,7 +599,7 @@ const productStyle = {
     },
     '&:disabled': {
       backgroundColor: '#eee',
-      color: '#fff'
+      color: '#fff',
     },
   },
   productGroupImg: {
