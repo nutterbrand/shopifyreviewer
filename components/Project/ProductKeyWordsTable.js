@@ -46,13 +46,13 @@ const stableSort = (array, comparator) => {
 
 const headCells = [
   {id: 'keyword', numeric: false, disablePadding: true, label: 'Keyword'},
-  {id: 'google', numeric: false, disablePadding: true, label: ''},
   {
     id: 'volume',
     numeric: true,
     disablePadding: false,
     label: 'Monthly Searches',
   },
+  {id: 'google', numeric: false, disablePadding: true, label: ''},
 ];
 
 const EnhancedTableHead = (props) => {
@@ -334,6 +334,7 @@ export const ProductKeyWordsTable = ({rows, productURL, createAd}) => {
                             >
                               {row.keyword}
                             </TableCell>
+                            <TableCell align="right">{row.volume.toLocaleString()}</TableCell>
                             <TableCell align="left">
                               <Button
                                   variant="contained"
@@ -346,7 +347,6 @@ export const ProductKeyWordsTable = ({rows, productURL, createAd}) => {
                                 Check Google
                               </Button>
                             </TableCell>
-                            <TableCell align="right">{row.volume}</TableCell>
                           </TableRow>
                       );
                     })}
