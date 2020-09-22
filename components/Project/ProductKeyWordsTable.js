@@ -17,6 +17,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import Search from '@material-ui/icons/Search';
+import {convertArrayToObject} from './helpers/helper';
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[ orderBy ] < a[ orderBy ]) {
@@ -55,9 +56,10 @@ const headCells = [
   {id: 'google', numeric: false, disablePadding: true, label: ''},
 ];
 
-const EnhancedTableHead = (props) => {
+const EnhancedTableHead = props => {
   const {
     classes,
+    keywordMap,
     onSelectAllClick,
     order,
     orderBy,
@@ -65,9 +67,7 @@ const EnhancedTableHead = (props) => {
     rowCount,
     onRequestSort,
   } = props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
+  const createSortHandler = property => event => onRequestSort(event, property);
 
   return (
       <TableHead>
@@ -144,6 +144,7 @@ const useToolbarStyles = makeStyles((theme) => ( {
 } ));
 
 const EnhancedTableToolbar = ({
+  keywordMap,
   numSelected,
   productURL,
   createAd,
@@ -151,7 +152,7 @@ const EnhancedTableToolbar = ({
 }) => {
   const classes = useToolbarStyles();
 
-  let csvData = [['keywords'], ...selected.map(k => [k])];
+  let csvData = [['keywords', 'monthly searches'], ...selected.map(k => [k, keywordMap[ k ].volume])];
 
   return (
       <Toolbar
@@ -168,14 +169,6 @@ const EnhancedTableToolbar = ({
           Your Product: <b className={classes.headerUrl}>{productURL}</b>
         </Typography>
         {numSelected > 0 && (
-            // <Button
-            //   className={classes.createAdBtn}
-            //   onClick={() => createAd(selected)}
-            //   variant="contained"
-            //   disableElevation
-            // >
-            //   Create Your Ad
-            // </Button>
             <Button
                 className={classes.createAdBtn}
                 variant="contained"
@@ -241,14 +234,7 @@ export const ProductKeyWordsTable = ({rows, productURL, createAd}) => {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = rows?.map((n) => n.keyword);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
+  const handleSelectAllClick = event => setSelected(event.target.checked ? rows.map((n) => n.keyword) : []);
 
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
@@ -291,6 +277,7 @@ export const ProductKeyWordsTable = ({rows, productURL, createAd}) => {
               productURL={productURL}
               createAd={createAd}
               selected={selected}
+              keywordMap={convertArrayToObject(rows, 'keyword')}
           />
           <TableContainer>
             <Table className={classes.table} size="medium">
