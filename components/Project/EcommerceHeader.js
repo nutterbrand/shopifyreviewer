@@ -122,6 +122,7 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
                     <div className={classes.autoContainer}>
                       <Autocomplete
                           className={classes.productUrlAuto}
+                          disableClearable
                           id="product-urls"
                           value={product}
                           onChange={(e, product) => {
