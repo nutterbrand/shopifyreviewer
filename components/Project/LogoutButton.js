@@ -7,11 +7,15 @@ const useStyles = makeStyles(productStyle);
 
 const LogoutButton = ({logout}) => {
   const classes = useStyles();
+  let redirectUrl = 'https://shopifyreviewer.com';
+  if (typeof window !== 'undefined') {
+    redirectUrl = window.location.origin;
+  }
 
   return <Button variant="contained"
                  className={classes.logoutBtn}
                  disableElevation
-                 onClick={logout}>
+                 onClick={() => logout({returnTo: redirectUrl})}>
     Log Out
   </Button>;
 
