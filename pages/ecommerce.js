@@ -111,57 +111,62 @@ export default function HomePage() {
                 loadingMessages={LOADING_MESSAGES}
             />
         )}
-        <HeaderShopify isAuthenticated={isAuthenticated} loginWithRedirect={loginWithRedirect} logout={logout} user={user}/>
-        <div className={classes.companyPage}>
-          <div className={classes.section}>
-            <div className={classes.container}>
-              <EcommerceHeader
-                  onSearch={handleOnSearch}
-                  onChange={handleOnChange}
-                  loadingTable={isLoading}
-              />
-              <div ref={scrollRef}></div>
-              {!!data && (
-                  <GridContainer className={classes.keywordCard}>
-                    <GridItem md={12} sm={12}>
-                      {
-                        data.result.length > 0 && hasSearched && <div className={classes.fixNoResult}>
-                          <h4 className={classes.headerSearch}>
-                            <Avatar className={classes.yellowAvatar}>👀</Avatar> Not seeing the keywords you are
-                            expecting?
-                          </h4>
-                          <Button variant="contained"
-                                  disableElevation
-                                  className={classes.genSearchAgain}
-                                  onClick={() => toggleSearchAgainModal(true)}>
-                            Try a More Generic Search Again</Button>
-                        </div>
-                      }
-                      {
-                        data.result.length < 1 ? <div className={classes.noResult}>
-                          <h4>Sorry, there aren't any keyword results for {productURL}...</h4>
-                          <Button variant="contained"
-                                  disableElevation
-                                  className={classes.searchAgain}
-                                  onClick={() => toggleSearchAgainModal(true)}>Search Again</Button>
-                        </div> : <>
-                          <h3 className={classes.headerAvatar}>
-                            <Avatar className={classes.greenAvatar}>3</Avatar> Pick the 5
-                            best keywords to add your site.
-                          </h3>
-                          <ProductKeyWordsTable
-                              rows={data.result}
-                              productURL={productURL}
-                              createAd={handleCreateAd}
-                          />
-                        </>
-                      }
-                    </GridItem>
-                  </GridContainer>
-              )}
+        <HeaderShopify isAuthenticated={isAuthenticated} loginWithRedirect={loginWithRedirect} logout={logout}
+                       user={user}/>
+        {user ? <div className={classes.companyPage}>
+              <div className={classes.section}>
+                <div className={classes.container}>
+                  <EcommerceHeader
+                      onSearch={handleOnSearch}
+                      onChange={handleOnChange}
+                      loadingTable={isLoading}
+                  />
+                  <div ref={scrollRef}></div>
+                  {!!data && (
+                      <GridContainer className={classes.keywordCard}>
+                        <GridItem md={12} sm={12}>
+                          {
+                            data.result.length > 0 && hasSearched && <div className={classes.fixNoResult}>
+                              <h4 className={classes.headerSearch}>
+                                <Avatar className={classes.yellowAvatar}>👀</Avatar> Not seeing the keywords you are
+                                expecting?
+                              </h4>
+                              <Button variant="contained"
+                                      disableElevation
+                                      className={classes.genSearchAgain}
+                                      onClick={() => toggleSearchAgainModal(true)}>
+                                Try a More Generic Search Again</Button>
+                            </div>
+                          }
+                          {
+                            data.result.length < 1 ? <div className={classes.noResult}>
+                              <h4>Sorry, there aren't any keyword results for {productURL}...</h4>
+                              <Button variant="contained"
+                                      disableElevation
+                                      className={classes.searchAgain}
+                                      onClick={() => toggleSearchAgainModal(true)}>Search Again</Button>
+                            </div> : <>
+                              <h3 className={classes.headerAvatar}>
+                                <Avatar className={classes.greenAvatar}>3</Avatar> Pick the 5
+                                best keywords to add your site.
+                              </h3>
+                              <ProductKeyWordsTable
+                                  rows={data.result}
+                                  productURL={productURL}
+                              />
+                            </>
+                          }
+                        </GridItem>
+                      </GridContainer>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+            : <div className={classes.loginCard}>
+                <h3>Please Log in to search your Shopify products</h3>
+            </div>
+        }
+
         {ad && (
             <CreateAdModal
                 ad={ad}

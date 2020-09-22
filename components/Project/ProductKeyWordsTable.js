@@ -147,7 +147,6 @@ const EnhancedTableToolbar = ({
   keywordMap,
   numSelected,
   productURL,
-  createAd,
   selected,
 }) => {
   const classes = useToolbarStyles();
@@ -211,16 +210,15 @@ const useStyles = makeStyles((theme) => ( {
     width: 1,
   },
   googleBtn: {
-    backgroundColor: '#C0C0C0',
-    color: '#ffffff',
+    color: '#C0C0C0',
     '&:hover': {
       backgroundColor: 'none',
-      color: '#ffffff',
+      color: '#C0C0C0',
     },
   },
 } ));
 
-export const ProductKeyWordsTable = ({rows, productURL, createAd}) => {
+export const ProductKeyWordsTable = ({rows, productURL, user, login}) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState('desc');
   const [orderBy, setOrderBy] = React.useState();
@@ -275,7 +273,6 @@ export const ProductKeyWordsTable = ({rows, productURL, createAd}) => {
           <EnhancedTableToolbar
               numSelected={selected.length}
               productURL={productURL}
-              createAd={createAd}
               selected={selected}
               keywordMap={convertArrayToObject(rows, 'keyword')}
           />
@@ -322,9 +319,10 @@ export const ProductKeyWordsTable = ({rows, productURL, createAd}) => {
                               {row.keyword}
                             </TableCell>
                             <TableCell align="right">{row.volume.toLocaleString()}</TableCell>
-                            <TableCell align="left">
+                            <TableCell align="right">
                               <Button
-                                  variant="contained"
+                                  variant="outlined"
+                                  size="small"
                                   className={classes.googleBtn}
                                   startIcon={<Search/>}
                                   disableElevation

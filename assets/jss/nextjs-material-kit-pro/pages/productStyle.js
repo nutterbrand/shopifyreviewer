@@ -40,6 +40,14 @@ const productStyle = {
     alignItems: 'center',
     backgroundColor: '#fff',
   },
+  loginCard: {
+    marginTop: '200px',
+    width: "100%",
+    height: '300px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   placeHolderContainer: {
     position: 'relative',
     width: '100%',
