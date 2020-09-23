@@ -162,8 +162,8 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
         {product &&
         <div className={classes.displaySection}>
           <div>
-            <div className={classes.displayPrice}>${product.variants[ 0 ].price}</div>
-            <img className={classes.displayImg} src={product.images[ 0 ].src}/>
+            <div className={classes.displayPrice}>${product.variants[ 0 ]?.price}</div>
+            <img className={classes.displayImg} src={product.images[ 0 ]?.src}/>
           </div>
           <div>
             <div className={classes.displayDesContainer}>{ReactHtmlParser(product.body_html)}</div>
