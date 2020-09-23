@@ -9,7 +9,7 @@ import {EmailModal} from '../components/Project/EmailModal';
 import {HeaderShopify} from '../components/Project/HeaderShopify';
 import {LoadingSpinner} from '../components/Project/LoadingSpinner';
 import {ProductKeyWordsTable} from '../components/Project/ProductKeyWordsTable';
-import {filterDomain} from '../components/Project/helpers/helper';
+import {filterDomain, useStickyState} from '../components/Project/helpers/helper';
 import GridContainer from '../components/Grid/GridContainer';
 import GridItem from '../components/Grid/GridItem';
 
@@ -34,11 +34,11 @@ const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
 
 export default function HomePage() {
   const classes = useStyles();
-  const [data, setData] = useState();
+  const [data, setData] = useStickyState(null, 'data');
   const [ad, setAd] = useState();
-  const [productURL, updateProductURL] = useState();
+  const [productURL, updateProductURL] = useStickyState(null, 'product');
   const [postData, updatePostData] = useState();
-  const [domain, updateDomain] = useState();
+  const [domain, updateDomain] = useStickyState(null, 'domain');
   const [createAdModalOpen, toggleAdModal] = useState(false);
   const [emailModalOpen, toggleEmailModal] = useState(false);
   const [searchAgainModalOpen, toggleSearchAgainModal] = useState(false);
@@ -113,7 +113,7 @@ export default function HomePage() {
         )}
         <HeaderShopify isAuthenticated={isAuthenticated} loginWithRedirect={loginWithRedirect} logout={logout}
                        user={user}/>
-        {user ? <div className={classes.companyPage}>
+         <div className={classes.companyPage}>
               <div className={classes.section}>
                 <div className={classes.container}>
                   <EcommerceHeader
@@ -153,6 +153,8 @@ export default function HomePage() {
                               <ProductKeyWordsTable
                                   rows={data.result}
                                   productURL={productURL}
+                                  login={loginWithRedirect}
+                                  user={user}
                               />
                             </>
                           }
@@ -162,10 +164,6 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            : <div className={classes.loginCard}>
-                <h3>Please Log in to search your Shopify products</h3>
-            </div>
-        }
 
         {ad && (
             <CreateAdModal
