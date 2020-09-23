@@ -12,7 +12,7 @@ const LoginButton = ({loginWithRedirect}) => {
                  className={classes.loginBtn}
                  disableElevation
                  onClick={loginWithRedirect}>
-    Log In
+    Log In To Download CSV
   </Button>;
 
 };
