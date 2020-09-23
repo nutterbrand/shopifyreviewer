@@ -17,7 +17,8 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import Search from '@material-ui/icons/Search';
-import {convertArrayToObject} from './helpers/helper';
+import {convertArrayToObject, useStickyState} from './helpers/helper';
+import LoginButton from './LoginButton';
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[ orderBy ] < a[ orderBy ]) {
@@ -148,6 +149,8 @@ const EnhancedTableToolbar = ({
   numSelected,
   productURL,
   selected,
+  user,
+  login,
 }) => {
   const classes = useToolbarStyles();
 
@@ -167,22 +170,27 @@ const EnhancedTableToolbar = ({
         >
           Your Product: <b className={classes.headerUrl}>{productURL}</b>
         </Typography>
-        {numSelected > 0 && (
-            <Button
-                className={classes.createAdBtn}
-                variant="contained"
-                disableElevation
-            >
-              <CSVLink
-                  data={csvData}
-                  filename={'keywords.csv'}
-                  className={classes.csv}
-                  target="_blank"
+        {numSelected > 0 &&
+        <>
+          {user ? (
+              <Button
+                  className={classes.createAdBtn}
+                  variant="contained"
+                  disableElevation
               >
-                Download CSV
-              </CSVLink>
-            </Button>
-        )}
+                <CSVLink
+                    data={csvData}
+                    filename={'keywords.csv'}
+                    className={classes.csv}
+                    target="_blank"
+                >
+                  Download CSV
+                </CSVLink>
+              </Button>
+          ) : (
+              <LoginButton loginWithRedirect={login}/>
+          )}
+        </>}
       </Toolbar>
   );
 };
@@ -222,7 +230,7 @@ export const ProductKeyWordsTable = ({rows, productURL, user, login}) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState('desc');
   const [orderBy, setOrderBy] = React.useState();
-  const [selected, setSelected] = React.useState([]);
+  const [selected, setSelected] = useStickyState([], 'selected');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(50);
 
@@ -275,6 +283,8 @@ export const ProductKeyWordsTable = ({rows, productURL, user, login}) => {
               productURL={productURL}
               selected={selected}
               keywordMap={convertArrayToObject(rows, 'keyword')}
+              user={user}
+              login={login}
           />
           <TableContainer>
             <Table className={classes.table} size="medium">
