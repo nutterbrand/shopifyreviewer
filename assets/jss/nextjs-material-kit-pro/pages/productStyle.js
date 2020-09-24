@@ -42,7 +42,7 @@ const productStyle = {
   },
   loginCard: {
     marginTop: '200px',
-    width: "100%",
+    width: '100%',
     height: '300px',
     display: 'flex',
     justifyContent: 'center',
@@ -719,6 +719,16 @@ const productStyle = {
     backgroundColor: '#4bb051',
     color: '#ffffff',
     width: '300px',
+    height: '36px',
+    marginRight: '10px',
+    '&:hover': {
+      backgroundColor: 'none',
+    },
+  },
+  reset: {
+    backgroundColor: '#ffce44',
+    color: '#ffffff',
+    width: '100px',
     height: '36px',
     '&:hover': {
       backgroundColor: 'none',

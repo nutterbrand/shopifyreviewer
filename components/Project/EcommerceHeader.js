@@ -17,7 +17,7 @@ import SearchHeader from '../../assets/img/searchHeader.svg';
 
 const useStyles = makeStyles(productStyle);
 
-export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
+export const EcommerceHeader = ({onSearch, onChange, loadingTable, shouldReset}) => {
   const router = useRouter();
   const classes = useStyles();
   const defaultInput = {domain: '', product: ''};
@@ -25,6 +25,14 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable}) => {
   const [product, setProduct] = useState();
   const [products, setProducts] = useState([]);
   const [isLoading, updateLoading] = useState(false);
+
+  useEffect(() => {
+    if (shouldReset) {
+      setInputValues(defaultInput);
+      setProducts([]);
+      setProduct(null);
+    }
+  }, [shouldReset]);
 
   useEffect(() => {
     let updatedValues = {...inputValues, ...router.query};

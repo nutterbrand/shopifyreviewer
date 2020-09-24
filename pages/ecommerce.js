@@ -2,10 +2,8 @@ import React, {useState, useEffect, useRef} from 'react';
 import {useAuth0} from '@auth0/auth0-react';
 import {makeStyles} from '@material-ui/core/styles';
 import fetch from 'isomorphic-unfetch';
-import {CreateAdModal} from '../components/Project/CreateAdModal';
 import {SearchAgainModal} from '../components/Project/SearchAgainModal';
 import {EcommerceHeader} from '../components/Project/EcommerceHeader';
-import {EmailModal} from '../components/Project/EmailModal';
 import {HeaderShopify} from '../components/Project/HeaderShopify';
 import {LoadingSpinner} from '../components/Project/LoadingSpinner';
 import {ProductKeyWordsTable} from '../components/Project/ProductKeyWordsTable';
@@ -35,17 +33,12 @@ const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
 export default function HomePage() {
   const classes = useStyles();
   const [data, setData] = useStickyState(null, 'data');
-  const [ad, setAd] = useState();
   const [productURL, updateProductURL] = useStickyState(null, 'product');
-  const [postData, updatePostData] = useState();
   const [domain, updateDomain] = useStickyState(null, 'domain');
-  const [createAdModalOpen, toggleAdModal] = useState(false);
-  const [emailModalOpen, toggleEmailModal] = useState(false);
   const [searchAgainModalOpen, toggleSearchAgainModal] = useState(false);
-
-  const [keywords, updateKeywords] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [hasSearched, updateSearchedAgain] = useState(true);
+  const [shouldReset, reset] = useState(false);
   const scrollRef = useRef(null);
 
   const {
@@ -55,10 +48,6 @@ export default function HomePage() {
     loginWithRedirect,
     logout,
   } = useAuth0();
-
-  useEffect(() => {
-    updateSearchedAgain(!createAdModalOpen && !emailModalOpen);
-  }, [createAdModalOpen, emailModalOpen]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -77,7 +66,6 @@ export default function HomePage() {
     fetch(requestUrl).then((response) => response.json()).then((data) => {
       console.log(data);
       setData(data);
-      setAd(data.result[ 0 ]);
       setLoading(false);
       scrollToRef(scrollRef);
     });
@@ -95,11 +83,15 @@ export default function HomePage() {
     makeRequest(requestUrl);
   };
 
-  const handleSearchAgainSubmit = keys => {
+  const resetQuery = () => {
     Router.push({
       pathname: '/ecommerce',
       query: null,
     });
+  };
+
+  const handleSearchAgainSubmit = keys => {
+    resetQuery();
     const filteredDomain = filterDomain(domain);
     updateProductURL(null);
     toggleSearchAgainModal(false);
@@ -108,14 +100,14 @@ export default function HomePage() {
     const requestUrl = `${BASE_URL}multiple-keywords/${filteredDomain}/${productURL}/${keys.key1}/${keys.key2}`;
     makeRequest(requestUrl);
   };
-  const handleOnChange = () => setData(null);
-  const handleCreateAd = (selected) => {
-    updateKeywords(selected);
-    toggleAdModal(true);
-  };
-  const reset = () => {
+
+  const handleOnChange = () => {
+    localStorage.clear();
     setData(null);
+    resetQuery();
+    reset(true);
   };
+
   return (
       <>
         {isLoading && (
@@ -133,6 +125,7 @@ export default function HomePage() {
                   onSearch={handleOnSearch}
                   onChange={handleOnChange}
                   loadingTable={isLoading}
+                  shouldReset={shouldReset}
               />
               <div ref={scrollRef}></div>
               {!!data && (
@@ -144,11 +137,19 @@ export default function HomePage() {
                             <Avatar className={classes.yellowAvatar}>👀</Avatar> Not seeing the keywords you are
                             expecting?
                           </h4>
-                          <Button variant="contained"
-                                  disableElevation
-                                  className={classes.genSearchAgain}
-                                  onClick={() => toggleSearchAgainModal(true)}>
-                            Try a More Generic Search Again</Button>
+                          <div>
+                            <Button variant="contained"
+                                    disableElevation
+                                    className={classes.genSearchAgain}
+                                    onClick={() => toggleSearchAgainModal(true)}>
+                              Try a More Generic Search Again</Button>
+
+                            <Button variant="contained"
+                                    disableElevation
+                                    className={classes.reset}
+                                    onClick={handleOnChange}>
+                              Reset</Button>
+                          </div>
                         </div>
                       }
                       {
@@ -177,25 +178,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-
-        {ad && (
-            <CreateAdModal
-                ad={ad}
-                createAdModalOpen={createAdModalOpen}
-                keywords={keywords}
-                toggleAdModal={toggleAdModal}
-                toggleEmailModal={toggleEmailModal}
-                updatePostData={updatePostData}
-            />
-        )}
-        <EmailModal
-            emailModalOpen={emailModalOpen}
-            toggleEmailModal={toggleEmailModal}
-            postData={postData}
-            domain={domain}
-            url={productURL}
-            reset={reset}
-        />
         <SearchAgainModal searchAgainModalOpen={searchAgainModalOpen} toggleSearchAgainModal={toggleSearchAgainModal}
                           handleSearchAgainSubmit={handleSearchAgainSubmit}/>
       </>
