@@ -60,6 +60,19 @@ export default function HomePage() {
     updateSearchedAgain(!createAdModalOpen && !emailModalOpen);
   }, [createAdModalOpen, emailModalOpen]);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const domain = JSON.parse(window.localStorage.getItem('domain'));
+      const product = JSON.parse(window.localStorage.getItem('product'));
+      if (domain && product) {
+        Router.push({
+          pathname: '/ecommerce',
+          query: {domain, product},
+        });
+      }
+    }
+  }, []);
+
   const makeRequest = requestUrl => {
     fetch(requestUrl).then((response) => response.json()).then((data) => {
       console.log(data);
@@ -113,57 +126,57 @@ export default function HomePage() {
         )}
         <HeaderShopify isAuthenticated={isAuthenticated} loginWithRedirect={loginWithRedirect} logout={logout}
                        user={user}/>
-         <div className={classes.companyPage}>
-              <div className={classes.section}>
-                <div className={classes.container}>
-                  <EcommerceHeader
-                      onSearch={handleOnSearch}
-                      onChange={handleOnChange}
-                      loadingTable={isLoading}
-                  />
-                  <div ref={scrollRef}></div>
-                  {!!data && (
-                      <GridContainer className={classes.keywordCard}>
-                        <GridItem md={12} sm={12}>
-                          {
-                            data.result.length > 0 && hasSearched && <div className={classes.fixNoResult}>
-                              <h4 className={classes.headerSearch}>
-                                <Avatar className={classes.yellowAvatar}>👀</Avatar> Not seeing the keywords you are
-                                expecting?
-                              </h4>
-                              <Button variant="contained"
-                                      disableElevation
-                                      className={classes.genSearchAgain}
-                                      onClick={() => toggleSearchAgainModal(true)}>
-                                Try a More Generic Search Again</Button>
-                            </div>
-                          }
-                          {
-                            data.result.length < 1 ? <div className={classes.noResult}>
-                              <h4>Sorry, there aren't any keyword results for {productURL}...</h4>
-                              <Button variant="contained"
-                                      disableElevation
-                                      className={classes.searchAgain}
-                                      onClick={() => toggleSearchAgainModal(true)}>Search Again</Button>
-                            </div> : <>
-                              <h3 className={classes.headerAvatar}>
-                                <Avatar className={classes.greenAvatar}>3</Avatar> Pick the 5
-                                best keywords to add your site.
-                              </h3>
-                              <ProductKeyWordsTable
-                                  rows={data.result}
-                                  productURL={productURL}
-                                  login={loginWithRedirect}
-                                  user={user}
-                              />
-                            </>
-                          }
-                        </GridItem>
-                      </GridContainer>
-                  )}
-                </div>
-              </div>
+        <div className={classes.companyPage}>
+          <div className={classes.section}>
+            <div className={classes.container}>
+              <EcommerceHeader
+                  onSearch={handleOnSearch}
+                  onChange={handleOnChange}
+                  loadingTable={isLoading}
+              />
+              <div ref={scrollRef}></div>
+              {!!data && (
+                  <GridContainer className={classes.keywordCard}>
+                    <GridItem md={12} sm={12}>
+                      {
+                        data.result.length > 0 && hasSearched && <div className={classes.fixNoResult}>
+                          <h4 className={classes.headerSearch}>
+                            <Avatar className={classes.yellowAvatar}>👀</Avatar> Not seeing the keywords you are
+                            expecting?
+                          </h4>
+                          <Button variant="contained"
+                                  disableElevation
+                                  className={classes.genSearchAgain}
+                                  onClick={() => toggleSearchAgainModal(true)}>
+                            Try a More Generic Search Again</Button>
+                        </div>
+                      }
+                      {
+                        data.result.length < 1 ? <div className={classes.noResult}>
+                          <h4>Sorry, there aren't any keyword results for {productURL}...</h4>
+                          <Button variant="contained"
+                                  disableElevation
+                                  className={classes.searchAgain}
+                                  onClick={() => toggleSearchAgainModal(true)}>Search Again</Button>
+                        </div> : <>
+                          <h3 className={classes.headerAvatar}>
+                            <Avatar className={classes.greenAvatar}>3</Avatar> Pick the 5
+                            best keywords to add your site.
+                          </h3>
+                          <ProductKeyWordsTable
+                              rows={data.result}
+                              productURL={productURL}
+                              login={loginWithRedirect}
+                              user={user}
+                          />
+                        </>
+                      }
+                    </GridItem>
+                  </GridContainer>
+              )}
             </div>
+          </div>
+        </div>
 
         {ad && (
             <CreateAdModal
