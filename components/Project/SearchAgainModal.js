@@ -15,11 +15,8 @@ export const SearchAgainModal = props => {
     handleSearchAgainSubmit,
   } = props;
 
-  const [keys, updateKeys] = useState({key1: '', key2: ''});
-  const handleKeysChange = e => {
-    const {name, value} = e.target;
-    updateKeys({...keys, [ name ]: value});
-  };
+  const [key, updateKey] = useState('');
+  const handleKeysChange = e => updateKey(e.target.value)
 
   const classes = useStyles();
   return (
@@ -30,35 +27,25 @@ export const SearchAgainModal = props => {
       >
         <div className={classes.searchAgainModal}>
           <h3 className={classes.headerAvatar}>
-            <Avatar className={classes.greenAvatar}>!</Avatar> Enter Two Keywords and Search Again
+            <Avatar className={classes.greenAvatar}>!</Avatar> Enter a Keyword and Search Again
           </h3>
           <form
               className={classes.form}
               noValidate
               autoComplete="off"
-              onSubmit={() => handleSearchAgainSubmit(keys)}
+              onSubmit={() => handleSearchAgainSubmit(key)}
           >
             <TextField
                 className={classes.key}
-                id="key1"
-                name="key1"
-                placeholder="Keyword 1"
+                id="key"
+                name="key"
+                placeholder="Keyword"
                 variant="outlined"
-                value={keys.key1}
+                value={key}
                 size="small"
                 onChange={handleKeysChange}
             />
-            <TextField
-                className={classes.key}
-                id="key2"
-                name="key2"
-                placeholder="Keyword 2"
-                variant="outlined"
-                value={keys.key2}
-                size="small"
-                onChange={handleKeysChange}
-            />
-            <Button className={classes.submitEmail} type="submit" disabled={!keys.key1 || !keys.key2}>
+            <Button className={classes.submitEmail} type="submit" disabled={!key}>
               Search Again
             </Button>
           </form>

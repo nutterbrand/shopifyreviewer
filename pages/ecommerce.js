@@ -90,14 +90,14 @@ export default function HomePage() {
     });
   };
 
-  const handleSearchAgainSubmit = keys => {
+  const handleSearchAgainSubmit = key => {
     resetQuery();
     const filteredDomain = filterDomain(domain);
     updateProductURL(null);
     toggleSearchAgainModal(false);
     setLoading(true);
     setData(null);
-    const requestUrl = `${BASE_URL}multiple-keywords/${filteredDomain}/${productURL}/${keys.key1}/${keys.key2}`;
+    const requestUrl = `${BASE_URL}multiple-keywords/${filteredDomain}/${productURL}/${key}`;
     makeRequest(requestUrl);
   };
 
