@@ -154,7 +154,7 @@ const EnhancedTableToolbar = ({
 }) => {
   const classes = useToolbarStyles();
 
-  let csvData = [['keywords', 'monthly searches'], ...selected.map(k => [k, keywordMap[ k ].volume])];
+  let csvData = [['keywords', 'monthly searches'], ...selected.map(k => [k, keywordMap[ k ]?.volume])];
 
   return (
       <Toolbar
