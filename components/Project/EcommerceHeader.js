@@ -82,9 +82,7 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable, shouldReset})
   if (loadingTable) return null;
   return (
       <>
-        <GridContainer className={classNames(classes.companyHeader,
-            {[ classes.moveLeft ]: !!product},
-        )}>
+        <GridContainer className={classes.companyHeader}>
           <GridItem md={12} sm={12}>
             <div className={classes.headerForm}>
               <img className={classes.searchHeader} src={SearchHeader}/>

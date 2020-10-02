@@ -20,6 +20,9 @@ const productStyle = {
   ...tooltipsStyle,
   container: {
     ...container,
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
   mainRaisedMargin: {
     ...mainRaisedMargin,
@@ -265,6 +268,7 @@ const productStyle = {
     margin: '0',
   },
   companyHeader: {
+    width: '90%',
     backgroundColor: '#fff',
     margin: '100px 0 0 0',
     padding: '25px',
@@ -369,10 +373,11 @@ const productStyle = {
     backgroundColor: '#fffef9',
   },
   keywordCard: {
-    width: '100%',
+    width: '90%',
     marginTop: '50px',
-    marginLeft: '-100px',
     marginBottom: '50px',
+    marginLeft: '0',
+    marginRight: '0',
     backgroundColor: '#fff',
     padding: '50px',
     overflowX: 'hidden',
@@ -733,10 +738,6 @@ const productStyle = {
     '&:hover': {
       backgroundColor: 'none',
     },
-  },
-  moveLeft: {
-    marginLeft: '-100px',
-    width: '100%',
   },
   displaySection: {
     backgroundColor: '#FAFAFA',
