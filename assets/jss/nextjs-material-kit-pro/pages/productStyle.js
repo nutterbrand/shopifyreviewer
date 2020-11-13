@@ -121,6 +121,11 @@ const productStyle = {
     zIndex: '2',
     boxShadow: '0 2px 5px -1px rgba(0,0,0,0.3)',
   },
+  twitterShare: {
+    position: 'absolute',
+    top: '18px',
+    right: '3%',
+  },
   user: {
     display: 'flex',
     alignItems: 'center',
