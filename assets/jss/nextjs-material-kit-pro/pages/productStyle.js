@@ -23,6 +23,7 @@ const productStyle = {
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
+    minWidth: '1080px',
   },
   mainRaisedMargin: {
     ...mainRaisedMargin,
@@ -700,7 +701,8 @@ const productStyle = {
   fixNoResult: {
     position: 'fixed',
     width: '100%',
-    padding: '0 20%',
+    minWidth: '1080px',
+    padding: '0 10%',
     bottom: '0',
     left: '0',
     height: '60px',
@@ -795,6 +797,26 @@ const productStyle = {
   },
   key: {
     width: '370px',
+  },
+  mobileWall: {
+    width: '100%',
+    height: '100vh',
+    backgroundColor: 'rgba(0,0,0,0.95)',
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    zIndex: '999999',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  mobileWallText: {
+    color: '#fff',
+    textAlign: 'center',
+  },
+  mobileWallImg: {
+    width: '400px',
   },
 };
 

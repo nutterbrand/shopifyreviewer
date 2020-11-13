@@ -8,6 +8,7 @@ import {HeaderShopify} from '../components/Project/HeaderShopify';
 import {LoadingSpinner} from '../components/Project/LoadingSpinner';
 import {ProductKeyWordsTable} from '../components/Project/ProductKeyWordsTable';
 import {filterDomain, useStickyState} from '../components/Project/helpers/helper';
+import {MobileWall} from '../components/Project/MobileWall';
 import GridContainer from '../components/Grid/GridContainer';
 import GridItem from '../components/Grid/GridItem';
 
@@ -180,6 +181,7 @@ export default function HomePage() {
         </div>
         <SearchAgainModal searchAgainModalOpen={searchAgainModalOpen} toggleSearchAgainModal={toggleSearchAgainModal}
                           handleSearchAgainSubmit={handleSearchAgainSubmit}/>
+        <MobileWall/>
       </>
   );
 }
