@@ -60,7 +60,7 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable, shouldReset})
     const {name, value} = e.target;
     onChange();
     Router.push({
-      pathname: '/ecommerce',
+      pathname: '/',
       query: null,
     });
     setInputValues({...inputValues, [ name ]: value});
@@ -152,7 +152,7 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable, shouldReset})
                       {!!inputValues.product && (
                           <Button className={classes.autoSubmit} onClick={() => {
                             Router.push({
-                              pathname: '/ecommerce',
+                              pathname: '/',
                               query: inputValues,
                             });
                           }}>
