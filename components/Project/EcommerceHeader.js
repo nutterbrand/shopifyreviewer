@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Router, {useRouter} from 'next/router';
 import fetch from 'isomorphic-unfetch';
-import classNames from 'classnames';
 import ReactHtmlParser from 'react-html-parser';
 import {filterDomain} from './helpers/helper';
 import GridItem from '../Grid/GridItem';
@@ -11,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
 import {makeStyles} from '@material-ui/core/styles';
 import productStyle from '../../assets/jss/nextjs-material-kit-pro/pages/productStyle';
 import SearchHeader from '../../assets/img/searchHeader.svg';
@@ -25,6 +25,7 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable, shouldReset})
   const [product, setProduct] = useState();
   const [products, setProducts] = useState([]);
   const [isLoading, updateLoading] = useState(false);
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
 
   useEffect(() => {
     if (shouldReset) {
@@ -75,6 +76,11 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable, shouldReset})
     const requestUrl = `https://evening-retreat-22032.herokuapp.com/urls-json/${filteredDomain}`;
     fetch(requestUrl).then((response) => response.json()).then((data) => {
       setProducts(data.result.products);
+      updateLoading(false);
+    }).catch(err => {
+      console.log(err);
+      setInputValues(defaultInput);
+      setSnackBarOpen(true);
       updateLoading(false);
     });
   };
@@ -176,6 +182,17 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable, shouldReset})
           </div>
         </div>
         }
+        <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            open={snackBarOpen}
+            autoHideDuration={6000}
+            severity="error"
+            onClose={setSnackBarOpen}
+            message="Sorry we don't recognize your Shopify site. Please Try again with a different domain"
+        />
       </>
   );
 };
