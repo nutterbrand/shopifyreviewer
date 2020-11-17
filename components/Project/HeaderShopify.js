@@ -15,14 +15,12 @@ export const HeaderShopify = ({isAuthenticated, loginWithRedirect, logout, user}
         <h4>Made with &hearts; for Shopify</h4>
         {user &&
         <div className={classes.user}><img className={classes.userImg} src={user.picture}/><h4>{user.name}</h4></div>}
-        <Tooltip id='twitterShare' title="Share to Twitter" placement='left'>
-          <TwitterShareButton
-              className={classes.twitterShare}
-              url='https://twitter.com/metricstory'
-              title='Shopify Reviewer'
-              via='Checkout #shopifyreviewer it’s helping me find good keywords to put in my Shopify product descriptions'
-              hashtag={['#shopifyreviewer']}><TwitterIcon size={36} round={true}/></TwitterShareButton>
-        </Tooltip>
+        <TwitterShareButton
+            className={classes.twitterShare}
+            url='https://twitter.com/metricstory'
+            title='Shopify Reviewer'
+            via='Checkout #shopifyreviewer it’s helping me find good keywords to put in my Shopify product descriptions'
+            hashtag={['#shopifyreviewer']}><TwitterIcon size={36} round={true}/></TwitterShareButton>
         {isAuthenticated ? <LogoutButton logout={logout}/> : <LoginButton loginWithRedirect={loginWithRedirect}/>}
       </div>
   );
