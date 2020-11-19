@@ -8,6 +8,7 @@ import GridContainer from '../Grid/GridContainer';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import MuiAlert from '@material-ui/lab/Alert';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -16,6 +17,9 @@ import productStyle from '../../assets/jss/nextjs-material-kit-pro/pages/product
 import SearchHeader from '../../assets/img/searchHeader.svg';
 
 const useStyles = makeStyles(productStyle);
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export const EcommerceHeader = ({onSearch, onChange, loadingTable, shouldReset}) => {
   const router = useRouter();
@@ -189,10 +193,11 @@ export const EcommerceHeader = ({onSearch, onChange, loadingTable, shouldReset})
             }}
             open={snackBarOpen}
             autoHideDuration={6000}
-            severity="error"
             onClose={setSnackBarOpen}
-            message="Sorry we don't recognize your Shopify site. Please Try again with a different domain"
-        />
+        >
+          <Alert severity="error">Sorry we don't recognize your Shopify site. Please Try again with a different
+            domain</Alert>
+        </Snackbar>
       </>
   );
 };
