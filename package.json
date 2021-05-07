@@ -37,7 +37,7 @@
     "react-swipeable-views": "0.13.3",
     "react-tagsinput": "3.19.0",
     "swr": "^0.2.0",
-    "underscore": "^1.10.2",
+    "underscore": "^1.12.1",
     "webpack": "4.40.2"
   },
   "scripts": {
